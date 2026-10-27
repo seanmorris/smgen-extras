@@ -1,0 +1,46 @@
+PRODUCT_NAME: smgen-plugins
+TAGLINE: Focused extensions for static sites
+ORGANIZATION: Sean Morris
+TITLE_PREFIX: smgen-plugins
+
+BASE_URL: http://localhost:8200
+DEV_PORT: 8200
+SMGEN_ENGINE: php
+HIGHLIGHT_STYLE: zenburn
+
+STATIC_DIR: ./static
+TEMPLATE_DIR: ./templates
+OUTPUT_DIR: ./docs
+INHERIT_CORE_STATIC: 0
+
+STYLES:
+  - /site.css
+
+SEARCH_ENABLED: 0
+
+LLMS:
+  title: smgen-plugins
+  summary: Add data-driven pages, static checkout controls, and generated PHP API references to SMGen sites.
+  details: |
+    Each package participates in the SMGen build and publishes ordinary static
+    files. The generated site does not need a PHP or Node.js server.
+  sections:
+    start:
+      title: Start Here
+      weight: 0
+    plugins:
+      title: Plugins
+      weight: 10
+    development:
+      title: Development
+      weight: 20
+
+MENUS:
+  documentation:
+    label: Plugins
+    renderer: tree
+    hierarchy: source
+    showLabel: true
+
+MENU_REGIONS:
+  sidebar: [documentation]

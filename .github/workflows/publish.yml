@@ -5,6 +5,7 @@ on:
     tags:
       - smgen-data-pages-v*
       - smgen-store-v*
+      - smgen-phpdoc-v*
 
 permissions:
   contents: read
@@ -61,6 +62,7 @@ jobs:
           case "${tag}" in
             smgen-data-pages-v*) package="smgen-data-pages"; version="${tag#smgen-data-pages-v}" ;;
             smgen-store-v*) package="smgen-store"; version="${tag#smgen-store-v}" ;;
+            smgen-phpdoc-v*) package="smgen-phpdoc"; version="${tag#smgen-phpdoc-v}" ;;
             *) echo "Unsupported release tag: ${tag}" >&2; exit 1 ;;
           esac
           declared="$(node -p "require('./packages/${package}/package.json').version")"

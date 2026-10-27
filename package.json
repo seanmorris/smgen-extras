@@ -2,7 +2,7 @@
   "name": "smgen-plugins-workspace",
   "version": "0.1.0",
   "private": true,
-  "description": "Official data-page and static-store plugins for SMGen.",
+  "description": "Official data-page, static-store, and PHP API documentation plugins for SMGen.",
   "license": "Apache-2.0",
   "author": "Sean Morris",
   "workspaces": [
@@ -12,12 +12,19 @@
     "node": ">=20"
   },
   "scripts": {
+    "phpdoc:vendor": "composer install --working-dir packages/smgen-phpdoc --no-dev --prefer-dist --no-interaction --optimize-autoloader",
     "lint": "bash scripts/lint.sh",
+    "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "bash tests/run.sh",
-    "check": "npm run lint && npm test"
+    "site": "bash scripts/build-site.sh build",
+    "dev": "bash scripts/build-site.sh watch",
+    "check": "npm run phpdoc:vendor && npm run lint && npm run typecheck && npm test && npm run site"
   },
   "devDependencies": {
+    "@types/node": "20.19.43",
     "eslint": "10.13.0",
-    "eslint-plugin-jsdoc": "65.4.2"
+    "eslint-plugin-jsdoc": "65.4.2",
+    "smgen-search": "0.1.1",
+    "typescript": "6.0.3"
   }
 }

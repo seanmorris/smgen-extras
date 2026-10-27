@@ -13,7 +13,7 @@ export default [
     ignores: ['node_modules/**'],
   },
   {
-    files: ['packages/**/*.js'],
+    files: ['packages/**/*.{js,mjs}'],
     plugins: {jsdoc},
     rules: {
       'jsdoc/check-tag-names': 'error',

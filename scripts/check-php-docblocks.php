@@ -61,6 +61,10 @@ final class PhpDocChecker
 			$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS));
 			foreach($iterator as $file)
 			{
+				if(str_contains(str_replace('\\', '/', $file->getPathname()), '/vendor/'))
+				{
+					continue;
+				}
 				if($file->isFile() && $file->getExtension() === 'php')
 				{
 					$files[] = $file->getPathname();
@@ -141,6 +145,11 @@ final class PhpDocChecker
 		for($cursor = $index - 1; $cursor >= 0; $cursor--)
 		{
 			$token = $tokens[$cursor];
+			if($token === ']')
+			{
+				$cursor = self::beforeAttributeGroup($tokens, $cursor);
+				continue;
+			}
 			if(is_array($token) && ($token[0] === T_WHITESPACE || in_array($token[0], self::MODIFIERS, true)))
 			{
 				continue;
@@ -148,6 +157,39 @@ final class PhpDocChecker
 			return is_array($token) && $token[0] === T_DOC_COMMENT ? $token[1] : null;
 		}
 		return null;
+	}
+
+	/**
+	 * Find the opening token for one complete PHP attribute group.
+	 *
+	 * @param array<int, array{int,string,int}|string> $tokens Parsed PHP tokens.
+	 */
+	private static function beforeAttributeGroup(array $tokens, int $closing): int
+	{
+		$depth = 1;
+		for($cursor = $closing - 1; $cursor >= 0; $cursor--)
+		{
+			$token = $tokens[$cursor];
+			if($token === ']')
+			{
+				$depth++;
+				continue;
+			}
+			if($token === '[')
+			{
+				$depth--;
+				continue;
+			}
+			if(is_array($token) && defined('T_ATTRIBUTE') && $token[0] === T_ATTRIBUTE)
+			{
+				$depth--;
+				if($depth === 0)
+				{
+					return $cursor;
+				}
+			}
+		}
+		return $closing;
 	}
 
 	/** Require at least three words of prose before PHPDoc tags. */

@@ -1,0 +1,11 @@
+apiVersion: smgen/v1
+id: smgen-phpdoc
+hooks:
+  prepare:
+    run: [node, ./bin/prepare.js]
+watch:
+  - adapter
+  - bin
+  - schemas
+  - src
+  - smgen.plugin.yaml

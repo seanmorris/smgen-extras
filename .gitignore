@@ -1,3 +1,7 @@
 node_modules/
+docs/
+.smgen-core/
+static/examples/
 .test-output/
 *.tgz
+packages/smgen-phpdoc/vendor/

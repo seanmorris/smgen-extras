@@ -1,0 +1,13 @@
+PRODUCT_NAME: Store Example
+TAGLINE: Hosted checkout from static HTML
+TITLE_PREFIX: smgen-store example
+BASE_URL: http://localhost:8200/examples/store
+OUTPUT_DIR: ../../static/examples/store
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../shared/templates
+STATIC_DIR: ../shared/static
+STYLES: [/example.css]
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+PLUGINS:
+  - smgen-store

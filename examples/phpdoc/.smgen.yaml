@@ -1,0 +1,15 @@
+PRODUCT_NAME: PHPDoc Example
+TAGLINE: Static API reference
+TITLE_PREFIX: smgen-phpdoc example
+BASE_URL: http://localhost:8200/examples/phpdoc
+OUTPUT_DIR: ../../static/examples/phpdoc
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../shared/templates
+STATIC_DIR: ../shared/static
+STYLES: [/example.css]
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+PLUGINS:
+  - use: smgen-phpdoc
+    options:
+      config: .smgen-phpdoc.yaml

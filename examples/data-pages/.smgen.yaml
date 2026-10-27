@@ -1,0 +1,15 @@
+PRODUCT_NAME: Data Pages Example
+TAGLINE: A catalog generated from CSV
+TITLE_PREFIX: smgen-data-pages example
+BASE_URL: http://localhost:8200/examples/data-pages
+OUTPUT_DIR: ../../static/examples/data-pages
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../shared/templates
+STATIC_DIR: ../shared/static
+STYLES: [/example.css]
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+PLUGINS:
+  - use: smgen-data-pages
+    options:
+      config: .smgen-data-pages.yaml

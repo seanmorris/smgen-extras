@@ -1,5 +1,5 @@
 BASE_URL: /shop
-SEARCH_ENABLED: 0
+SEARCH_ENABLED: 1
 STYLES:
   - /default.css
 PLUGINS:
@@ -7,3 +7,22 @@ PLUGINS:
     options:
       config: .smgen-data-pages.yaml
   - smgen-store
+  - use: smgen-phpdoc
+    options:
+      config: .smgen-phpdoc.yaml
+LLMS:
+  title: Store Documentation
+  summary: Build and extend the example store.
+  sections:
+    reference:
+      title: API Reference
+      weight: 10
+MENUS:
+  documentation:
+    label: Documentation
+    renderer: tree
+    links:
+      - id: reference
+        group: true
+        title: Reference
+        weight: 10

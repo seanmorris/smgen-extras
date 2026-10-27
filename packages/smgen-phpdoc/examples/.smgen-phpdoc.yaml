@@ -1,0 +1,31 @@
+version: 1
+package:
+  title: Example PHP API
+  description: Public classes and functions in the example package.
+  version: 1.0.0
+sources:
+  - path: src
+    include: ['**/*.php']
+    exclude: ['Internal/**']
+php: '8.2'
+output: api
+visibility: [public]
+grouping: namespace
+menu:
+  name: documentation
+  parent: reference
+  weight: 60
+  symbols: false
+llms:
+  section: reference
+assistant: true
+jsonld: true
+source:
+  repository: https://github.com/example/project
+  ref: 0123456789abcdef0123456789abcdef01234567
+validation:
+  summaries: error
+  parameters: warn
+  returns: warn
+  unresolvedTypes: off
+  brokenSee: warn

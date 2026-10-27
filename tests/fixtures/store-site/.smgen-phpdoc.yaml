@@ -1,0 +1,24 @@
+version: 1
+package:
+  title: Store Fixture API
+  description: Public PHP types used by the store fixture.
+  version: 1.0.0
+sources:
+  - path: src
+php: '8.2'
+output: api
+menu:
+  name: documentation
+  parent: reference
+  weight: 20
+llms:
+  section: reference
+assistant: true
+jsonld: true
+source:
+  repository: https://github.com/example/store-fixture
+  ref: 0123456789abcdef0123456789abcdef01234567
+validation:
+  summaries: error
+  parameters: error
+  returns: error

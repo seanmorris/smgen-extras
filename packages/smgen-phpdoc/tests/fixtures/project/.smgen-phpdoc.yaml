@@ -1,0 +1,29 @@
+version: 1
+package:
+  title: Acme PHP API
+  description: Public contracts, values, and operations in Acme.
+  version: 1.2.3
+sources:
+  - path: src
+php: '8.2'
+output: api
+visibility: [public, protected]
+grouping: namespace
+menu:
+  name: documentation
+  parent: reference
+  weight: 60
+  symbols: false
+llms:
+  section: reference
+assistant: true
+jsonld: true
+source:
+  repository: https://github.com/example/acme
+  ref: 0123456789abcdef0123456789abcdef01234567
+validation:
+  summaries: warn
+  parameters: warn
+  returns: warn
+  unresolvedTypes: off
+  brokenSee: warn

@@ -1,0 +1,22 @@
+version: 1
+package:
+  title: Greeting API
+  description: A small API reference generated from the example source.
+  version: 1.0.0
+sources:
+  - path: src
+php: '8.2'
+output: api
+visibility: [public]
+grouping: namespace
+llms: false
+assistant: false
+jsonld: true
+source:
+  repository: https://github.com/seanmorris/smgen-plugins
+  ref: main
+  prefix: examples/phpdoc
+validation:
+  summaries: error
+  parameters: error
+  returns: error

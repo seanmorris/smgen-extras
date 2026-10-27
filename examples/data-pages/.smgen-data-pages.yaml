@@ -1,0 +1,20 @@
+version: 1
+datasets:
+  field-notes:
+    source: data/field-notes.csv
+    template: templates/note.md.php
+    output: notes/{slug}.md
+    key: id
+    columns:
+      id: ID
+      slug: Slug
+      title: Title
+      habitat: Habitat
+      summary: Summary
+      published: Published
+    required: [id, slug, title, habitat, summary]
+    where:
+      published: "yes"
+    collections:
+      - template: templates/catalog.md.php
+        output: notes/index.md
