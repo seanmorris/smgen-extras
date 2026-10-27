@@ -7,15 +7,21 @@
 echo $context->frontmatter([
 	'title' => 'Organizations',
 	'description' => 'A directory generated from 24 synthetic organization records.',
-	'TOC' => false,
+	'TOC' => true,
 	'menus' => [
-		'organizations' => ['title' => 'All organizations', 'weight' => 0],
+		'directory' => [
+			'parent' => 'organization-records',
+			'title' => 'All organizations',
+			'weight' => 0,
+		],
 	],
 ]);
 ?>
 # Organizations
 
 These 24 profiles come from a second CSV file and its own row template.
+
+## Organization directory
 
 <ul class="catalog-list">
 <?php foreach($records as $record): ?>

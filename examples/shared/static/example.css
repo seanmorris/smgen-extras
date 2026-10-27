@@ -37,7 +37,7 @@ body {
   line-height: 1.65;
 }
 
-body.example-with-sidebars {
+body.example-with-sidebar {
   width: min(100% - 2rem, 86rem);
 }
 
@@ -88,30 +88,21 @@ footer {
   padding: 4rem 0 5rem;
 }
 
-.example-layout--sidebars {
+.example-layout--sidebar {
   display: grid;
-  grid-template-columns: 13rem minmax(0, 1fr) 13rem;
+  grid-template-columns: 13rem minmax(0, 1fr);
 }
 
-.example-layout--sidebars > main {
-  display: block;
+.example-layout--sidebar > main {
   min-width: 0;
-  padding-inline: 2rem;
+  padding-left: 2rem;
 }
 
 .example-sidebar {
   min-width: 0;
   padding: 4rem 1rem 5rem;
-}
-
-.example-sidebar--left {
   border-right: 1px solid var(--border);
   padding-left: 0;
-}
-
-.example-sidebar--right {
-  border-left: 1px solid var(--border);
-  padding-right: 0;
 }
 
 .example-sidebar nav {
@@ -161,6 +152,19 @@ footer {
 
 .example-sidebar a.active-link {
   font-weight: 700;
+}
+
+.example-sidebar details > summary {
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.example-sidebar details > ul {
+  margin: 0.3rem 0 0.65rem 0.45rem;
+  padding-left: 0.45rem;
+  border-left: 1px solid var(--border);
 }
 
 article {
@@ -364,53 +368,30 @@ footer {
 }
 
 @media (max-width: 70rem) {
-  body.example-with-sidebars {
+  body.example-with-sidebar {
     width: min(100% - 2rem, 58rem);
   }
 
-  .example-layout--sidebars {
+  .example-layout--sidebar {
     display: block;
   }
 
-  .example-layout--sidebars > main {
+  .example-layout--sidebar > main {
     padding-inline: 0;
   }
 
   .example-sidebar {
     padding: 1rem 0;
     border: 0;
-  }
-
-  .example-sidebar--left {
     border-bottom: 1px solid var(--border);
-  }
-
-  .example-sidebar--right {
-    border-top: 1px solid var(--border);
   }
 
   .example-sidebar nav {
     position: static;
-    max-height: none;
-    overflow: visible;
+    max-height: 16rem;
   }
 
   .example-sidebar .menu-title {
     margin-bottom: 0.35rem;
-  }
-
-  .example-sidebar ul {
-    display: flex;
-    overflow-x: auto;
-    gap: 0.25rem;
-    scrollbar-width: thin;
-  }
-
-  .example-sidebar li + li {
-    margin-top: 0;
-  }
-
-  .example-sidebar a {
-    max-width: 13rem;
   }
 }

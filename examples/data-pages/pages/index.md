@@ -1,14 +1,24 @@
 ---
 title: Data Pages Example
 description: Customer and organization directories generated from CSV rows.
-TOC: false
+TOC: true
 ---
 
 # Two CSV files, one site
 
-The [customer directory](customers/index.html) and
-[organization directory](organizations/index.html) contain 24 records each.
-SMGen builds every detail page and both indexes from the two source files.
+SMGen builds 48 detail pages and two indexes from two source files.
+
+## Customers
+
+The [customer directory](customers/index.html) contains 24 records. Its row
+template places every generated profile under Customers in the nested menu.
+
+## Organizations
+
+The [organization directory](organizations/index.html) contains 24 records.
+Its template places those profiles under Organizations in the same menu.
+
+## Source data
 
 Each dataset maps its original headings to short template variables. Change a
 CSV row, run SMGen, and its detail page and directory entry update together.

@@ -7,15 +7,21 @@
 echo $context->frontmatter([
 	'title' => 'Customers',
 	'description' => 'A directory generated from 24 synthetic customer records.',
-	'TOC' => false,
+	'TOC' => true,
 	'menus' => [
-		'customers' => ['title' => 'All customers', 'weight' => 0],
+		'directory' => [
+			'parent' => 'customer-records',
+			'title' => 'All customers',
+			'weight' => 0,
+		],
 	],
 ]);
 ?>
 # Customers
 
 These 24 profiles come from one CSV file and one row template.
+
+## Customer directory
 
 <ul class="catalog-list">
 <?php foreach($records as $record): ?>

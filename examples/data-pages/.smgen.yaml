@@ -18,14 +18,25 @@ PLUGINS:
       - data
       - templates
 MENUS:
-  customers:
-    label: Customers
-    renderer: flat
+  directory:
+    label: Directory
+    renderer: tree
+    hierarchy: manual
     showLabel: true
-  organizations:
-    label: Organizations
-    renderer: flat
-    showLabel: true
+    links:
+      - id: overview
+        page: index.md
+        title: Overview
+        weight: -100
+      - id: customer-records
+        group: true
+        title: Customers
+        weight: 10
+        expanded: true
+      - id: organization-records
+        group: true
+        title: Organizations
+        weight: 20
+        expanded: true
 MENU_REGIONS:
-  leftBar: [customers]
-  rightBar: [organizations]
+  sidebar: [directory]
