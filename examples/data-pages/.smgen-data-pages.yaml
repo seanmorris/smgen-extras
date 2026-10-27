@@ -1,20 +1,43 @@
 version: 1
 datasets:
-  field-notes:
-    source: data/field-notes.csv
-    template: templates/note.md.php
-    output: notes/{slug}.md
-    key: id
+  customers:
+    source: data/customers.csv
+    template: templates/customer.md.php
+    output: customers/{customer_id}.md
+    key: customer_id
     columns:
-      id: ID
-      slug: Slug
-      title: Title
-      habitat: Habitat
-      summary: Summary
-      published: Published
-    required: [id, slug, title, habitat, summary]
-    where:
-      published: "yes"
+      index: Index
+      customer_id: Customer Id
+      first_name: First Name
+      last_name: Last Name
+      company: Company
+      city: City
+      country: Country
+      phone_primary: Phone 1
+      phone_secondary: Phone 2
+      email: Email
+      subscription_date: Subscription Date
+      website: Website
+    required: [customer_id, first_name, last_name, company, city, country, email, subscription_date]
     collections:
-      - template: templates/catalog.md.php
-        output: notes/index.md
+      - template: templates/customers.md.php
+        output: customers/index.md
+  organizations:
+    source: data/organizations.csv
+    template: templates/organization.md.php
+    output: organizations/{organization_id}.md
+    key: organization_id
+    columns:
+      index: Index
+      organization_id: Organization Id
+      name: Name
+      website: Website
+      country: Country
+      description: Description
+      founded: Founded
+      industry: Industry
+      employees: Number of employees
+    required: [organization_id, name, country, description, founded, industry, employees]
+    collections:
+      - template: templates/organizations.md.php
+        output: organizations/index.md

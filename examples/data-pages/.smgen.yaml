@@ -1,5 +1,5 @@
 PRODUCT_NAME: Data Pages Example
-TAGLINE: A catalog generated from CSV
+TAGLINE: Two directories generated from CSV
 TITLE_PREFIX: smgen-data-pages example
 BASE_URL: http://localhost:8200/examples/data-pages
 OUTPUT_DIR: ../../static/examples/data-pages
@@ -13,3 +13,7 @@ PLUGINS:
   - use: smgen-data-pages
     options:
       config: .smgen-data-pages.yaml
+    watch:
+      - .smgen-data-pages.yaml
+      - data
+      - templates

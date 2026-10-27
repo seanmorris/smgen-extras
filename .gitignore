@@ -1,5 +1,6 @@
 node_modules/
 docs/
+/.docs.smgen-*/
 .smgen-core/
 static/examples/
 .test-output/

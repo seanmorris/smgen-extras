@@ -1,0 +1,31 @@
+version: 1
+datasets:
+  products:
+    source: data/products.csv
+    template: templates/product.md.php
+    output: products/{ean}.md
+    key: ean
+    columns:
+      index: Index
+      title: Name
+      description: Description
+      brand: Brand
+      category: Category
+      price: Price
+      currency: Currency
+      stock: Stock
+      ean: EAN
+      color: Color
+      size: Size
+      availability: Availability
+      internal_id: Internal ID
+      provider: Checkout Provider
+      presentation: Checkout Presentation
+      checkout_url: Checkout URL
+      published: Published
+    required: [title, description, brand, category, price, currency, stock, ean, availability, provider, presentation, checkout_url]
+    where:
+      published: "yes"
+    collections:
+      - template: templates/catalog.md.php
+        output: products/index.md

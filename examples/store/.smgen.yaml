@@ -10,4 +10,11 @@ STYLES: [/example.css]
 SEARCH_ENABLED: 0
 SMGEN_ENGINE: php
 PLUGINS:
+  - use: smgen-data-pages
+    options:
+      config: .smgen-data-pages.yaml
+    watch:
+      - .smgen-data-pages.yaml
+      - data
+      - templates
   - smgen-store
