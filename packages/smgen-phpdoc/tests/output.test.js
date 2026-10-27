@@ -20,6 +20,9 @@ test('managed output is atomic, ownership-scoped, and unchanged on a no-op', asy
 		const first = await installManaged(pages, config, build.pages);
 		assert.equal(first.changed, true);
 		const landing = path.join(pages, 'api', 'index.md');
+		const landingContent = await fs.readFile(landing, 'utf8');
+		assert.match(landingContent, /^TOC: true$/m);
+		assert.doesNotMatch(landingContent, /^toc: true$/m);
 		const firstStat = await fs.stat(landing);
 		await delay(25);
 		const second = await installManaged(pages, config, build.pages);

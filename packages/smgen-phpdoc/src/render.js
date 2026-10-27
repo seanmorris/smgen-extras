@@ -447,7 +447,7 @@ function frontmatter(page, config)
 	const metadata = {
 		title: page.title,
 		'description-meta': page.summary,
-		toc: true,
+		'TOC': true,
 	};
 	if(config.menu.name !== null && (page.kind === 'landing' || config.menu.symbols))
 	{
