@@ -17,3 +17,15 @@ PLUGINS:
       - .smgen-data-pages.yaml
       - data
       - templates
+MENUS:
+  customers:
+    label: Customers
+    renderer: flat
+    showLabel: true
+  organizations:
+    label: Organizations
+    renderer: flat
+    showLabel: true
+MENU_REGIONS:
+  leftBar: [customers]
+  rightBar: [organizations]

@@ -10,6 +10,9 @@ echo $context->frontmatter([
 	'title' => $name,
 	'description' => 'Synthetic customer record for ' . $name . ' at ' . $row['company'] . '.',
 	'TOC' => false,
+	'menus' => [
+		'customers' => ['weight' => (int) $row['index']],
+	],
 ]);
 ?>
 # <?=$context->escapeHtml($name)?>

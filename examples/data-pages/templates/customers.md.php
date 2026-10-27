@@ -8,6 +8,9 @@ echo $context->frontmatter([
 	'title' => 'Customers',
 	'description' => 'A directory generated from 24 synthetic customer records.',
 	'TOC' => false,
+	'menus' => [
+		'customers' => ['title' => 'All customers', 'weight' => 0],
+	],
 ]);
 ?>
 # Customers

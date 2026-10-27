@@ -8,6 +8,9 @@ echo $context->frontmatter([
 	'title' => $row['name'],
 	'description' => 'Synthetic organization record for ' . $row['name'] . '.',
 	'TOC' => false,
+	'menus' => [
+		'organizations' => ['weight' => (int) $row['index']],
+	],
 ]);
 ?>
 # <?=$context->escapeHtml($row['name'])?>

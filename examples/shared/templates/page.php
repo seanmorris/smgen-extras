@@ -4,6 +4,10 @@
  * Renders the lightweight shell shared by the published plugin examples.
  */
 
+$leftBarShow = menuRegionExists('leftBar') && ($frontmatter['leftBarShow'] ?? true);
+$rightBarShow = menuRegionExists('rightBar') && ($frontmatter['rightBarShow'] ?? true);
+$sidebarsShow = $leftBarShow || $rightBarShow;
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +24,7 @@ $for(css)$
 	<link rel="stylesheet" href="${css}">
 $endfor$
 </head>
-<body>
+<body<?=$sidebarsShow ? ' class="example-with-sidebars"' : ''?>>
 	<header class="example-header">
 		<a class="example-brand" href="<?=escapeHtml(resolveAssetUrl('/'))?>">
 			<img src="<?=escapeHtml(resolveAssetUrl('/example-mark.svg'))?>" width="44" height="44" alt="">
@@ -31,14 +35,26 @@ $endfor$
 		</a>
 		<a href="https://seanmorris.github.io/smgen-plugins/" target="_blank" rel="noopener noreferrer">Plugin guides</a>
 	</header>
-	<main>
-		<article>
-			$body$
-		</article>
-		$if(toc)$
-		<nav class="example-toc" aria-label="On this page">${toc}</nav>
-		$endif$
-	</main>
+	<div class="example-layout<?=$sidebarsShow ? ' example-layout--sidebars' : ''?>">
+		<?php if($leftBarShow): ?>
+		<aside class="example-sidebar example-sidebar--left">
+			<nav aria-label="Primary navigation"><?php renderMenuRegion('leftBar'); ?></nav>
+		</aside>
+		<?php endif; ?>
+		<main>
+			<article>
+				$body$
+			</article>
+			$if(toc)$
+			<nav class="example-toc" aria-label="On this page">${toc}</nav>
+			$endif$
+		</main>
+		<?php if($rightBarShow): ?>
+		<aside class="example-sidebar example-sidebar--right">
+			<nav aria-label="Related navigation"><?php renderMenuRegion('rightBar'); ?></nav>
+		</aside>
+		<?php endif; ?>
+	</div>
 	<footer>
 		<span>Example site</span>
 		<a href="https://github.com/seanmorris/smgen-plugins" target="_blank" rel="noopener noreferrer">View source</a>
