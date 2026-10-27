@@ -19,7 +19,9 @@ npm ci
 npm run check
 ```
 
-Set `SMGEN_BIN` to an SMGen checkout when it is not available at `/app/smgen.sh`:
+The site launcher uses a local package or a sibling `static-gen` or `smgen`
+checkout before it checks the system command. Set `SMGEN_BIN` when the current
+checkout lives somewhere else:
 
 ```sh
 SMGEN_BIN=/path/to/smgen/smgen.sh npm test

@@ -38,7 +38,9 @@ The check installs the pinned PHPDoc parser dependencies, enforces PHP and
 JavaScript documentation, runs strict checked JSDoc, exercises each package,
 builds a combined fixture site, and builds this documentation site.
 
-Set `SMGEN_BIN` when the SMGen checkout is not available at `/app/smgen.sh`:
+The site launcher uses a local package or a sibling `static-gen` or `smgen`
+checkout before it checks the system command. Set `SMGEN_BIN` when the current
+checkout lives somewhere else:
 
 ```bash
 SMGEN_BIN=/path/to/smgen/smgen.sh npm run check
