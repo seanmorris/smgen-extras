@@ -65,7 +65,7 @@ $endfor$
 			<nav class="main" aria-label="Plugin documentation"><?php renderNavBar(); ?></nav>
 		</aside>
 		<?php endif; ?>
-		<main id="content" class="page-content">
+		<main id="content" class="page-content$if(toc)$ page-content--with-toc$endif$">
 			<article>
 				$body$
 			</article>

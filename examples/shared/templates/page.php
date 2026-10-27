@@ -68,7 +68,7 @@ $endfor$
 			<nav aria-label="Site navigation"><?php renderMenuRegion('sidebar'); ?></nav>
 		</aside>
 		<?php endif; ?>
-		<main id="content">
+		<main id="content"$if(toc)$ class="example-content--with-toc"$endif$>
 			<article>
 				$body$
 			</article>
