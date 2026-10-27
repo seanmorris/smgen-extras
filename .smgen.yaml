@@ -2,6 +2,7 @@ PRODUCT_NAME: smgen-plugins
 TAGLINE: Focused extensions for static sites
 ORGANIZATION: Sean Morris
 TITLE_PREFIX: smgen-plugins
+DEFAULT_THEME: theme-plugins
 
 BASE_URL: http://localhost:8200
 DEV_PORT: 8200

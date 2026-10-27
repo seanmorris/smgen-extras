@@ -1,18 +1,24 @@
 ---
 title: Store Example
 description: A CSV product catalog with validated hosted checkout links.
-TOC: false
+TOC: true
 ---
 
 # A storefront from CSV
+
+## Catalog
 
 The [product catalog](products/index.html) starts with 24 rows from Datablist's
 Products sample. The data-page plugin filters six unavailable products and
 renders the other 18 with one PHP template.
 
+## Product pages
+
 Each published row supplies its product details, JSON-LD, price, and checkout
 provider. The example uses placeholder hosted links, so it loads no
 payment-provider JavaScript.
+
+## Build safeguards
 
 The build fails before publication if a product has an invalid price, an
 unsupported checkout mode, an unsafe URL, or a credential-shaped value.

@@ -1,6 +1,7 @@
 node_modules/
 docs/
 /.docs.smgen-*/
+/design-inspo.png
 .smgen-core/
 static/examples/
 .test-output/

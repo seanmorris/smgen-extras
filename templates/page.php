@@ -1,9 +1,20 @@
 <?php
 
+/**
+ * Renders the documentation shell for the SMGen plugin collection.
+ */
+
 $leftBarShow = $frontmatter['leftBarShow'] ?? true;
+$currentSource = basename($pageFile);
+$sectionLinks = [
+	['source' => 'index.md', 'path' => '/', 'label' => 'Overview'],
+	['source' => 'phpdoc.md', 'path' => '/phpdoc.html', 'label' => 'PHPDoc'],
+	['source' => 'data-pages.md', 'path' => '/data-pages.html', 'label' => 'Data Pages'],
+	['source' => 'store.md', 'path' => '/store.html', 'label' => 'Store'],
+];
 
 ?><!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-plugins">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,10 +46,17 @@ $endfor$
 					<small><?=escapeHtml(getConf('TAGLINE'))?></small>
 				</span>
 			</a>
-			<nav class="header-links" aria-label="Related sites">
-				<a href="https://seanmorris.github.io/smgen/" target="_blank" rel="noopener noreferrer">SMGen</a>
-				<a href="https://github.com/seanmorris/smgen-plugins" target="_blank" rel="noopener noreferrer">GitHub</a>
-			</nav>
+			<div class="header-main">
+				<nav class="section-links" aria-label="Plugin guides">
+					<?php foreach($sectionLinks as $section): ?>
+					<a href="<?=escapeHtml(resolveAssetUrl($section['path']))?>"<?=$currentSource === $section['source'] ? ' class="active-link" aria-current="page"' : ''?>><?=escapeHtml($section['label'])?></a>
+					<?php endforeach; ?>
+				</nav>
+				<nav class="header-links" aria-label="Related sites">
+					<a href="https://seanmorris.github.io/smgen/" target="_blank" rel="noopener noreferrer">SMGen</a>
+					<a href="https://github.com/seanmorris/smgen-plugins" target="_blank" rel="noopener noreferrer">GitHub</a>
+				</nav>
+			</div>
 		</div>
 	</header>
 	<div class="shell site-layout<?=!$leftBarShow ? ' no-sidebar' : ''?>">

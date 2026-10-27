@@ -1,6 +1,7 @@
 PRODUCT_NAME: PHPDoc Example
 TAGLINE: Static API reference
 TITLE_PREFIX: smgen-phpdoc example
+DEFAULT_THEME: theme-phpdoc
 BASE_URL: http://localhost:8200/examples/phpdoc
 OUTPUT_DIR: ../../static/examples/phpdoc
 PAGES_DIR: ./pages
@@ -13,3 +14,21 @@ PLUGINS:
   - use: smgen-phpdoc
     options:
       config: .smgen-phpdoc.yaml
+MENUS:
+  reference:
+    label: Reference
+    renderer: tree
+    hierarchy: manual
+    showLabel: true
+    links:
+      - id: overview
+        page: index.md
+        title: Overview
+        weight: -100
+      - id: api-reference
+        group: true
+        title: Greeting API
+        weight: 10
+        expanded: true
+MENU_REGIONS:
+  sidebar: [reference]

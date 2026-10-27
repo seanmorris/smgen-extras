@@ -7,12 +7,21 @@
 echo $context->frontmatter([
 	'title' => 'Products',
 	'description' => 'A static catalog generated from selected product records.',
-	'TOC' => false,
+	'TOC' => true,
+	'menus' => [
+		'catalog' => [
+			'parent' => 'product-records',
+			'title' => 'All products',
+			'weight' => 0,
+		],
+	],
 ]);
 ?>
 # Products
 
 These 18 product pages come from rows whose `Published` value is `yes`.
+
+## Product catalog
 
 <ul class="catalog-list">
 <?php foreach($records as $record): ?>

@@ -9,6 +9,11 @@ php: '8.2'
 output: api
 visibility: [public]
 grouping: namespace
+menu:
+  name: reference
+  parent: api-reference
+  weight: 10
+  symbols: true
 llms: false
 assistant: false
 jsonld: true

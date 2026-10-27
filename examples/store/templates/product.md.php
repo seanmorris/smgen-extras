@@ -30,7 +30,13 @@ $formattedPrice = number_format((float) $row['price'], 2, '.', ',');
 echo $context->frontmatter([
 	'title' => $row['title'],
 	'description' => $row['description'],
-	'TOC' => false,
+	'TOC' => true,
+	'menus' => [
+		'catalog' => [
+			'parent' => 'product-records',
+			'weight' => (int) $row['index'],
+		],
+	],
 	'storePage' => true,
 	'plugins' => ['smgen-store' => true],
 	'store' => [
@@ -81,6 +87,8 @@ echo $context->frontmatter([
 
 <p class="product-price"><?=$context->escapeHtml($row['currency'])?> <?=$context->escapeHtml($formattedPrice)?></p>
 
+## Product details
+
 <dl class="record-details">
 <dt>Availability</dt><dd><?=$context->escapeHtml($availability)?></dd>
 <dt>Stock</dt><dd><?=$context->escapeHtml($row['stock'])?></dd>
@@ -89,6 +97,8 @@ echo $context->frontmatter([
 <dt>EAN</dt><dd><?=$context->escapeHtml($row['ean'])?></dd>
 <dt>Checkout</dt><dd><?=$context->escapeHtml($provider)?></dd>
 </dl>
+
+## Checkout
 
 ::: {.smgen-store-checkout}
 :::

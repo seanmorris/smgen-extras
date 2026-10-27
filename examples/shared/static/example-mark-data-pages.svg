@@ -1,6 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
-  <title id="title">SMGen plugin example</title>
-  <rect x="2" y="2" width="44" height="44" rx="13" fill="#6545d3"/>
+  <title id="title">Data Pages example</title>
+  <defs>
+    <linearGradient id="base" x1="6" y1="4" x2="43" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8465eb"/>
+      <stop offset="1" stop-color="#5634bd"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#base)"/>
   <circle cx="15" cy="15" r="4" fill="#fff"/>
   <circle cx="33" cy="24" r="4" fill="#f5bd61"/>
   <circle cx="24" cy="34" r="4" fill="#fff"/>

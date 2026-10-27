@@ -1,6 +1,7 @@
 PRODUCT_NAME: Data Pages Example
 TAGLINE: Two directories generated from CSV
 TITLE_PREFIX: smgen-data-pages example
+DEFAULT_THEME: theme-data-pages
 BASE_URL: http://localhost:8200/examples/data-pages
 OUTPUT_DIR: ../../static/examples/data-pages
 PAGES_DIR: ./pages

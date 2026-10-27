@@ -1,6 +1,7 @@
 PRODUCT_NAME: Store Example
 TAGLINE: Hosted checkout from static HTML
 TITLE_PREFIX: smgen-store example
+DEFAULT_THEME: theme-store
 BASE_URL: http://localhost:8200/examples/store
 OUTPUT_DIR: ../../static/examples/store
 PAGES_DIR: ./pages
@@ -18,3 +19,21 @@ PLUGINS:
       - data
       - templates
   - smgen-store
+MENUS:
+  catalog:
+    label: Catalog
+    renderer: tree
+    hierarchy: manual
+    showLabel: true
+    links:
+      - id: overview
+        page: index.md
+        title: Overview
+        weight: -100
+      - id: product-records
+        group: true
+        title: Products
+        weight: 10
+        expanded: true
+MENU_REGIONS:
+  sidebar: [catalog]
