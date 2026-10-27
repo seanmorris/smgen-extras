@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require_once(dirname(__DIR__) . '/src/autoload.php');
+
+try
+{
+	exit(SmgenStore\Command::run($argv));
+}
+catch(Throwable $error)
+{
+	fwrite(STDERR, 'smgen-store: ' . $error->getMessage() . "\n");
+	exit(1);
+}

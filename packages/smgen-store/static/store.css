@@ -1,0 +1,45 @@
+.smgen-store-button {
+  align-items: center;
+  background: #171717;
+  border: 1px solid #171717;
+  border-radius: 0.35rem;
+  color: #fff;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.1rem;
+  text-decoration: none;
+}
+
+.smgen-store-button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+.smgen-store-provider {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+
+.smgen-store-provider--stripe stripe-buy-button:defined + .smgen-store-fallback {
+  display: none;
+}
+
+.smgen-store-provider--paypal-cart {
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  .smgen-store-button {
+    background: #f4f4f4;
+    border-color: #f4f4f4;
+    color: #111;
+  }
+}

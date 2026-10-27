@@ -1,0 +1,30 @@
+version: 1
+datasets:
+  products:
+    source: data/products.csv
+    template: templates/product.md.php
+    output: products/{slug}.md
+    key: sku
+    columns:
+      sku: SKU
+      slug: Slug
+      title: Name
+      description: Description
+      price: Price
+      currency: Currency
+      provider: Checkout Provider
+      presentation: Checkout Presentation
+      checkout_url: Checkout URL
+      stripe_button_id: Stripe Buy Button ID
+      stripe_publishable_key: Stripe Publishable Key
+      paypal_button_id: PayPal Hosted Button ID
+      paypal_client_id: PayPal Client ID
+      paypal_merchant_id: PayPal Merchant ID
+      paypal_cart_item_id: PayPal Cart Item ID
+      published: Published
+    required: [sku, slug, title, price, currency, provider, presentation, checkout_url]
+    where:
+      published: "yes"
+    collections:
+      - template: templates/catalog.md.php
+        output: products/index.md

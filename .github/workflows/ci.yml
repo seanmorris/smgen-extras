@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out plugins
+        uses: actions/checkout@v4
+
+      - name: Check out SMGen
+        uses: actions/checkout@v4
+        with:
+          repository: seanmorris/smgen
+          path: _smgen
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, yaml
+          coverage: none
+
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run checks
+        env:
+          SMGEN_BIN: ${{ github.workspace }}/_smgen/smgen.sh
+        run: npm run check
+
+      - name: Inspect package contents
+        run: npm pack --workspaces --dry-run

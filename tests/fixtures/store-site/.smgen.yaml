@@ -1,0 +1,9 @@
+BASE_URL: /shop
+SEARCH_ENABLED: 0
+STYLES:
+  - /default.css
+PLUGINS:
+  - use: smgen-data-pages
+    options:
+      config: .smgen-data-pages.yaml
+  - smgen-store

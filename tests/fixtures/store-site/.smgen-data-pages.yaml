@@ -1,0 +1,24 @@
+version: 1
+datasets:
+  products:
+    source: data/products.csv
+    template: templates/product.md.php
+    output: products/{slug}.md
+    key: sku
+    columns:
+      sku: SKU
+      slug: Slug
+      title: Name
+      description: Description
+      price: Price
+      currency: Currency
+      provider: Checkout Provider
+      presentation: Checkout Presentation
+      checkout_url: Checkout URL
+      published: Published
+    required: [sku, slug, title, price, currency, provider, presentation, checkout_url]
+    where:
+      published: "yes"
+    collections:
+      - template: templates/catalog.md.php
+        output: products/index.md

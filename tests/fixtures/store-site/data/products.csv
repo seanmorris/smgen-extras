@@ -1,0 +1,2 @@
+SKU,Slug,Name,Description,Price,Currency,Checkout Provider,Checkout Presentation,Checkout URL,Published
+MUG-001,smgen-mug,SMGen Mug,"A sturdy mug with <em>trusted HTML</em>.",24.00,USD,hosted-link,link,https://example.com/checkout/smgen-mug,yes

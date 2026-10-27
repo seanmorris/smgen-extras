@@ -1,0 +1,22 @@
+apiVersion: smgen/v1
+id: smgen-store
+pages:
+  selectors:
+    - where:
+        storePage: true
+  styles:
+    - /smgen-store/store.css
+  filters:
+    - filters/store.lua
+assets:
+  - from: static
+    to: smgen-store
+hooks:
+  prepare:
+    run: [php, ./bin/prepare.php]
+watch:
+  - bin
+  - src
+  - filters
+  - static
+  - smgen.plugin.yaml

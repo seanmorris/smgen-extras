@@ -1,0 +1,76 @@
+name: Publish package
+
+on:
+  push:
+    tags:
+      - smgen-data-pages-v*
+      - smgen-store-v*
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out plugins
+        uses: actions/checkout@v4
+
+      - name: Check out SMGen
+        uses: actions/checkout@v4
+        with:
+          repository: seanmorris/smgen
+          path: _smgen
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, yaml
+          coverage: none
+
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run checks
+        env:
+          SMGEN_BIN: ${{ github.workspace }}/_smgen/smgen.sh
+        run: npm run check
+
+      - name: Select tagged workspace
+        id: package
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tag="${GITHUB_REF_NAME}"
+          case "${tag}" in
+            smgen-data-pages-v*) package="smgen-data-pages"; version="${tag#smgen-data-pages-v}" ;;
+            smgen-store-v*) package="smgen-store"; version="${tag#smgen-store-v}" ;;
+            *) echo "Unsupported release tag: ${tag}" >&2; exit 1 ;;
+          esac
+          declared="$(node -p "require('./packages/${package}/package.json').version")"
+          if [[ "${declared}" != "${version}" ]]; then
+            echo "Tag ${tag} does not match ${package} version ${declared}." >&2
+            exit 1
+          fi
+          echo "name=${package}" >> "${GITHUB_OUTPUT}"
+
+      - name: Publish tagged workspace
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --workspace "packages/${{ steps.package.outputs.name }}" --access public --provenance

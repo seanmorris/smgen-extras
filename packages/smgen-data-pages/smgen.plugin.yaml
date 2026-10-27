@@ -1,0 +1,9 @@
+apiVersion: smgen/v1
+id: smgen-data-pages
+hooks:
+  prepare:
+    run: [php, ./bin/prepare.php]
+watch:
+  - bin
+  - src
+  - smgen.plugin.yaml

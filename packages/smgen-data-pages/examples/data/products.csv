@@ -1,0 +1,2 @@
+SKU,Slug,Name,Description,Price,Currency,Checkout Provider,Checkout Presentation,Checkout URL,Stripe Buy Button ID,Stripe Publishable Key,PayPal Hosted Button ID,PayPal Client ID,PayPal Merchant ID,PayPal Cart Item ID,Published
+MUG-001,smgen-mug,SMGen Mug,"A sturdy mug for long builds.",24.00,USD,hosted-link,link,https://example.com/checkout/smgen-mug,,,,,,,yes
