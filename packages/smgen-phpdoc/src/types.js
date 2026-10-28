@@ -124,6 +124,7 @@
  * @property {string} summary Page summary.
  * @property {'landing'|'namespace'|'symbol'} kind Page role.
  * @property {GraphSymbol|null} symbol Related symbol for symbol pages.
+ * @property {string|null} namespace Namespace the page documents or belongs to; null for the landing page.
  * @property {string} content Complete Markdown source.
  */
 

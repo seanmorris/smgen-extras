@@ -19,7 +19,7 @@ export async function renderGraph(graph, config)
 	/** @type {RenderedPage[]} */
 	const pages = [];
 	const namespaces = groupedNamespaces(graph.symbols);
-	const landing = pageShell('index.md', 'index', graph.package.title, graph.package.description, 'landing', null,
+	const landing = pageShell('index.md', 'index', graph.package.title, graph.package.description, 'landing', null, null,
 		renderLanding(graph, namespaces, routes, config));
 	pages.push(await finishPage(landing, graph, config));
 
@@ -30,7 +30,7 @@ export async function renderGraph(graph, config)
 			const route = namespaceRoute(namespace);
 			const title = namespace === '' ? 'Global namespace' : namespace;
 			const summary = namespace === '' ? 'Global PHP declarations.' : `Declarations in the ${namespace} namespace.`;
-			const page = pageShell(`${route}.md`, route, title, summary, 'namespace', null,
+			const page = pageShell(`${route}.md`, route, title, summary, 'namespace', null, namespace,
 				renderNamespace(namespace, symbols, routes));
 			pages.push(await finishPage(page, graph, config));
 		}
@@ -40,7 +40,7 @@ export async function renderGraph(graph, config)
 	{
 		const route = routes.get(symbol.id);
 		if(route === undefined) throw new Error(`Missing route for ${symbol.id}.`);
-		const page = pageShell(`${route}.md`, route, symbol.name, summaryFor(symbol), 'symbol', symbol,
+		const page = pageShell(`${route}.md`, route, symbol.name, summaryFor(symbol), 'symbol', symbol, symbol.namespace,
 			renderSymbol(symbol, graph, routes, config));
 		pages.push(await finishPage(page, graph, config));
 	}
@@ -430,7 +430,7 @@ async function finishPage(page, graph, config)
 		if(typeof rendered !== 'string') throw new Error(`Renderer module ${modulePath} did not return Markdown text.`);
 		body = rendered;
 	}
-	const metadata = frontmatter(page, config);
+	const metadata = frontmatter(page, graph, config);
 	return {...page, content: `---\n${stringify(metadata, {lineWidth: 0})}---\n\n${body.trim()}\n`};
 }
 
@@ -438,10 +438,11 @@ async function finishPage(page, graph, config)
  * Build SMGen metadata for generated discovery, navigation, and structured data.
  *
  * @param {RenderedPage} page Rendered page.
+ * @param {DocumentationGraph} graph Validated graph.
  * @param {PhpDocConfig} config Normalized configuration.
  * @returns {Record<string,unknown>} SMGen frontmatter mapping.
  */
-function frontmatter(page, config)
+function frontmatter(page, graph, config)
 {
 	/** @type {Record<string,unknown>} */
 	const metadata = {
@@ -449,6 +450,7 @@ function frontmatter(page, config)
 		'description-meta': page.summary,
 		'TOC': true,
 	};
+	if(page.kind !== 'landing') metadata.breadcrumbs = breadcrumbs(page, graph, config);
 	if(config.menu.name !== null && (page.kind === 'landing' || config.menu.symbols))
 	{
 		metadata.menus = {
@@ -494,12 +496,63 @@ function frontmatter(page, config)
  * @param {string} summary Page summary.
  * @param {'landing'|'namespace'|'symbol'} kind Page role.
  * @param {GraphSymbol|null} symbol Related symbol.
+ * @param {string|null} namespace Namespace the page documents or belongs to; null for the landing page.
  * @param {string} content Markdown body.
  * @returns {RenderedPage} Unfinished page record.
  */
-function pageShell(pagePath, route, title, summary, kind, symbol, content)
+function pageShell(pagePath, route, title, summary, kind, symbol, namespace, content)
 {
-	return /** @type {RenderedPage} */ ({path: pagePath, route, title, summary, kind, symbol, content});
+	return /** @type {RenderedPage} */ ({path: pagePath, route, title, summary, kind, symbol, namespace, content});
+}
+
+/**
+ * Convert one extensionless route into its root-relative public path.
+ *
+ * @param {string} route Extensionless route.
+ * @param {PhpDocConfig} config Normalized configuration.
+ * @returns {string} Root-relative public path; index routes end with a slash.
+ */
+function publicPath(route, config)
+{
+	const prefix = '/' + config.output.replace(/^\/+|\/+$/g, '');
+	if(route === 'index') return `${prefix}/`;
+	if(route.endsWith('/index')) return `${prefix}/${route.slice(0, -'index'.length)}`;
+	return `${prefix}/${routeFile(route)}`;
+}
+
+/**
+ * Build the ancestor trail of one page: the landing page, then each enclosing namespace.
+ *
+ * Namespace entries link to their index pages under namespace grouping. The page
+ * itself is not part of the trail.
+ *
+ * @param {RenderedPage} page Rendered page.
+ * @param {DocumentationGraph} graph Validated graph.
+ * @param {PhpDocConfig} config Normalized configuration.
+ * @returns {Array<{title:string,path?:string}>} Ordered ancestors.
+ */
+function breadcrumbs(page, graph, config)
+{
+	/** @type {Array<{title:string,path?:string}>} */
+	const trail = [{title: graph.package.title, path: publicPath('index', config)}];
+	if(page.namespace === null) return trail;
+	const segments = page.namespace === '' ? [] : page.namespace.split('\\').filter(Boolean);
+	const ancestors = page.kind === 'namespace' ? segments.slice(0, -1) : segments;
+	if(page.kind === 'symbol' && page.namespace === '')
+	{
+		trail.push(config.grouping === 'namespace'
+			? {title: 'Global namespace', path: publicPath(namespaceRoute(''), config)}
+			: {title: 'Global namespace'});
+		return trail;
+	}
+	for(let depth = 1; depth <= ancestors.length; depth++)
+	{
+		const namespace = ancestors.slice(0, depth).join('\\');
+		trail.push(config.grouping === 'namespace'
+			? {title: ancestors[depth - 1], path: publicPath(namespaceRoute(namespace), config)}
+			: {title: ancestors[depth - 1]});
+	}
+	return trail;
 }
 
 /**

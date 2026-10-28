@@ -78,8 +78,11 @@ removes that temporary source tree after it publishes the HTML.
 
 ## Join the Rest of the Site
 
-Generated pages carry normal SMGen frontmatter. Select the navigation,
-`llms.txt`, assistant, and JSON-LD features in the PHPDoc configuration:
+Generated pages carry normal SMGen frontmatter, including a `breadcrumbs`
+list of each page's ancestors (the landing page, then every enclosing
+namespace) with titles and index-page paths, which the Postbox example renders
+as its routing bar. Select the navigation, `llms.txt`, assistant, and JSON-LD
+features in the PHPDoc configuration:
 
 ```yaml
 menu:

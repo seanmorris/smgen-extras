@@ -101,6 +101,18 @@ jsonld: true
 
 The landing page joins `menu.name`. Set `symbols: true` to add symbol pages to the same menu. The named menu and parent must already exist in the site configuration.
 
+Every namespace and symbol page also carries a `breadcrumbs` list: its ancestors in order, starting with the landing page and then each enclosing namespace. Each entry has a `title` and, under namespace grouping, the root-relative `path` of that namespace's index page. Templates can render the trail as links without knowing how the plugin names its routes:
+
+```yaml
+breadcrumbs:
+  - title: Postbox API
+    path: /api/
+  - title: Postbox
+    path: /api/namespaces/postbox/
+  - title: Transport
+    path: /api/namespaces/postbox/transport/
+```
+
 `llms` selects every generated page for one configured `LLMS` section. `assistant: true` selects the pages for `smgen-assistant`. `jsonld: true` adds `TechArticle` data to each page. These settings add metadata only. The corresponding SMGen feature or plugin still controls its output.
 
 ## Link to Source

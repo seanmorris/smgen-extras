@@ -23,6 +23,11 @@ test('managed output is atomic, ownership-scoped, and unchanged on a no-op', asy
 		const landingContent = await fs.readFile(landing, 'utf8');
 		assert.match(landingContent, /^TOC: true$/m);
 		assert.doesNotMatch(landingContent, /^toc: true$/m);
+		assert.doesNotMatch(landingContent, /^breadcrumbs:/m);
+		const contracts = await fs.readFile(path.join(pages, 'api', 'namespaces', 'acme', 'contracts', 'index.md'), 'utf8');
+		assert.match(contracts, /^breadcrumbs:\n  - title: Acme PHP API\n    path: \/api\/\n  - title: Acme\n    path: \/api\/namespaces\/acme\/\nllms:/m);
+		const renderable = await fs.readFile(path.join(pages, 'api', 'interfaces', 'acme', 'contracts', 'renderable.md'), 'utf8');
+		assert.match(renderable, /^breadcrumbs:\n  - title: Acme PHP API\n    path: \/api\/\n  - title: Acme\n    path: \/api\/namespaces\/acme\/\n  - title: Contracts\n    path: \/api\/namespaces\/acme\/contracts\/\n/m);
 		const firstStat = await fs.stat(landing);
 		await delay(25);
 		const second = await installManaged(pages, config, build.pages);

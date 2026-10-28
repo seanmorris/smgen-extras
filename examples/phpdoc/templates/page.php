@@ -14,7 +14,9 @@ $leftBarShow = $frontmatter['leftBarShow'] ?? true;
 $sourceUrl = $frontmatter['source-url'] ?? null;
 $version = '1.2.0';
 $pageTitle = (string) ($frontmatter['title'] ?? '');
-$route = $isApi ? explode('\\', $pageTitle) : [];
+// Generated API pages carry their ancestor trail: the landing page, then each namespace.
+$trail = is_array($frontmatter['breadcrumbs'] ?? null) ? array_slice($frontmatter['breadcrumbs'], 1) : [];
+$leaf = str_contains($pageTitle, '\\') ? substr($pageTitle, strrpos($pageTitle, '\\') + 1) : $pageTitle;
 
 ?><!DOCTYPE html>
 <html lang="en" class="<?=escapeHtml(getConf('DEFAULT_THEME') ?: 'theme-docs')?>">
@@ -77,11 +79,12 @@ $endfor$
 		<?php endif; ?>
 		<main id="content" class="sheet">
 			<p class="route" aria-label="Breadcrumb">
-				<?php if($isApi): ?>
+				<?php if($inApi && $trail): ?>
 				<a href="<?=escapeHtml(resolveAssetUrl('/api/index.html'))?>">api</a>
-				<?php foreach($route as $index => $segment): ?>
-				<span class="route-sep">\</span><?php if($index === count($route) - 1): ?><strong><?=escapeHtml($segment)?></strong><?php else: ?><span><?=escapeHtml($segment)?></span><?php endif; ?>
+				<?php foreach($trail as $crumb): ?>
+				<span class="route-sep">\</span><?php if(!empty($crumb['path'])): ?><a href="<?=escapeHtml(resolveAssetUrl((string) $crumb['path']))?>"><?=escapeHtml((string) ($crumb['title'] ?? ''))?></a><?php else: ?><span><?=escapeHtml((string) ($crumb['title'] ?? ''))?></span><?php endif; ?>
 				<?php endforeach; ?>
+				<span class="route-sep">\</span><strong><?=escapeHtml($leaf)?></strong>
 				<?php elseif($inApi): ?>
 				<a href="<?=escapeHtml(resolveAssetUrl('/api/index.html'))?>">api</a><span class="route-sep">/</span><strong><?=escapeHtml($pageTitle)?></strong>
 				<?php else: ?>
