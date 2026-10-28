@@ -1,13 +1,21 @@
-PRODUCT_NAME: Store Example
-TAGLINE: Hosted checkout from static HTML
-TITLE_PREFIX: smgen-store example
+PRODUCT_NAME: Fernway Goods
+TAGLINE: Paper, pens, and desk goods made to be used
+TITLE_PREFIX: Fernway Goods
 DEFAULT_THEME: theme-store
 BASE_URL: http://localhost:8200/examples/store
 OUTPUT_DIR: ../../static/examples/store
 PAGES_DIR: ./pages
-TEMPLATE_DIR: ../shared/templates
-STATIC_DIR: ../shared/static
-STYLES: [/example.css]
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+STYLES: [/scrollbar.css, /shop.css]
+CORE_ASSETS:
+  - main.js
+  - nav-state.js
+  - scrollbar.css
+SCRIPTS:
+  - /nav-state.js
+DEFER_SCRIPTS:
+  - /main.js
 SEARCH_ENABLED: 0
 SMGEN_ENGINE: php
 PLUGINS:
@@ -18,22 +26,10 @@ PLUGINS:
       - .smgen-data-pages.yaml
       - data
       - templates
+  - use: smgen-categories
+    options:
+      config: .smgen-categories.yaml
+    watch:
+      - .smgen-categories.yaml
+      - templates
   - smgen-store
-MENUS:
-  catalog:
-    label: Catalog
-    renderer: tree
-    hierarchy: manual
-    showLabel: true
-    links:
-      - id: overview
-        page: index.md
-        title: Overview
-        weight: -100
-      - id: product-records
-        group: true
-        title: Products
-        weight: 10
-        expanded: true
-MENU_REGIONS:
-  sidebar: [catalog]

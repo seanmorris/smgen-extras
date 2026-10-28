@@ -1,39 +1,51 @@
 ---
-title: How This Blog Is Built
-description: Follow one CSV row through the data-page, timeline, RSS, and JSON-LD build steps.
-TOC: true
+title: About the studio
+description: Three people, one press, and a journal kept as a spreadsheet.
+layout: page
+leftBarShow: false
+TOC: false
 jsonld:
   "@context": https://schema.org
-  "@type": TechArticle
-  headline: How This Blog Is Built
-  description: Follow one CSV row through the data-page, timeline, RSS, and JSON-LD build steps.
+  "@type": AboutPage
+  name: About Field Notes
+  description: Three people, one press, and a journal kept as a spreadsheet.
 ---
 
-# How this blog is built
+# About the studio
 
-The example combines one plugin with SMGen's normal page metadata. It publishes
-ordinary HTML and XML.
+Field Notes is the journal of a small print and design studio on the harbour.
+There are three of us, one Vandercook proof press from 1962, one very good
+kettle, and a window that faces the slipway.
 
-## Read the spreadsheet
+We print cards, broadsheets, and the occasional book in small runs. We build
+websites out of plain files for people who want them to last. The two kinds of
+work have the same reason behind them: the simple tool is the one that is still
+working in ten years.
 
-`smgen-data-pages` reads `data/posts.csv`. Its configuration selects published
-rows, checks required columns, and reserves one output path per slug.
+## The people
 
-## Render the posts
+- **Mara Bell** runs the press and mixes the ink. She writes most of the
+  workshop notes and all of the reading lists.
+- **Theo Okafor** sets type, rebuilds cabinets, and walks the sea wall in any
+  weather.
+- **June Castellanos** draws, binds, and keeps the flask filled for the early
+  mornings at the ferry slip.
 
-`templates/post.md.php` turns each row into Markdown. The generated frontmatter
-includes the publication date plus membership in the `archive` menu and
-`notes` feed.
+## Colophon
 
-## Build the archive and feed
+This journal is a folder of Markdown files. Every post is one file in
+`pages/posts/` with a short block of frontmatter: a title, a date, an author,
+and a topic. The words follow. At build time:
 
-SMGen groups the selected pages by year, month, and day for the timeline. It
-sorts the same pages by publication time for `feed.xml`. The page template adds
-the feed's discovery link to the document head.
+1. SMGen reads every post, builds the archive calendar and the RSS feed from
+   the publication dates, and turns the Markdown into HTML.
+2. The page template reads the same frontmatter to lay out the front page and
+   the topic pages. There is no database and no generated index to keep in
+   sync.
+3. The result is copied to a folder of plain files along with one stylesheet.
 
-## Publish static files
+The published site is HTML, CSS, and XML. There is no JavaScript on any page.
+The type is whatever serif your device already has, which is faster than
+anything we could send you.
 
-The output contains HTML, CSS, XML, and images. The timeline uses native
-`details` elements and loads no JavaScript.
-
-[Back to the blog](index.html)
+[Back to the journal](index.html) · [Subscribe to the feed](feed.xml)

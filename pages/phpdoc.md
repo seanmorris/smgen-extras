@@ -2,6 +2,9 @@
 title: PHP API References
 description: Generate linked SMGen API pages through static PHP analysis.
 weight: 1
+guide:
+  package: smgen-phpdoc
+  example: examples/phpdoc/
 llms:
   section: plugins
   description: Configure smgen-phpdoc, its generated pages, validation policy, and CLI.
@@ -109,6 +112,20 @@ validation:
 
 An error leaves the prior generated pages and published site in place.
 Warnings name the affected declaration and source location.
+
+## Highlight PHP Correctly
+
+Pandoc's PHP grammar colours only the first letter of class and namespace
+names. Generated API pages load highlight.js and a small script that
+re-tokenises each PHP block and maps the result onto Pandoc's class names, so
+`HIGHLIGHT_STYLE` and existing stylesheets keep working. Add the same two
+assets to `DEFER_SCRIPTS` to fix hand-written PHP blocks on other pages:
+
+```yaml
+DEFER_SCRIPTS:
+  - /smgen-phpdoc/vendor/highlight.js/highlight.min.js
+  - /smgen-phpdoc/syntax-highlight.js
+```
 
 ## Link Back to Source
 

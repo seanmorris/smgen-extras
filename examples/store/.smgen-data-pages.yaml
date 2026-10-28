@@ -3,29 +3,35 @@ datasets:
   products:
     source: data/products.csv
     template: templates/product.md.php
-    output: products/{ean}.md
-    key: ean
+    output: products/{slug}.md
+    key: slug
     columns:
       index: Index
+      slug: Slug
       title: Name
+      tagline: Tagline
       description: Description
-      brand: Brand
       category: Category
       price: Price
       currency: Currency
       stock: Stock
-      ean: EAN
-      color: Color
-      size: Size
+      sku: SKU
+      color_name: Color Name
+      color_hex: Color Hex
+      dimensions: Dimensions
+      material: Material
       availability: Availability
-      internal_id: Internal ID
+      highlights: Highlights
       provider: Checkout Provider
       presentation: Checkout Presentation
       checkout_url: Checkout URL
       published: Published
-    required: [title, description, brand, category, price, currency, stock, ean, availability, provider, presentation, checkout_url]
+      featured: Featured
+    required: [slug, title, tagline, description, category, price, currency, stock, sku, color_name, color_hex, dimensions, material, availability, highlights, provider, presentation, checkout_url]
     where:
       published: "yes"
     collections:
+      - template: templates/home.md.php
+        output: index.md
       - template: templates/catalog.md.php
         output: products/index.md

@@ -2,7 +2,7 @@
 
 `smgen-phpdoc` reads PHP source without running it and generates linked Markdown API pages for SMGen. SMGen then renders the pages with the site's templates, menus, search index, sitemap, `llms.txt`, JSON-LD, and assistant corpus.
 
-The published site receives HTML from SMGen. This plugin adds no browser CSS or JavaScript.
+The published site receives HTML from SMGen. On generated API pages the plugin adds one deferred script pair that re-highlights PHP code blocks in the browser; it adds no CSS.
 
 ## Install
 
@@ -163,6 +163,20 @@ templates:
 The module exports a default function or `render` function. It receives `{page, graph, config}` and returns Markdown text. `page.content` contains the default body. The plugin supplies validated frontmatter after the function returns.
 
 Renderer modules execute with the build user's permissions. Keep them in the project and review them like other build hooks.
+
+## Syntax Highlighting
+
+Pandoc's PHP grammar colours only the first letter of a class or namespace name. The plugin ships [highlight.js](https://highlightjs.org/) and a small `syntax-highlight.js`, and loads both as deferred scripts on pages whose frontmatter carries `api-page: true`. The script re-tokenises each `php` code block and maps highlight.js scopes onto Pandoc's class names (`kw`, `dt`, `fu`, `va`, `st`, and so on), so the site's `HIGHLIGHT_STYLE` and any stylesheet written for Pandoc output keep working. Line spans and anchors are preserved.
+
+Other pages can opt in by listing the same assets in `DEFER_SCRIPTS`:
+
+```yaml
+DEFER_SCRIPTS:
+  - /smgen-phpdoc/vendor/highlight.js/highlight.min.js
+  - /smgen-phpdoc/syntax-highlight.js
+```
+
+Set `window.smgenPhpDocHighlight = {languages: ['php', 'js']}` before the scripts load to re-highlight more languages.
 
 ## Generated Content Ownership
 

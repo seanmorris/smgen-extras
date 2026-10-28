@@ -2,6 +2,7 @@
 title: Development
 description: Test, package, and release the SMGen plugin workspace.
 weight: 4
+layout: guide
 llms:
   section: development
   description: Work on the plugin workspace and publish one package by tag.
@@ -63,11 +64,14 @@ Each tag selects one workspace:
 smgen-data-pages-v0.1.0
 smgen-store-v0.1.0
 smgen-phpdoc-v0.1.0
+smgen-categories-v0.1.0
+smgen-timeline-v0.1.0
 ```
 
 The publish workflow compares the tag with that package's declared version,
 runs the complete checks, inspects the npm archive, and publishes only the
-selected workspace.
+selected workspace. `smgen-timeline` depends on `smgen-categories`, so publish
+the categories package first whenever both change.
 
 The [source repository](https://github.com/seanmorris/smgen-plugins) contains
 the package contracts, fixtures, and release workflow.

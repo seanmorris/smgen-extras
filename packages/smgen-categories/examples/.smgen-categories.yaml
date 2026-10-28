@@ -1,0 +1,12 @@
+version: 1
+categories:
+  topic:
+    field: topic
+    pages: ['posts/**/*.md']
+    output: topics/{slug}.md
+    template: templates/topic.md.php
+  month:
+    field: date
+    group: month
+    pages: ['posts/**/*.md']
+    output: archive/{value}/index.md

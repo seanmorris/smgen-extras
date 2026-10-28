@@ -1,0 +1,18 @@
+PRODUCT_NAME: Fixture Journal
+BASE_URL: https://example.test/journal
+OUTPUT_DIR: ./docs
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+STYLES: [/default.css]
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+PLUGINS:
+  - use: smgen-categories
+    options:
+      config: .smgen-categories.yaml
+  - use: smgen-timeline
+    options:
+      output: days/{value}/index.md
+MENU_REGIONS:
+  sidebar: [archive]

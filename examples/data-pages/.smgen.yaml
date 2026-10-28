@@ -1,13 +1,21 @@
-PRODUCT_NAME: Data Pages Example
-TAGLINE: Two directories generated from CSV
-TITLE_PREFIX: smgen-data-pages example
-DEFAULT_THEME: theme-data-pages
+PRODUCT_NAME: Greywater Range
+TAGLINE: Trail guide
+TITLE_PREFIX: Greywater Range
+DEFAULT_THEME: theme-guide
 BASE_URL: http://localhost:8200/examples/data-pages
 OUTPUT_DIR: ../../static/examples/data-pages
 PAGES_DIR: ./pages
-TEMPLATE_DIR: ../shared/templates
-STATIC_DIR: ../shared/static
-STYLES: [/example.css]
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+STYLES: [/scrollbar.css, /guide.css]
+CORE_ASSETS:
+  - main.js
+  - nav-state.js
+  - scrollbar.css
+SCRIPTS:
+  - /nav-state.js
+DEFER_SCRIPTS:
+  - /main.js
 SEARCH_ENABLED: 0
 SMGEN_ENGINE: php
 PLUGINS:
@@ -19,25 +27,49 @@ PLUGINS:
       - data
       - templates
 MENUS:
-  directory:
-    label: Directory
+  guide:
+    label: Guide
     renderer: tree
     hierarchy: manual
-    showLabel: true
+    showLabel: false
     links:
-      - id: overview
-        page: index.md
-        title: Overview
-        weight: -100
-      - id: customer-records
+      - id: trails
         group: true
-        title: Customers
+        title: Trails
         weight: 10
         expanded: true
-      - id: organization-records
+      - id: region-north-fork
         group: true
-        title: Organizations
+        parent: trails
+        title: North Fork
+        weight: 10
+        expanded: true
+      - id: region-saddle-ridge
+        group: true
+        parent: trails
+        title: Saddle Ridge
         weight: 20
         expanded: true
+      - id: region-lower-basin
+        group: true
+        parent: trails
+        title: Lower Basin
+        weight: 30
+        expanded: true
+      - id: region-coastal-bluffs
+        group: true
+        parent: trails
+        title: Coastal Bluffs
+        weight: 40
+        expanded: true
+      - id: campgrounds
+        group: true
+        title: Campgrounds
+        weight: 20
+        expanded: true
+      - id: about
+        page: about.md
+        title: About this guide
+        weight: 100
 MENU_REGIONS:
-  sidebar: [directory]
+  sidebar: [guide]

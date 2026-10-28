@@ -1,0 +1,24 @@
+apiVersion: smgen/v1
+id: smgen-timeline
+menus:
+  archive:
+    label: Archive
+    renderer: timeline
+    hierarchy: manual
+    showLabel: true
+renderers:
+  timeline: helpers/timeline.php
+alter: helpers/alter.php
+assets:
+  - from: static
+    to: smgen-timeline
+hooks:
+  prepare:
+    run: [php, ./bin/prepare.php]
+watch:
+  - bin
+  - helpers
+  - src
+  - static
+  - templates
+  - smgen.plugin.yaml

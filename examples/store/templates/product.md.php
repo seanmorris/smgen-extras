@@ -1,50 +1,45 @@
 <?php
 
 /**
- * Renders one selected product row with store metadata and JSON-LD.
+ * Renders one published product row with store metadata, JSON-LD, and a buy box.
  */
 
-$availabilityLabels = [
-	'in_stock' => 'In stock',
-	'pre_order' => 'Pre-order',
-	'limited_stock' => 'Limited stock',
-	'backorder' => 'Backorder',
-];
-$schemaAvailability = [
-	'in_stock' => 'https://schema.org/InStock',
-	'pre_order' => 'https://schema.org/PreOrder',
-	'limited_stock' => 'https://schema.org/LimitedAvailability',
-	'backorder' => 'https://schema.org/BackOrder',
-];
-$providerLabels = [
-	'hosted-link' => 'Hosted checkout link',
-	'stripe' => 'Stripe Payment Link',
-	'paypal' => 'PayPal payment link',
-	'square' => 'Square payment link',
-];
-$availability = $availabilityLabels[$row['availability']] ?? $row['availability'];
-$offerAvailability = $schemaAvailability[$row['availability']] ?? 'https://schema.org/OnlineOnly';
-$provider = $providerLabels[$row['provider']] ?? $row['provider'];
-$formattedPrice = number_format((float) $row['price'], 2, '.', ',');
+require_once __DIR__ . '/shop-lib.php';
+
+$categories = shopCategories();
+$category = $categories[$row['category']] ?? ['slug' => $context->pathSegment($row['category']), 'blurb' => ''];
+$availability = shopAvailability($row['availability']);
+$highlights = array_values(array_filter(array_map('trim', explode('|', $row['highlights']))));
+$price = shopPrice($row);
 
 echo $context->frontmatter([
 	'title' => $row['title'],
-	'description' => $row['description'],
-	'TOC' => true,
-	'menus' => [
-		'catalog' => [
-			'parent' => 'product-records',
-			'weight' => (int) $row['index'],
-		],
-	],
+	'description' => $row['tagline'] . ' ' . $row['description'],
+	'layout' => 'product',
+	'TOC' => false,
 	'storePage' => true,
 	'plugins' => ['smgen-store' => true],
+	'product' => [
+		'category' => $row['category'],
+		'categorySlug' => $category['slug'],
+		'tagline' => $row['tagline'],
+		'price' => $price,
+		'availability' => $availability['label'],
+		'availabilityTone' => $availability['tone'],
+		'availabilityNote' => $availability['note'],
+		'provider' => shopProviderName($row['provider']),
+		'colorHex' => $row['color_hex'],
+		'colorName' => $row['color_name'],
+		'sku' => $row['sku'],
+		'tile' => shopTile($row, $context, 'hero'),
+		'cardTile' => shopTile($row, $context),
+	],
 	'store' => [
 		'schema' => 1,
 		'type' => 'product',
-		'id' => $row['ean'],
+		'id' => $row['sku'],
 		'name' => $row['title'],
-		'description' => $row['description'],
+		'description' => $row['tagline'],
 		'price' => [
 			'amount' => $row['price'],
 			'currency' => $row['currency'],
@@ -53,7 +48,7 @@ echo $context->frontmatter([
 			'provider' => $row['provider'],
 			'presentation' => $row['presentation'],
 			'url' => $row['checkout_url'],
-			'label' => 'Open example checkout',
+			'label' => 'Buy now · ' . $price,
 		],
 	],
 	'jsonld' => [
@@ -61,46 +56,39 @@ echo $context->frontmatter([
 		'@type' => 'Product',
 		'name' => $row['title'],
 		'description' => $row['description'],
-		'brand' => [
-			'@type' => 'Brand',
-			'name' => $row['brand'],
-		],
+		'sku' => $row['sku'],
+		'brand' => ['@type' => 'Brand', 'name' => 'Fernway Goods'],
 		'category' => $row['category'],
-		'color' => $row['color'],
-		'size' => $row['size'],
-		'gtin13' => $row['ean'],
+		'color' => $row['color_name'],
+		'material' => $row['material'],
 		'offers' => [
 			'@type' => 'Offer',
 			'price' => $row['price'],
 			'priceCurrency' => $row['currency'],
-			'availability' => $offerAvailability,
+			'availability' => $availability['schema'],
 			'url' => $row['checkout_url'],
 		],
 	],
 ]);
 ?>
-# <?=$context->escapeHtml($row['title'])?>
-
-<p class="record-kicker"><?=$context->escapeHtml($row['brand'])?> · <?=$context->escapeHtml($row['category'])?></p>
-
-<?=$context->escapeHtml($row['description'])?>
-
-<p class="product-price"><?=$context->escapeHtml($row['currency'])?> <?=$context->escapeHtml($formattedPrice)?></p>
-
-## Product details
-
-<dl class="record-details">
-<dt>Availability</dt><dd><?=$context->escapeHtml($availability)?></dd>
-<dt>Stock</dt><dd><?=$context->escapeHtml($row['stock'])?></dd>
-<dt>Color</dt><dd><?=$context->escapeHtml($row['color'])?></dd>
-<dt>Size</dt><dd><?=$context->escapeHtml($row['size'])?></dd>
-<dt>EAN</dt><dd><?=$context->escapeHtml($row['ean'])?></dd>
-<dt>Checkout</dt><dd><?=$context->escapeHtml($provider)?></dd>
-</dl>
-
-## Checkout
-
 ::: {.smgen-store-checkout}
 :::
 
-[Back to all products](index.html)
+<p class="checkout-note">Secure checkout with <?=$context->escapeHtml(shopProviderName($row['provider']))?>. <?=$context->escapeHtml($availability['note'])?></p>
+
+<?=$context->escapeHtml($row['description'])?>
+
+<h2 class="spec-title">Details</h2>
+
+<dl class="spec">
+<div><dt>Material</dt><dd><?=$context->escapeHtml($row['material'])?></dd></div>
+<div><dt>Size</dt><dd><?=$context->escapeHtml($row['dimensions'])?></dd></div>
+<div><dt>Colour</dt><dd><span class="swatch" style="--swatch: <?=$context->escapeHtml($row['color_hex'])?>"></span><?=$context->escapeHtml($row['color_name'])?></dd></div>
+<div><dt>SKU</dt><dd><?=$context->escapeHtml($row['sku'])?></dd></div>
+</dl>
+
+<ul class="highlights">
+<?php foreach($highlights as $highlight): ?>
+<li><?=$context->escapeHtml($highlight)?></li>
+<?php endforeach; ?>
+</ul>

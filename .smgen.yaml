@@ -7,14 +7,23 @@ DEFAULT_THEME: theme-plugins
 BASE_URL: http://localhost:8200
 DEV_PORT: 8200
 SMGEN_ENGINE: php
-HIGHLIGHT_STYLE: zenburn
+HIGHLIGHT_STYLE: tango
 
 STATIC_DIR: ./static
 TEMPLATE_DIR: ./templates
 OUTPUT_DIR: ./docs
 INHERIT_CORE_STATIC: 0
 
+CORE_ASSETS:
+  - main.js
+  - nav-state.js
+  - scrollbar.css
+SCRIPTS:
+  - /nav-state.js
+DEFER_SCRIPTS:
+  - /main.js
 STYLES:
+  - /scrollbar.css
   - /site.css
 
 SEARCH_ENABLED: 0

@@ -1,9 +1,9 @@
 # Sample Data
 
-`customers.csv` and `organizations.csv` contain the first 24 rows from
-Datablist's 100-row Customers and Organizations samples. Datablist describes
-most rows in its sample collection as synthetic data for testing.
+`trails.csv` and `campgrounds.csv` describe the Greywater Range, a fictional
+mountain and coastal region invented for this example. Every trail, campground,
+distance, and place name is made up.
 
-Source: <https://www.datablist.com/learn/csv/download-sample-csv-files>
-
-Downloaded October 27, 2026. The rows and source columns are unchanged.
+`Highlights` and `Nearby Trails` hold `|`-separated lists. `Nearby Trails`
+refers to trail slugs, which is how a campground page links to its trails
+without a database.

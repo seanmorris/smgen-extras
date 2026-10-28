@@ -1,0 +1,9 @@
+version: 1
+categories:
+  category:
+    field: product.category
+    pages: ['products/**/*.md']
+    exclude: ['products/index.md']
+    sort: title
+    output: categories/{slug}.md
+    template: templates/category.md.php

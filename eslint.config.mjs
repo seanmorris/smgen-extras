@@ -10,7 +10,7 @@ const documentedFunctions = [
 
 export default [
   {
-    ignores: ['node_modules/**'],
+    ignores: ['node_modules/**', 'packages/*/static/vendor/**'],
   },
   {
     files: ['packages/**/*.{js,mjs}'],

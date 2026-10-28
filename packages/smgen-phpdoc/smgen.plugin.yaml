@@ -1,5 +1,16 @@
 apiVersion: smgen/v1
 id: smgen-phpdoc
+pages:
+  selectors:
+    - where:
+        api-page: true
+  scripts:
+    defer:
+      - /smgen-phpdoc/vendor/highlight.js/highlight.min.js
+      - /smgen-phpdoc/syntax-highlight.js
+assets:
+  - from: static
+    to: smgen-phpdoc
 hooks:
   prepare:
     run: [node, ./bin/prepare.js]
@@ -8,4 +19,5 @@ watch:
   - bin
   - schemas
   - src
+  - static
   - smgen.plugin.yaml

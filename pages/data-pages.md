@@ -2,6 +2,9 @@
 title: Data Pages
 description: Validate CSV or TSV data and turn each row into an SMGen page.
 weight: 2
+guide:
+  package: smgen-data-pages
+  example: examples/data-pages/
 llms:
   section: plugins
   description: Configure smgen-data-pages, templates, validation, and generated outputs.
@@ -24,7 +27,7 @@ jsonld:
 `smgen-data-pages` turns rows from a CSV or TSV file into Markdown before SMGen
 scans the site. PHP's CSV parser handles quoted delimiters and multiline cells.
 
-<p class="example-link"><a href="examples/data-pages/" target="_blank" rel="noopener noreferrer">Open the directory example</a> or <a href="examples/blog/" target="_blank" rel="noopener noreferrer">open the blog example</a>.</p>
+<p class="example-link"><a href="examples/data-pages/" target="_blank" rel="noopener noreferrer">Open the trail guide example</a>, built from two spreadsheets, or <a href="examples/store/" target="_blank" rel="noopener noreferrer">open the store example</a>, which pairs this plugin with <code>smgen-store</code>.</p>
 
 ## Install and Activate
 

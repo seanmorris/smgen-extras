@@ -2,6 +2,9 @@
 title: Static Store
 description: Add validated hosted checkout controls to static SMGen pages.
 weight: 3
+guide:
+  package: smgen-store
+  example: examples/store/
 llms:
   section: plugins
   description: Configure smgen-store product metadata, checkout providers, and JSON-LD.

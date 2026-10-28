@@ -1,0 +1,10 @@
+apiVersion: smgen/v1
+id: smgen-categories
+hooks:
+  prepare:
+    run: [php, ./bin/prepare.php]
+watch:
+  - bin
+  - src
+  - templates
+  - smgen.plugin.yaml

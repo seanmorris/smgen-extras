@@ -1,11 +1,10 @@
 # Sample Data
 
-`products.csv` starts with the first 24 rows from Datablist's 100-row Products
-sample. Datablist describes most rows in its sample collection as synthetic
-data for testing.
+`products.csv` describes the catalog of Fernway Goods, a fictional paper and
+desk goods shop invented for this example. Every product, price, SKU, and
+checkout URL is made up. The checkout links point at `example.com` and load no
+payment-provider JavaScript.
 
-Source: <https://www.datablist.com/learn/csv/download-sample-csv-files>
-
-Downloaded October 27, 2026. The checkout provider, presentation, URL, and
-publication columns were added for this example. Rows marked `discontinued` or
-`out_of_stock` have `Published` set to `no`.
+Rows with `Published` set to `no` are discontinued or out of stock and are
+filtered before any page is generated. `Highlights` holds a `|`-separated list.
+`Color Hex` drives the product tile color in the page template.

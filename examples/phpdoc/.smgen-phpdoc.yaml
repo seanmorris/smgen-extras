@@ -1,8 +1,8 @@
 version: 1
 package:
-  title: Greeting API
-  description: A small API reference generated from the example source.
-  version: 1.0.0
+  title: Postbox API
+  description: Classes, interfaces, enums, and functions for composing and delivering mail with Postbox.
+  version: 1.2.0
 sources:
   - path: src
 php: '8.2'

@@ -6,6 +6,8 @@ on:
       - smgen-data-pages-v*
       - smgen-store-v*
       - smgen-phpdoc-v*
+      - smgen-categories-v*
+      - smgen-timeline-v*
 
 permissions:
   contents: read
@@ -63,6 +65,8 @@ jobs:
             smgen-data-pages-v*) package="smgen-data-pages"; version="${tag#smgen-data-pages-v}" ;;
             smgen-store-v*) package="smgen-store"; version="${tag#smgen-store-v}" ;;
             smgen-phpdoc-v*) package="smgen-phpdoc"; version="${tag#smgen-phpdoc-v}" ;;
+            smgen-categories-v*) package="smgen-categories"; version="${tag#smgen-categories-v}" ;;
+            smgen-timeline-v*) package="smgen-timeline"; version="${tag#smgen-timeline-v}" ;;
             *) echo "Unsupported release tag: ${tag}" >&2; exit 1 ;;
           esac
           declared="$(node -p "require('./packages/${package}/package.json').version")"

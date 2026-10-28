@@ -1,43 +1,51 @@
 version: 1
 datasets:
-  customers:
-    source: data/customers.csv
-    template: templates/customer.md.php
-    output: customers/{customer_id}.md
-    key: customer_id
+  trails:
+    source: data/trails.csv
+    template: templates/trail.md.php
+    output: trails/{slug}.md
+    key: slug
     columns:
-      index: Index
-      customer_id: Customer Id
-      first_name: First Name
-      last_name: Last Name
-      company: Company
-      city: City
-      country: Country
-      phone_primary: Phone 1
-      phone_secondary: Phone 2
-      email: Email
-      subscription_date: Subscription Date
-      website: Website
-    required: [customer_id, first_name, last_name, company, city, country, email, subscription_date]
-    collections:
-      - template: templates/customers.md.php
-        output: customers/index.md
-  organizations:
-    source: data/organizations.csv
-    template: templates/organization.md.php
-    output: organizations/{organization_id}.md
-    key: organization_id
-    columns:
-      index: Index
-      organization_id: Organization Id
+      slug: Slug
       name: Name
-      website: Website
-      country: Country
+      region: Region
+      distance_km: Distance Km
+      gain_m: Elevation Gain M
+      route_type: Route Type
+      difficulty: Difficulty
+      hours: Time Hours
+      dogs: Dogs
+      trailhead: Trailhead
+      season: Season
+      summary: Summary
+      highlights: Highlights
       description: Description
-      founded: Founded
-      industry: Industry
-      employees: Number of employees
-    required: [organization_id, name, country, description, founded, industry, employees]
+    required: [slug, name, region, distance_km, gain_m, route_type, difficulty, hours, dogs, trailhead, season, summary, highlights, description]
     collections:
-      - template: templates/organizations.md.php
-        output: organizations/index.md
+      - template: templates/home.md.php
+        output: index.md
+      - template: templates/trails.md.php
+        output: trails/index.md
+  campgrounds:
+    source: data/campgrounds.csv
+    template: templates/campground.md.php
+    output: campgrounds/{slug}.md
+    key: slug
+    columns:
+      slug: Slug
+      name: Name
+      region: Region
+      sites: Sites
+      elevation_m: Elevation M
+      reservations: Reservations
+      water: Water
+      toilets: Toilets
+      season: Season
+      fee_usd: Fee USD
+      nearby: Nearby Trails
+      summary: Summary
+      description: Description
+    required: [slug, name, region, sites, elevation_m, reservations, water, toilets, season, fee_usd, summary, description]
+    collections:
+      - template: templates/campgrounds.md.php
+        output: campgrounds/index.md
