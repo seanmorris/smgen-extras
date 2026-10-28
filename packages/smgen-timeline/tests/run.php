@@ -35,6 +35,7 @@ final class TimelineRegression
 			$this->testAlterHookSelectsDatedPages();
 			$this->testPrepareGeneratesDayRollupsThroughCategories();
 			$this->testCompileStampsFallbackDates();
+			$this->testFinalizeWritesPartialsIntoTheStage();
 		}
 		finally
 		{
@@ -74,9 +75,41 @@ final class TimelineRegression
 		$this->assertContains('<details  data-id-path="archive-archive-2025">', $html, 'other year closed');
 		$this->assertContains('<a href="/posts/early.html" class="active-link" aria-current="page"><time datetime="2026-10-24">24</time><span>Early</span></a>', $html, 'active list entry');
 		$this->assertSame(2, substr_count($html, '<time datetime="2026-10-24">24</time>'), 'one list line per post');
+		$this->assertSame(1, substr_count($html, '<table>'), 'one month embedded per page');
+		$this->assertContains('<div class="archive-calendar" data-calendar-menu="archive">', $html, 'calendar names its menu');
+		$this->assertContains('<strong aria-live="polite">October 2026</strong>', $html, 'current month shown');
+		$this->assertContains('<a rel="prev" class="archive-calendar-step" href="/posts/sept.html" data-calendar="/smgen-timeline/calendar/archive/2026-09.html" aria-label="Show September 2026">', $html, 'older month step links into the month and names its partial');
+		$this->assertContains('<p class="archive-calendar-years" aria-label="Jump to a year"><a href="/archive/2026-10-24.html" data-calendar="/smgen-timeline/calendar/archive/2026-10.html" aria-label="Show October 2026" aria-current="true">2026</a><a href="/posts/old.html" data-calendar="/smgen-timeline/calendar/archive/2025-03.html" aria-label="Show March 2025">2025</a></p>', $html, 'year chips jump to the newest month of each year');
+
+		$partials = Timeline::partials($menu);
+		$this->assertSame(['/smgen-timeline/calendar/archive/2026-10.html', '/smgen-timeline/calendar/archive/2026-09.html', '/smgen-timeline/calendar/archive/2025-03.html'], array_keys($partials), 'one partial per month with posts');
+		$september = $partials['/smgen-timeline/calendar/archive/2026-09.html'];
+		$this->assertContains('<strong aria-live="polite">September 2026</strong>', $september, 'partial heading');
+		$this->assertContains('rel="next" class="archive-calendar-step" href="/archive/2026-10-24.html" data-calendar="/smgen-timeline/calendar/archive/2026-10.html"', $september, 'partial steps forward');
+		$this->assertContains('<td class="has-posts"><a href="/posts/sept.html" aria-label="September 18, 2026: 1 post" >18</a></td>', $september, 'partial day cell');
+		$this->assertTrue(!str_contains($september, 'aria-current="date"'), 'partials carry no current page');
+		$this->assertTrue(!str_contains($partials['/smgen-timeline/calendar/archive/2025-03.html'], 'rel="prev"'), 'oldest month has no previous step');
 
 		$rollupView = $this->capture(static fn() => Timeline::render($menu, 'archive', ['currentPage' => '/archive/2026-10-24.html']));
 		$this->assertContains('data-id-path="archive-archive-2026-10" data-contains-current="true"', $rollupView, 'rollup page counts as current for its month');
+	}
+
+	/** The finalize hook writes every month partial under the staged output with base-URL links. */
+	private function testFinalizeWritesPartialsIntoTheStage(): void
+	{
+		$catalog = $this->catalog();
+		$menu = Timeline::compile(['name' => 'archive', 'renderer' => 'timeline', 'label' => 'Archive'], $this->links($catalog), $catalog, []);
+		$stage = $this->tempRoot . '/stage';
+		mkdir($stage, 0700, true);
+		$navigation = $this->tempRoot . '/navigation.json';
+		file_put_contents($navigation, json_encode(['menus' => ['archive' => $menu, 'primary' => ['renderer' => 'flat']]], JSON_THROW_ON_ERROR));
+		$count = PluginHook::writePartials(['paths' => ['stage' => $stage], 'site' => ['baseUrl' => 'https://example.test/blog/']], $navigation);
+		Timeline::setBaseUrl('');
+		$this->assertSame(3, $count, 'three partials written');
+		$september = (string) file_get_contents($stage . '/smgen-timeline/calendar/archive/2026-09.html');
+		$this->assertContains('href="https://example.test/blog/posts/sept.html"', $september, 'partial links carry the base URL');
+		$this->assertContains('data-calendar="https://example.test/blog/smgen-timeline/calendar/archive/2026-10.html"', $september, 'partial references carry the base URL');
+		$this->assertFails(static fn() => PluginHook::writePartials(['paths' => ['stage' => $stage]], $stage . '/missing.json'), 'SMGEN_NAV_DATA');
 	}
 
 	/** The alter hook adds dated pages and skips opt-outs, explicit menus, and rollups. */
@@ -91,7 +124,7 @@ final class TimelineRegression
 		$alter($registry, $catalog, []);
 		$ids = array_keys($registry['links']['archive']);
 		sort($ids);
-		$this->assertSame(['page:posts/early.md', 'page:posts/late.md', 'page:posts/old.md', 'page:posts/solo.md'], $ids, 'dated pages joined');
+		$this->assertSame(['page:posts/early.md', 'page:posts/late.md', 'page:posts/old.md', 'page:posts/sept.md', 'page:posts/solo.md'], $ids, 'dated pages joined');
 		$this->assertSame([], $registry['links']['primary'], 'flat menus untouched');
 	}
 
@@ -147,6 +180,7 @@ final class TimelineRegression
 			'posts/early.md' => $this->page('posts/early.md', 'Early', ['date' => '2026-10-24T09:05:00Z']),
 			'posts/solo.md' => $this->page('posts/solo.md', 'Solo', ['date' => '2026-10-11']),
 			'posts/old.md' => $this->page('posts/old.md', 'Old', ['date' => '2025-03-02']),
+			'posts/sept.md' => $this->page('posts/sept.md', 'September', ['date' => '2026-09-18']),
 			'.smgen-generated/smgen-timeline/archive/2026-10-24.md' => $this->page('.smgen-generated/smgen-timeline/archive/2026-10-24.md', 'October 24, 2026', ['category' => ['name' => 'timeline-day', 'value' => '2026-10-24']], null, '/archive/2026-10-24.html'),
 		]];
 	}

@@ -669,6 +669,30 @@ summary:focus-visible {
   text-decoration: none;
 }
 
+.rail .archive-calendar-heading a:hover {
+  color: var(--ochre);
+}
+
+.rail .archive-calendar-years {
+  justify-content: center;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.rail .archive-calendar-years a {
+  color: var(--ink-faint);
+  text-decoration: none;
+}
+
+.rail .archive-calendar-years a:hover,
+.rail .archive-calendar-years a[aria-current="true"] {
+  color: var(--ochre);
+}
+
 .rail .archive-calendar th {
   color: var(--ink-faint);
   font-size: 0.62rem;

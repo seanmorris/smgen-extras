@@ -24,9 +24,9 @@ jsonld:
 
 # Timeline
 
-`smgen-timeline` provides the `timeline` menu renderer: a calendar for the
-current or newest month, expandable year and month groups, and one line per
-post. Every page with a `date` joins it, and nothing else is required of the
+`smgen-timeline` provides the `timeline` menu renderer: a calendar whose arrows
+and year chips step through every month with posts without leaving the page,
+expandable year and month groups, and one line per post. Every page with a `date` joins it, and nothing else is required of the
 author. The plugin depends on `smgen-categories` to build a page for each day
 that has more than one post.
 

@@ -47,7 +47,7 @@ final class Timeline
 		return $menu;
 	}
 
-	/** Return the public stylesheet the widget needs when it has content. */
+	/** Return the public stylesheet the widget needs when it has content; the script comes from the manifest. */
 	public static function assets(array $menu): array
 	{
 		return empty($menu['timeline']['years']) ? [] : ['/smgen-timeline/timeline.css'];
@@ -166,7 +166,7 @@ final class Timeline
 
 		?><section class="navigation-widget archive-widget" aria-label="<?=self::escape($title);?>">
 		<h2 class="navigation-widget-title"><?=self::escape($title);?></h2>
-		<?php self::renderCalendar(self::months($years), $currentPath); ?>
+		<?php self::renderCalendar(self::months($years), $currentPath, (string) ($menu['name'] ?? 'archive')); ?>
 		<ul class="archive-timeline"><?php foreach($years as $yearIndex => $year):
 			$yearCurrent = self::yearContainsPath($year, $currentPath);
 			$yearOpen = $yearCurrent || (!$hasCurrentPage && $yearIndex === 0);
@@ -189,8 +189,41 @@ final class Timeline
 	</section><?php
 	}
 
-	/** Render the calendar for the month holding the current page, or the newest month. */
-	private static function renderCalendar(array $months, string $currentPath): void
+	/** Public path of the calendar partial for one month of one menu. */
+	public static function partialPath(string $menuName, string $month): string
+	{
+		return '/smgen-timeline/calendar/' . $menuName . '/' . $month . '.html';
+	}
+
+	/**
+	 * Render every month's calendar partial for a compiled menu.
+	 *
+	 * The page embeds only one month; the arrows and year chips fetch these partials
+	 * and swap them in place, so a long archive costs each page a single month.
+	 *
+	 * @param array<string, mixed> $menu Compiled menu with a `timeline` structure.
+	 * @return array<string, string> Partial HTML keyed by public path.
+	 */
+	public static function partials(array $menu): array
+	{
+		$months = self::months($menu['timeline']['years'] ?? []);
+		$menuName = (string) ($menu['name'] ?? 'archive');
+		$partials = [];
+		foreach($months as $index => $month)
+		{
+			$partials[self::partialPath($menuName, $month['month'])] = self::capture(static function() use ($months, $index, $menuName): void {
+				self::renderCalendarMonth($months, $index, '', $menuName);
+			});
+		}
+		return $partials;
+	}
+
+	/**
+	 * Render the calendar for the month holding the current page, or the newest month.
+	 *
+	 * @param list<array<string, mixed>> $months Months newest first.
+	 */
+	private static function renderCalendar(array $months, string $currentPath, string $menuName): void
 	{
 		if(!$months)
 		{
@@ -205,7 +238,20 @@ final class Timeline
 				break;
 			}
 		}
-		$month = $months[$activeIndex];
+		?><div class="archive-calendar" data-calendar-menu="<?=self::escape($menuName);?>"><?php self::renderCalendarMonth($months, $activeIndex, $currentPath, $menuName); ?></div><?php
+	}
+
+	/**
+	 * Render one month: heading with step links, the day grid, and year chips.
+	 *
+	 * Step links and year chips point at a page in the target month for visitors
+	 * without JavaScript and carry the partial to fetch for everyone else.
+	 *
+	 * @param list<array<string, mixed>> $months Months newest first.
+	 */
+	private static function renderCalendarMonth(array $months, int $index, string $currentPath, string $menuName): void
+	{
+		$month = $months[$index];
 		$monthDate = DateTimeImmutable::createFromFormat('!Y-m-d', $month['month'] . '-01');
 		if($monthDate === false)
 		{
@@ -219,24 +265,20 @@ final class Timeline
 		{
 			$pagesByDay[(int) substr($page['date'], 8, 2)][] = $page;
 		}
-		$older = $months[$activeIndex + 1] ?? null;
-		$newer = $months[$activeIndex - 1] ?? null;
 		$weekdays = [['Sunday', 'Su'], ['Monday', 'Mo'], ['Tuesday', 'Tu'], ['Wednesday', 'We'], ['Thursday', 'Th'], ['Friday', 'Fr'], ['Saturday', 'Sa']];
 		$heading = $month['name'] . ' ' . substr($month['month'], 0, 4);
-
-		?><div class="archive-calendar">
+		$older = $months[$index + 1] ?? null;
+		$newer = $months[$index - 1] ?? null;
+		$newestByYear = [];
+		foreach($months as $candidate)
+		{
+			$newestByYear[substr($candidate['month'], 0, 4)] ??= $candidate;
+		}
+		?>
 		<div class="archive-calendar-heading">
-			<?php if($older): ?>
-			<a href="<?=self::escape(self::url($older['pages'][0]['path']));?>" aria-label="Previous month: <?=self::escape($older['name'] . ' ' . substr($older['month'], 0, 4));?>" rel="prev">&#8249;</a>
-			<?php else: ?>
-			<span aria-hidden="true"></span>
-			<?php endif; ?>
-			<strong><?=self::escape($heading);?></strong>
-			<?php if($newer): ?>
-			<a href="<?=self::escape(self::url($newer['pages'][0]['path']));?>" aria-label="Next month: <?=self::escape($newer['name'] . ' ' . substr($newer['month'], 0, 4));?>" rel="next">&#8250;</a>
-			<?php else: ?>
-			<span aria-hidden="true"></span>
-			<?php endif; ?>
+			<?php if($older): ?><?php self::renderCalendarStep($older, 'prev', '&#8249;', $menuName); ?><?php else: ?><span aria-hidden="true"></span><?php endif; ?>
+			<strong aria-live="polite"><?=self::escape($heading);?></strong>
+			<?php if($newer): ?><?php self::renderCalendarStep($newer, 'next', '&#8250;', $menuName); ?><?php else: ?><span aria-hidden="true"></span><?php endif; ?>
 		</div>
 		<table>
 			<caption class="visually-hidden"><?=self::escape($heading);?> publication calendar</caption>
@@ -275,7 +317,47 @@ final class Timeline
 			}
 			?></tbody>
 		</table>
-	</div><?php
+		<?php if(count($newestByYear) > 1): ?>
+		<p class="archive-calendar-years" aria-label="Jump to a year"><?php foreach($newestByYear as $year => $newest):
+			$isShown = substr($month['month'], 0, 4) === (string) $year;
+			?><a href="<?=self::escape(self::url(self::monthEntryPath($newest)));?>" data-calendar="<?=self::escape(self::url(self::partialPath($menuName, $newest['month'])));?>" aria-label="Show <?=self::escape($newest['name'] . ' ' . $year);?>"<?=$isShown ? ' aria-current="true"' : '';?>><?=self::escape((string) $year);?></a><?php endforeach; ?></p>
+		<?php endif; ?>
+<?php
+	}
+
+	/** Render a previous or next month step: a link into that month carrying its partial. */
+	private static function renderCalendarStep(array $target, string $rel, string $glyph, string $menuName): void
+	{
+		$label = 'Show ' . $target['name'] . ' ' . substr($target['month'], 0, 4);
+		?><a rel="<?=$rel;?>" class="archive-calendar-step" href="<?=self::escape(self::url(self::monthEntryPath($target)));?>" data-calendar="<?=self::escape(self::url(self::partialPath($menuName, $target['month'])));?>" aria-label="<?=self::escape($label);?>"><?=$glyph;?></a><?php
+	}
+
+	/** Public path a month's step link falls back to: its newest day, post or rollup. */
+	private static function monthEntryPath(array $month): string
+	{
+		foreach($month['days'] ?? [] as $day)
+		{
+			if(isset($day['path']))
+			{
+				return (string) $day['path'];
+			}
+		}
+		return (string) ($month['pages'][0]['path'] ?? '/');
+	}
+
+	/** Run a renderer and return what it printed. */
+	private static function capture(callable $callback): string
+	{
+		ob_start();
+		try
+		{
+			$callback();
+		}
+		finally
+		{
+			$html = (string) ob_get_clean();
+		}
+		return $html;
 	}
 
 	/** Flatten the years into one newest-first month list. */
@@ -325,10 +407,23 @@ final class Timeline
 		return false;
 	}
 
-	/** Resolve a public path through SMGen's asset helper when it is loaded. */
+	/** Site base URL used when SMGen's asset helper is not loaded, as in build hooks. */
+	private static string $baseUrl = '';
+
+	/** Set the base URL for links rendered outside SMGen templates. */
+	public static function setBaseUrl(string $baseUrl): void
+	{
+		self::$baseUrl = rtrim($baseUrl, '/');
+	}
+
+	/** Resolve a public path through SMGen's asset helper when it is loaded, else the base URL. */
 	private static function url(string $path): string
 	{
-		return function_exists('resolveAssetUrl') ? (string) resolveAssetUrl($path) : $path;
+		if(function_exists('resolveAssetUrl'))
+		{
+			return (string) resolveAssetUrl($path);
+		}
+		return self::$baseUrl . '/' . ltrim($path, '/');
 	}
 
 	/** Escape text for HTML output. */

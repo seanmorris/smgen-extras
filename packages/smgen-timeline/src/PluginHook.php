@@ -7,26 +7,19 @@ namespace SmgenTimeline;
 use RuntimeException;
 
 /**
- * Generates day rollup pages for every calendar day with more than one dated page.
+ * Generates day rollup pages during prepare and calendar month partials during finalize.
  */
 final class PluginHook
 {
-	/** Read the prepare context and generate the day rollups through smgen-categories. */
+	/** Read the hook context and run the prepare or finalize phase. */
 	public static function run(): void
 	{
-		$contextPath = getenv('SMGEN_PLUGIN_CONTEXT');
-		if(!is_string($contextPath) || $contextPath === '' || !is_file($contextPath))
+		$context = self::context();
+		if($context['phase'] === 'finalize')
 		{
-			throw new RuntimeException('SMGEN_PLUGIN_CONTEXT must name a readable build context.');
-		}
-		$context = json_decode((string) file_get_contents($contextPath), true, 512, JSON_THROW_ON_ERROR);
-		if(!is_array($context) || ($context['apiVersion'] ?? null) !== 'smgen/v1' || ($context['phase'] ?? null) !== 'prepare')
-		{
-			throw new RuntimeException('smgen-timeline requires an smgen/v1 prepare context.');
-		}
-		if(($context['plugin']['id'] ?? null) !== 'smgen-timeline')
-		{
-			throw new RuntimeException('Plugin context ID does not match smgen-timeline.');
+			$count = self::writePartials($context);
+			fwrite(STDOUT, 'smgen-timeline wrote ' . $count . " calendar partial(s).\n");
+			return;
 		}
 		$projectRoot = $context['project']['root'] ?? null;
 		$pages = $context['paths']['pages'] ?? null;
@@ -38,6 +31,80 @@ final class PluginHook
 		$baseUrl = $context['site']['baseUrl'] ?? '';
 		$count = self::generate($projectRoot, $pages, $output, $context['plugin']['options'] ?? [], is_string($baseUrl) ? $baseUrl : '');
 		fwrite(STDOUT, 'smgen-timeline generated ' . $count . " day rollup page(s).\n");
+	}
+
+	/**
+	 * Read and validate the SMGEN_PLUGIN_CONTEXT file.
+	 *
+	 * @return array<string, mixed> Decoded prepare or finalize context.
+	 */
+	private static function context(): array
+	{
+		$contextPath = getenv('SMGEN_PLUGIN_CONTEXT');
+		if(!is_string($contextPath) || $contextPath === '' || !is_file($contextPath))
+		{
+			throw new RuntimeException('SMGEN_PLUGIN_CONTEXT must name a readable build context.');
+		}
+		$context = json_decode((string) file_get_contents($contextPath), true, 512, JSON_THROW_ON_ERROR);
+		if(!is_array($context) || ($context['apiVersion'] ?? null) !== 'smgen/v1' || !in_array($context['phase'] ?? null, ['prepare', 'finalize'], true))
+		{
+			throw new RuntimeException('smgen-timeline requires an smgen/v1 prepare or finalize context.');
+		}
+		if(($context['plugin']['id'] ?? null) !== 'smgen-timeline')
+		{
+			throw new RuntimeException('Plugin context ID does not match smgen-timeline.');
+		}
+		return $context;
+	}
+
+	/**
+	 * Write one calendar partial per month for every timeline menu into the staged output.
+	 *
+	 * @param array<string, mixed> $context Finalize context with the stage path and base URL.
+	 * @return int Number of partials written.
+	 */
+	public static function writePartials(array $context, ?string $navigationPath = null): int
+	{
+		$stage = $context['paths']['stage'] ?? null;
+		if(!is_string($stage) || !is_dir($stage))
+		{
+			throw new RuntimeException('Finalize context is missing the staged output directory.');
+		}
+		$navigationPath ??= getenv('SMGEN_NAV_DATA');
+		if(!is_string($navigationPath) || !is_file($navigationPath))
+		{
+			throw new RuntimeException('SMGEN_NAV_DATA must name the compiled navigation data.');
+		}
+		$navigation = json_decode((string) file_get_contents($navigationPath), true, 512, JSON_THROW_ON_ERROR);
+		$baseUrl = $context['site']['baseUrl'] ?? '';
+		Timeline::setBaseUrl(is_string($baseUrl) ? $baseUrl : '');
+		$count = 0;
+		foreach($navigation['menus'] ?? [] as $name => $menu)
+		{
+			if(!is_array($menu) || ($menu['renderer'] ?? null) !== 'timeline')
+			{
+				continue;
+			}
+			$menu['name'] = (string) ($menu['name'] ?? $name);
+			if(preg_match('/^[A-Za-z0-9_-]+$/', $menu['name']) !== 1)
+			{
+				throw new RuntimeException('Timeline menu names must be simple tokens: ' . $menu['name']);
+			}
+			foreach(Timeline::partials($menu) as $publicPath => $html)
+			{
+				$file = rtrim($stage, '/') . $publicPath;
+				if(!is_dir(dirname($file)) && !mkdir(dirname($file), 0755, true) && !is_dir(dirname($file)))
+				{
+					throw new RuntimeException('Unable to create the calendar partial directory: ' . dirname($file));
+				}
+				if(file_put_contents($file, $html) === false)
+				{
+					throw new RuntimeException('Unable to write the calendar partial: ' . $file);
+				}
+				$count++;
+			}
+		}
+		return $count;
 	}
 
 	/**

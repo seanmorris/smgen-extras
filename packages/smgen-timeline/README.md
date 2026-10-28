@@ -21,9 +21,13 @@ The plugin defines an `archive` menu with the `timeline` renderer. Place it in a
 
 ## What the Widget Shows
 
-- A calendar for the month holding the current page, or the newest month. A day with one post links to that post. A day with several posts shows a count and links to that day's rollup page.
+- A calendar for the month holding the current page, or the newest month. Arrows step to the previous and next months that have posts, and year chips jump to the newest month of each year. A day with one post links to that post. A day with several posts shows a count and links to that day's rollup page.
 - Year and month groups as native `details` elements with counts. The group holding the current page always renders open, and SMGen's `nav-state.js` remembers the rest.
 - One line per post under each month, newest first.
+
+### Browsing Months in Place
+
+Each page embeds only one month. During the `finalize` phase the plugin writes a partial for every month with posts to `/smgen-timeline/calendar/<menu>/<Y-m>.html`, and `/smgen-timeline/timeline.js` fetches those partials when a visitor uses the arrows or year chips, swapping the month in without leaving the page. Partials for the neighbouring months are prefetched, and the script loads with `defer` on every page the plugin applies to. Without JavaScript the arrows and chips are ordinary links into the target month: its newest day page or, when that day has one post, the post itself.
 
 The widget's stylesheet is published at `/smgen-timeline/timeline.css` and linked only on pages where the menu renders with content. Class names (`archive-calendar`, `archive-timeline`, `archive-count`, `archive-day-count`) are unchanged from the built-in version, so existing site CSS keeps working.
 

@@ -9,11 +9,17 @@ menus:
 renderers:
   timeline: helpers/timeline.php
 alter: helpers/alter.php
+pages:
+  scripts:
+    defer:
+      - /smgen-timeline/timeline.js
 assets:
   - from: static
     to: smgen-timeline
 hooks:
   prepare:
+    run: [php, ./bin/prepare.php]
+  finalize:
     run: [php, ./bin/prepare.php]
 watch:
   - bin
