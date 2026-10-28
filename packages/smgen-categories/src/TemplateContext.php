@@ -15,6 +15,30 @@ final class TemplateContext
 	/** @var array<string, mixed> Frontmatter merged into every page the current render emits. */
 	private array $defaults = [];
 
+	/** @var string Site base URL without a trailing slash, or an empty string for root-relative links. */
+	private string $baseUrl = '';
+
+	/** Set the site base URL that url() prefixes onto public paths. */
+	public function withBaseUrl(string $baseUrl): void
+	{
+		$this->baseUrl = rtrim($baseUrl, '/');
+	}
+
+	/**
+	 * Turn a member's public path into a link the published site can follow.
+	 *
+	 * Member paths are root-relative, such as /products/pen.html. A site served
+	 * below a prefix, such as GitHub Pages, needs BASE_URL in front of them.
+	 */
+	public function url(string $path): string
+	{
+		if(preg_match('~^(?:[a-z][a-z0-9+.-]*:|//)~i', $path) === 1)
+		{
+			return $path;
+		}
+		return $this->baseUrl . '/' . ltrim($path, '/');
+	}
+
 	/** Set the frontmatter that frontmatter() adds unless the template overrides a key. */
 	public function withDefaults(array $defaults): void
 	{

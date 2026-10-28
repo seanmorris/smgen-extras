@@ -16,6 +16,6 @@ echo $context->frontmatter([
 <?=$category['count']?> <?=$category['count'] === 1 ? 'post' : 'posts'?>.
 
 <?php foreach($members as $member): ?>
-- [<?=$context->escapeHtml($member['title'])?>](<?=$context->escapeHtml($member['path'])?>)<?php if($member['description'] !== ''): ?> — <?=$context->escapeHtml($member['description'])?><?php endif; ?>
+- [<?=$context->escapeHtml($member['title'])?>](<?=$context->escapeHtml($context->url($member['path']))?>)<?php if($member['description'] !== ''): ?> — <?=$context->escapeHtml($member['description'])?><?php endif; ?>
 
 <?php endforeach; ?>

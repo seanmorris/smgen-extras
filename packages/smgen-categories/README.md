@@ -53,7 +53,7 @@ A template receives:
 
 - `$category`: `name`, `field`, `group`, `value`, `label`, `slug`, `count`.
 - `$members`: one record per page with `source`, `path` (public URL path), `title`, `description`, `date`, and the full `metadata` mapping.
-- `$context`: `frontmatter()`, `yaml()`, `escapeHtml()`, and `pathSegment()`.
+- `$context`: `frontmatter()`, `yaml()`, `escapeHtml()`, `pathSegment()`, and `url()`, which prefixes the site's `BASE_URL` onto a member path so links work when the site is published below a path prefix.
 
 ```php
 <?php
@@ -62,7 +62,7 @@ echo $context->frontmatter(['title' => $category['label'], 'layout' => 'topic'])
 # <?=$context->escapeHtml($category['label'])?>
 
 <?php foreach($members as $member): ?>
-- [<?=$context->escapeHtml($member['title'])?>](<?=$context->escapeHtml($member['path'])?>)
+- [<?=$context->escapeHtml($member['title'])?>](<?=$context->escapeHtml($context->url($member['path']))?>)
 <?php endforeach; ?>
 ```
 
@@ -72,11 +72,11 @@ echo $context->frontmatter(['title' => $category['label'], 'layout' => 'topic'])
 
 ```bash
 npx smgen-categories validate --root . --pages pages
-npx smgen-categories generate --root . --pages pages --output /tmp/rollups
+npx smgen-categories generate --root . --pages pages --output /tmp/rollups --base-url https://example.test/site
 ```
 
 `validate` renders every rollup in memory and reports bad dates, unsafe values, collisions, and template errors with the page and category that caused them.
 
 ## Use From Another Plugin
 
-`SmgenCategories\Categories::fromDefinitions($projectRoot, $definitions)` accepts the same definition shape without a configuration file and allows absolute template paths, so a plugin can ship its own default template. `render($pagesRoot, $skipGeneratedId)` returns the Markdown documents; `generate($pagesRoot, $outputRoot, $skipGeneratedId)` installs them.
+`SmgenCategories\Categories::fromDefinitions($projectRoot, $definitions, $baseUrl)` accepts the same definition shape without a configuration file and allows absolute template paths, so a plugin can ship its own default template. `render($pagesRoot, $skipGeneratedId)` returns the Markdown documents; `generate($pagesRoot, $outputRoot, $skipGeneratedId)` installs them.

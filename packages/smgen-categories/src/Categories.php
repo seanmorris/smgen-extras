@@ -26,8 +26,9 @@ final class Categories
 	 *
 	 * @param string $projectRoot Project directory that templates and the configuration live under.
 	 * @param string|null $configPath Configuration file relative to the project root, or null to start without categories.
+	 * @param string $baseUrl Site base URL that templates prefix onto member links through $context->url().
 	 */
-	public function __construct(string $projectRoot, ?string $configPath = '.smgen-categories.yaml')
+	public function __construct(string $projectRoot, ?string $configPath = '.smgen-categories.yaml', string $baseUrl = '')
 	{
 		$root = realpath($projectRoot);
 		if($root === false || !is_dir($root))
@@ -36,6 +37,7 @@ final class Categories
 		}
 		$this->projectRoot = $root;
 		$this->templateContext = new TemplateContext();
+		$this->templateContext->withBaseUrl($baseUrl);
 		$this->definitions = $configPath === null ? [] : $this->readConfig($this->resolveInputFile($configPath, 'Configuration'));
 	}
 
@@ -46,10 +48,11 @@ final class Categories
 	 *
 	 * @param string $projectRoot Project directory.
 	 * @param array<string, mixed> $definitions Category definitions keyed by name.
+	 * @param string $baseUrl Site base URL for member links.
 	 */
-	public static function fromDefinitions(string $projectRoot, array $definitions): self
+	public static function fromDefinitions(string $projectRoot, array $definitions, string $baseUrl = ''): self
 	{
-		$instance = new self($projectRoot, null);
+		$instance = new self($projectRoot, null, $baseUrl);
 		$normalized = [];
 		foreach($definitions as $name => $definition)
 		{

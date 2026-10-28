@@ -39,7 +39,7 @@ final class Command
 		}
 		$config = $options['config'] ?? '.smgen-categories.yaml';
 		$pages = $options['pages'] ?? rtrim($root, '/') . '/pages';
-		$categories = new Categories($root, $config);
+		$categories = new Categories($root, $config, $options['base-url'] ?? '');
 		if($command === 'validate')
 		{
 			$outputs = $categories->render($pages);
@@ -60,7 +60,7 @@ final class Command
 	private static function options(array $arguments): array
 	{
 		$options = [];
-		$allowed = ['--root' => 'root', '--config' => 'config', '--pages' => 'pages', '--output' => 'output'];
+		$allowed = ['--root' => 'root', '--config' => 'config', '--pages' => 'pages', '--output' => 'output', '--base-url' => 'base-url'];
 		while($arguments !== [])
 		{
 			$option = array_shift($arguments);
@@ -83,8 +83,8 @@ final class Command
 	{
 		return <<<'TEXT'
 Usage:
-  smgen-categories validate [--root DIR] [--config FILE] [--pages DIR]
-  smgen-categories generate --output DIR [--root DIR] [--config FILE] [--pages DIR]
+  smgen-categories validate [--root DIR] [--config FILE] [--pages DIR] [--base-url URL]
+  smgen-categories generate --output DIR [--root DIR] [--config FILE] [--pages DIR] [--base-url URL]
   smgen-categories --version
 
 validate renders every rollup page in memory without changing the project.

@@ -105,7 +105,7 @@ grep -Fq 'href="https://example.test/journal/smgen-timeline/timeline.css"' "${JO
 grep -Fq 'aria-label="October 24, 2026: 2 posts"' "${JOURNAL}/docs/index.html"
 grep -Fq '<td class="has-posts has-rollup"><a href="https://example.test/journal/days/2026-10-24/"' "${JOURNAL}/docs/index.html"
 grep -Fq '<td class="has-posts"><a href="https://example.test/journal/posts/solo.html"' "${JOURNAL}/docs/index.html"
-grep -Fq 'Late post' "${JOURNAL}/docs/days/2026-10-24/index.html"
+grep -Fq 'href="https://example.test/journal/posts/late.html"' "${JOURNAL}/docs/days/2026-10-24/index.html"
 grep -Fq 'Early post' "${JOURNAL}/docs/days/2026-10-24/index.html"
 if grep -Fq 'Private post' "${JOURNAL}/docs/days/2026-10-24/index.html" || grep -Fq 'Private post' "${JOURNAL}/docs/index.html"; then
 	echo "A page with archive: false joined the timeline." >&2

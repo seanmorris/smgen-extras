@@ -32,7 +32,8 @@ final class PluginHook
 		{
 			throw new RuntimeException('smgen-categories config option must be a nonempty path.');
 		}
-		$categories = new Categories($context['project']['root'], $config);
+		$baseUrl = $context['site']['baseUrl'] ?? '';
+		$categories = new Categories($context['project']['root'], $config, is_string($baseUrl) ? $baseUrl : '');
 		$count = $categories->generate($context['paths']['pages'], $context['paths']['generatedPages']);
 		fwrite(STDOUT, 'smgen-categories generated ' . $count . " rollup page(s).\n");
 	}

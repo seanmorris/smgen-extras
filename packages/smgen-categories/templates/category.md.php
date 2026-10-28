@@ -18,6 +18,6 @@ echo $context->frontmatter([
 
 <ul class="category-members">
 <?php foreach($members as $member): ?>
-<li><a href="<?=$context->escapeHtml($member['path'])?>"><?=$context->escapeHtml($member['title'])?></a><?php if($member['description'] !== ''): ?> — <?=$context->escapeHtml($member['description'])?><?php endif; ?></li>
+<li><a href="<?=$context->escapeHtml($context->url($member['path']))?>"><?=$context->escapeHtml($member['title'])?></a><?php if($member['description'] !== ''): ?> — <?=$context->escapeHtml($member['description'])?><?php endif; ?></li>
 <?php endforeach; ?>
 </ul>

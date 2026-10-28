@@ -74,7 +74,9 @@ categories:
 ## Write a Template
 
 The template receives `$category`, `$members`, and `$context`, and calls
-`$context->frontmatter()` like a data-page template. The plugin adds a `title`
+`$context->frontmatter()` like a data-page template. Link to members through
+`$context->url($member['path'])`, which adds the site's `BASE_URL`, so the
+links survive publishing below a path prefix such as GitHub Pages. The plugin adds a `title`
 and a `category` mapping with the group's name, value, label, count, and member
 paths, so other plugins and page templates can find the rollup.
 
@@ -84,7 +86,7 @@ echo $context->frontmatter(['title' => $category['label'], 'layout' => 'topic'])
 ?>
 
 <?php foreach($members as $member): ?>
-- [<?=$context->escapeHtml($member['title'])?>](<?=$context->escapeHtml($member['path'])?>)
+- [<?=$context->escapeHtml($member['title'])?>](<?=$context->escapeHtml($context->url($member['path']))?>)
 <?php endforeach; ?>
 ```
 
@@ -132,7 +134,7 @@ there and links to the member's public path:
 ```php
 <?php foreach($members as $member): ?>
 <?php $product = $member['metadata']['product'] ?? []; ?>
-<li class="card"><a href="<?=$context->escapeHtml($member['path'])?>">
+<li class="card"><a href="<?=$context->escapeHtml($context->url($member['path']))?>">
   <?=$product['cardTile'] ?? ''?>
   <span class="card-name"><?=$context->escapeHtml($member['title'])?></span>
   <span class="card-price"><?=$context->escapeHtml((string) ($product['price'] ?? ''))?></span>

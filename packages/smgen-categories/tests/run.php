@@ -59,6 +59,8 @@ final class CategoriesRegression
 		$this->assertContains("- /posts/b.html", $walks, 'newest first by date');
 		$this->assertTrue(strpos($walks, '/posts/b.html') < strpos($walks, '/posts/a.html'), 'date-desc order');
 		$this->assertContains('<a href="/posts/c.html">Gamma</a>', $outputs['topics/tools.md'], 'generated page is a member');
+		$prefixed = (new Categories($project, '.smgen-categories.yaml', 'https://example.test/site/'))->render($project . '/pages');
+		$this->assertContains('<a href="https://example.test/site/posts/c.html">Gamma</a>', $prefixed['topics/tools.md'], 'base URL prefixes member links');
 		$this->assertTrue(!str_contains($walks, 'About'), 'pages outside the globs are skipped');
 		$this->assertTrue(!str_contains($walks, 'Stale'), 'own generated pages are skipped');
 	}

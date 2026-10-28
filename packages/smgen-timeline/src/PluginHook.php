@@ -35,7 +35,8 @@ final class PluginHook
 		{
 			throw new RuntimeException('Plugin context is missing project, pages, or generated-page paths.');
 		}
-		$count = self::generate($projectRoot, $pages, $output, $context['plugin']['options'] ?? []);
+		$baseUrl = $context['site']['baseUrl'] ?? '';
+		$count = self::generate($projectRoot, $pages, $output, $context['plugin']['options'] ?? [], is_string($baseUrl) ? $baseUrl : '');
 		fwrite(STDOUT, 'smgen-timeline generated ' . $count . " day rollup page(s).\n");
 	}
 
@@ -46,12 +47,13 @@ final class PluginHook
 	 * @param string $pagesRoot Pages directory to scan.
 	 * @param string $outputRoot Managed directory to install rollups into.
 	 * @param mixed $options Plugin options: output, template, pages, exclude.
+	 * @param string $baseUrl Site base URL for member links.
 	 * @return int Number of rollup pages written.
 	 */
-	public static function generate(string $projectRoot, string $pagesRoot, string $outputRoot, mixed $options): int
+	public static function generate(string $projectRoot, string $pagesRoot, string $outputRoot, mixed $options, string $baseUrl = ''): int
 	{
 		Dependencies::loadCategories($projectRoot);
-		$categories = \SmgenCategories\Categories::fromDefinitions($projectRoot, [Timeline::DAY_CATEGORY => self::definition($projectRoot, $options)]);
+		$categories = \SmgenCategories\Categories::fromDefinitions($projectRoot, [Timeline::DAY_CATEGORY => self::definition($projectRoot, $options)], $baseUrl);
 		return $categories->generate($pagesRoot, $outputRoot, 'smgen-timeline');
 	}
 

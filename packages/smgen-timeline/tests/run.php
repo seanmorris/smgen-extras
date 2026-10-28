@@ -105,13 +105,13 @@ final class TimelineRegression
 		file_put_contents($project . '/pages/posts/early.md', "---\ntitle: Early\ndate: 2026-10-24T09:05:00Z\n---\n");
 		file_put_contents($project . '/pages/posts/solo.md', "---\ntitle: Solo\ndate: 2026-10-11\n---\n");
 		file_put_contents($project . '/pages/posts/hidden.md', "---\ntitle: Hidden\ndate: 2026-10-24\narchive: false\n---\n");
-		$count = PluginHook::generate($project, $project . '/pages', $project . '/pages/.smgen-generated/smgen-timeline', []);
+		$count = PluginHook::generate($project, $project . '/pages', $project . '/pages/.smgen-generated/smgen-timeline', [], 'https://example.test/journal');
 		$this->assertSame(1, $count, 'one rollup');
 		$rollup = (string) file_get_contents($project . '/pages/.smgen-generated/smgen-timeline/archive/2026-10-24.md');
 		$this->assertContains('name: timeline-day', $rollup, 'category name');
 		$this->assertContains('value: "2026-10-24"', $rollup, 'category value');
 		$this->assertContains('# October 24, 2026', $rollup, 'default template heading');
-		$this->assertContains('<a href="/posts/late.html">Late</a> — Later that day.', $rollup, 'member with description');
+		$this->assertContains('<a href="https://example.test/journal/posts/late.html">Late</a> — Later that day.', $rollup, 'member with description links through the base URL');
 		$this->assertTrue(!str_contains($rollup, 'Hidden'), 'archive: false pages are left out');
 		$this->assertTrue(strpos($rollup, 'Late') < strpos($rollup, 'Early'), 'newest first');
 
