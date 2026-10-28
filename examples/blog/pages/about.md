@@ -1,6 +1,6 @@
 ---
 title: About the studio
-description: Three people, one press, and a journal kept as a spreadsheet.
+description: Three people, one press, and a journal kept as a folder of plain files.
 layout: page
 leftBarShow: false
 TOC: false
@@ -8,7 +8,7 @@ jsonld:
   "@context": https://schema.org
   "@type": AboutPage
   name: About Field Notes
-  description: Three people, one press, and a journal kept as a spreadsheet.
+  description: Three people, one press, and a journal kept as a folder of plain files.
 ---
 
 # About the studio

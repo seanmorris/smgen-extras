@@ -24,17 +24,17 @@ jsonld:
     name: Mara Bell
 ---
 
-This journal is a spreadsheet. Each post is one row, with a title, a date, a category, and the words. A short script turns the rows into pages, and the pages into a site, and the site is a folder of HTML that could be served by anything.
+This journal is a folder of plain text files. Each post is one file, with a short block at the top for the title, the date, the author, and the topic, and then the words. A small build turns the files into pages, the pages into a site, and the site is a folder of HTML that could be served by anything.
 
 We did it this way for the same reason we print on a hundred-year-old press: the simple tool is the one that is still working in ten years.
 
 ## What the build does
 
-- Reads the spreadsheet and refuses to continue if a row is missing something it needs.
-- Writes one page for every published row, and one index for all of them.
-- Builds the archive calendar and the feed from the same dates the pages use.
+- Reads every post and refuses to continue if one is missing something it needs.
+- Writes one page for every post, one page for every topic, and one page for any day that had more than one post.
+- Builds the archive calendar and the feed from the same dates the posts carry.
 
-Nothing happens in the browser. There is no script on this page unless you count the one that drew the little feed icon, and that is CSS.
+Almost nothing happens in the browser. The few scripts on this page are conveniences: they remember which archive groups you opened, fetch the next page a moment before you ask for it, and switch the calendar between months without a reload. Turn them off and every link still works.
 
 ## What it costs
 
