@@ -72,6 +72,14 @@ Pricing, payment state, and fulfillment remain with the payment provider.
 :::
 :::
 
+## A Blog from CSV
+
+The blog example turns dated CSV rows into posts with `smgen-data-pages`.
+SMGen uses the generated dates and flags to build its calendar archive and RSS
+feed.
+
+<a href="examples/blog/" target="_blank" rel="noopener noreferrer">Open the blog example</a>
+
 ## Install a Plugin
 
 Install the package beside SMGen, then activate it in `.smgen.yaml`:

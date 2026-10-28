@@ -41,7 +41,7 @@ if [[ "${COMMAND}" == build || "${COMMAND}" == watch ]]; then
 	fi
 	rm -rf -- "${EXAMPLE_OUTPUT}"
 	SITE_BASE_URL="${BASE_URL:-http://localhost:8200}"
-	for example in phpdoc data-pages store; do
+	for example in phpdoc data-pages store blog; do
 		(
 			cd "${ROOT_DIR}/examples/${example}"
 			BASE_URL="${SITE_BASE_URL%/}/examples/${example}" "${SMGEN_COMMAND}" build

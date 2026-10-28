@@ -24,7 +24,7 @@ jsonld:
 `smgen-data-pages` turns rows from a CSV or TSV file into Markdown before SMGen
 scans the site. PHP's CSV parser handles quoted delimiters and multiline cells.
 
-<p class="example-link"><a href="examples/data-pages/" target="_blank" rel="noopener noreferrer">Open the data-pages example site</a></p>
+<p class="example-link"><a href="examples/data-pages/" target="_blank" rel="noopener noreferrer">Open the directory example</a> or <a href="examples/blog/" target="_blank" rel="noopener noreferrer">open the blog example</a>.</p>
 
 ## Install and Activate
 

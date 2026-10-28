@@ -1,0 +1,40 @@
+PRODUCT_NAME: Field Notes
+TAGLINE: CSV posts, a static archive, and RSS
+TITLE_PREFIX: Field Notes
+DEFAULT_THEME: theme-blog
+BASE_URL: http://localhost:8200/examples/blog
+OUTPUT_DIR: ../../static/examples/blog
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../shared/templates
+STATIC_DIR: ../shared/static
+STYLES: [/example.css]
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+PLUGINS:
+  - use: smgen-data-pages
+    options:
+      config: .smgen-data-pages.yaml
+    watch:
+      - .smgen-data-pages.yaml
+      - data
+      - templates
+MENUS:
+  archive:
+    label: Archive
+    renderer: timeline
+    showLabel: true
+MENU_REGIONS:
+  sidebar: [archive]
+RSS_FEEDS:
+  notes:
+    path: /feed.xml
+    title: Field Notes
+    description: Notes about static publishing, small builds, and durable files.
+    link: /
+    language: en-us
+    limit: 20
+    channel:
+      copyright: Copyright 2026 Field Notes
+      category:
+        - Static publishing
+        - SMGen

@@ -1,0 +1,24 @@
+version: 1
+datasets:
+  posts:
+    source: data/posts.csv
+    template: templates/post.md.php
+    output: posts/{slug}.md
+    key: slug
+    columns:
+      slug: Slug
+      title: Title
+      description: Description
+      date: Published At
+      modified: Modified At
+      author_name: Author
+      author_email: Author Email
+      category: Category
+      body: Body
+      published: Published
+    required: [slug, title, description, date, author_name, author_email, category, body]
+    where:
+      published: "yes"
+    collections:
+      - template: templates/index.md.php
+        output: index.md

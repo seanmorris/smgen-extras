@@ -24,6 +24,11 @@ $exampleThemes = [
 		'mark' => '/example-mark-store.svg',
 		'guide' => 'https://seanmorris.github.io/smgen-plugins/store.html',
 	],
+	'theme-blog' => [
+		'color' => '#2f6e5e',
+		'mark' => '/example-mark-blog.svg',
+		'guide' => 'https://seanmorris.github.io/smgen-plugins/data-pages.html',
+	],
 ];
 $exampleTheme = getConf('DEFAULT_THEME') ?: 'theme-data-pages';
 $theme = $exampleThemes[$exampleTheme] ?? $exampleThemes['theme-data-pages'];
@@ -40,6 +45,9 @@ $endif$
 	<meta name="theme-color" content="<?=escapeHtml($theme['color'])?>">
 	<link rel="icon" type="image/svg+xml" href="<?=escapeHtml(resolveAssetUrl($theme['mark']))?>">
 <?php renderJsonLd($frontmatter, $pageFile); ?>
+<?php foreach(rssFeedDefinitions() as $rssFeed): ?>
+	<link rel="alternate" type="application/rss+xml" title="<?=escapeHtml($rssFeed['title'])?>" href="<?=escapeHtml(resolveAssetUrl($rssFeed['path']))?>">
+<?php endforeach; ?>
 	<style>$styles.html()$</style>
 $for(css)$
 	<link rel="stylesheet" href="${css}">

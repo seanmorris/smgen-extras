@@ -1,0 +1,19 @@
+Slug,Title,Description,Published At,Modified At,Author,Author Email,Category,Body,Published
+feed-you-can-inspect,A feed you can inspect,Why a generated feed should remain understandable without a feed reader.,2026-10-27T14:30:00Z,2026-10-28T09:00:00Z,Mara Bell,mara@example.test,RSS,"An RSS feed is most useful when its source stays boring. Open `feed.xml` here and the channel, dates, links, and categories are all visible.
+
+SMGen builds the file with XMLWriter. The template only marks this row for the `notes` feed.",yes
+keeping-an-archive-static,Keeping an archive static,Building useful archive navigation without shipping a browser application.,2026-10-27T09:15:00Z,,Mara Bell,mara@example.test,Navigation,"The calendar and year groups are generated before deployment. Native `details` elements handle expansion, so the archive works before any script could run.
+
+The same publication date places this post in the calendar, timeline, feed, sitemap, and structured data.",yes
+fewer-browser-assets,Shipping fewer browser assets,How page selection keeps feature assets away from pages that do not need them.,2026-09-18T16:45:00Z,,Ilan Reed,ilan@example.test,Performance,"A feature should pay its way on the page that uses it. SMGen adds the archive stylesheet because this site places a populated timeline in the sidebar.
+
+There is no archive script. Sites without a timeline do not request the archive stylesheet.",yes
+rows-into-posts,Turning rows into posts,A short data-page template can supply content and publication metadata together.,2026-06-03T11:20:00Z,2026-06-05T08:10:00Z,Ilan Reed,ilan@example.test,Data,"The CSV holds the prose and fields an editor changes. A trusted PHP template converts each selected row into Markdown and YAML frontmatter.
+
+Local validation catches missing columns, duplicate slugs, malformed rows, and unsafe output paths before the site build begins.",yes
+one-build-three-outputs,One build and three outputs,One publication date can drive a page archive and feed item.,2025-12-12T13:00:00Z,,Mara Bell,mara@example.test,Builds,"The page is the first output visitors see. The same source also contributes an entry to the archive and an item to the RSS feed.
+
+Those outputs share a date because the template writes it once. No browser code joins them after deployment.",yes
+starting-with-plain-files,Starting with plain files,The first version of the example needed a spreadsheet and two small templates.,2025-11-04T10:00:00Z,,Ilan Reed,ilan@example.test,Workflow,"The source of this blog is a CSV file beside its templates. A normal SMGen build produces HTML, XML, navigation data, and a sitemap.
+
+The published directory can move to GitHub Pages, object storage, or any host that serves static files.",yes
