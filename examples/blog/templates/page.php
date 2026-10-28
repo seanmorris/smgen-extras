@@ -156,7 +156,7 @@ $endfor$
 			<a href="<?=escapeHtml(resolveAssetUrl('/topics/' . $topic['slug'] . '.html'))?>"<?=$activeTopic === $topic['slug'] ? ' aria-current="page"' : ''?>><?=escapeHtml($label)?></a>
 			<?php endforeach; ?>
 			<a href="<?=escapeHtml(resolveAssetUrl('/about.html'))?>"<?=$source === 'about.md' ? ' aria-current="page"' : ''?>>About</a>
-			<a class="feed-link" href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>">RSS</a>
+			<a class="feed-link" href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>" target="_blank" rel="noopener noreferrer">RSS</a>
 		</nav>
 	</header>
 
@@ -174,7 +174,7 @@ $endfor$
 				$body$
 			</div>
 			<footer class="post-footer">
-				<p>Filed under <a href="<?=escapeHtml(resolveAssetUrl('/topics/' . $topic['slug'] . '.html'))?>"><?=escapeHtml($topicName)?></a>. <a href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>">Subscribe to the feed</a> to hear about the next one.</p>
+				<p>Filed under <a href="<?=escapeHtml(resolveAssetUrl('/topics/' . $topic['slug'] . '.html'))?>"><?=escapeHtml($topicName)?></a>. <a href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>" target="_blank" rel="noopener noreferrer">Subscribe to the feed</a> to hear about the next one.</p>
 				<nav class="post-siblings" aria-label="Nearby notes">
 					<?php if($previousPost !== null): ?>
 					<a class="post-sibling post-sibling--previous" href="<?=escapeHtml(resolveAssetUrl('/posts/' . $previousPost['slug'] . '.html'))?>"><small>Earlier</small><span><?=escapeHtml($previousPost['title'])?></span></a>
@@ -259,7 +259,7 @@ $endfor$
 
 	<footer class="colophon">
 		<p><strong><?=escapeHtml(getConf('PRODUCT_NAME'))?></strong> is printed by hand and published from plain files.</p>
-		<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>">RSS feed</a><a href="<?=escapeHtml(resolveAssetUrl('/about.html'))?>">Colophon</a><a href="https://seanmorris.github.io/smgen/">Built with SMGen</a><a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/blog">Source</a></p>
+		<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>" target="_blank" rel="noopener noreferrer">RSS feed</a><a href="<?=escapeHtml(resolveAssetUrl('/about.html'))?>">Colophon</a><a href="https://seanmorris.github.io/smgen/">Built with SMGen</a><a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/blog">Source</a></p>
 	</footer>
 </body>
 </html>
