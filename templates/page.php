@@ -67,7 +67,7 @@ $endfor$
 		<div class="shell hero-inner">
 			<p class="eyebrow"><span>smgen/v1 plugin API</span><span>PHP 8.2</span><span>Node 20</span></p>
 			<h1>Build steps, not applications.</h1>
-			<p class="hero-lede">Three plugins that add generated pages, validated data, and a static storefront to an <a href="https://seanmorris.github.io/smgen/">SMGen</a> site. Each one runs at build time and publishes ordinary files. Nothing on the published site needs a server.</p>
+			<p class="hero-lede">Five plugins that add PHP API references, pages from spreadsheets, category rollups, a dated archive, and a static storefront to an <a href="https://seanmorris.github.io/smgen/">SMGen</a> site. Each one runs at build time and publishes ordinary files. Nothing on the published site needs a server.</p>
 			<p class="hero-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl('/phpdoc.html'))?>">Read the guides</a><a class="button button--ghost" href="#examples">See the examples</a></p>
 		</div>
 	</section>
