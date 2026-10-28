@@ -648,6 +648,27 @@ h3 {
   font-size: 0.78rem;
 }
 
+/* On API pages the strip lists members; section headings become group labels
+   and a heading with no members under it (Declaration) is left out. */
+.prose--api .sorting > ul > li > ul > li > a:first-child {
+  padding: 0;
+  border: 0;
+  margin-left: 0.5rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.prose--api .sorting > ul > li > ul > li:not(:has(ul)) > a:first-child {
+  display: none;
+}
+
+.prose--api .sorting:not(:has(ul ul ul a)) {
+  display: none;
+}
+
 /* API pages --------------------------------------------------------------- */
 
 .api-head {

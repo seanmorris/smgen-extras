@@ -15,7 +15,8 @@ $sourceUrl = $frontmatter['source-url'] ?? null;
 $version = '1.2.0';
 $pageTitle = (string) ($frontmatter['title'] ?? '');
 // Generated API pages carry their ancestor trail: the landing page, then each namespace.
-$trail = is_array($frontmatter['breadcrumbs'] ?? null) ? array_slice($frontmatter['breadcrumbs'], 1) : [];
+$hasTrail = is_array($frontmatter['breadcrumbs'] ?? null);
+$trail = $hasTrail ? array_slice($frontmatter['breadcrumbs'], 1) : [];
 $leaf = str_contains($pageTitle, '\\') ? substr($pageTitle, strrpos($pageTitle, '\\') + 1) : $pageTitle;
 
 ?><!DOCTYPE html>
@@ -79,7 +80,7 @@ $endfor$
 		<?php endif; ?>
 		<main id="content" class="sheet">
 			<p class="route" aria-label="Breadcrumb">
-				<?php if($inApi && $trail): ?>
+				<?php if($inApi && $hasTrail): ?>
 				<a href="<?=escapeHtml(resolveAssetUrl('/api/index.html'))?>">api</a>
 				<?php foreach($trail as $crumb): ?>
 				<span class="route-sep">\</span><?php if(!empty($crumb['path'])): ?><a href="<?=escapeHtml(resolveAssetUrl((string) $crumb['path']))?>"><?=escapeHtml((string) ($crumb['title'] ?? ''))?></a><?php else: ?><span><?=escapeHtml((string) ($crumb['title'] ?? ''))?></span><?php endif; ?>
@@ -102,7 +103,7 @@ $endfor$
 				<?php endif; ?>
 				$if(toc)$
 				<nav class="sorting" aria-label="On this page">
-					<span class="sorting-label"><?=$isApi ? 'Members' : 'In this guide'?></span>
+					<span class="sorting-label"><?=$isApi ? 'Members' : ($inApi ? 'Contents' : 'In this guide')?></span>
 					${toc}
 				</nav>
 				$endif$
