@@ -1,7 +1,7 @@
 /* smgen-plugins hub — graphite and cobalt, monospace labels, light code. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   --scrollbar-thumb: var(--line);
   --paper: #f5f5f1;
   --paper-deep: #ebebe6;
@@ -20,22 +20,20 @@
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0f1115;
-    --paper-deep: #161920;
-    --surface: #181b22;
-    --ink: #e8eaef;
-    --ink-soft: #aab0bb;
-    --ink-faint: #737a86;
-    --line: #272b34;
-    --cobalt: #8aa0ff;
-    --cobalt-deep: #aebdff;
-    --cobalt-soft: #1b2340;
-    --lime: #b9f08a;
-    --code-bg: #161a22;
-    --code-line: #262b36;
-  }
+:root:not([data-theme="light"]) {
+  --paper: #0f1115;
+  --paper-deep: #161920;
+  --surface: #181b22;
+  --ink: #e8eaef;
+  --ink-soft: #aab0bb;
+  --ink-faint: #737a86;
+  --line: #272b34;
+  --cobalt: #8aa0ff;
+  --cobalt-deep: #aebdff;
+  --cobalt-soft: #1b2340;
+  --lime: #b9f08a;
+  --code-bg: #161a22;
+  --code-line: #262b36;
 }
 
 * {
@@ -283,19 +281,17 @@ h3 {
   color: var(--cobalt);
 }
 
-@media (prefers-color-scheme: dark) {
-  .button {
-    color: #0f1115;
-  }
+html:not([data-theme="light"]) .button {
+  color: #0f1115;
+}
 
-  .button:hover {
-    color: #0f1115;
-  }
+html:not([data-theme="light"]) .button:hover {
+  color: #0f1115;
+}
 
-  .button--ghost,
-  .button--ghost:hover {
-    color: var(--cobalt);
-  }
+html:not([data-theme="light"]) .button--ghost,
+html:not([data-theme="light"]) .button--ghost:hover {
+  color: var(--cobalt);
 }
 
 /* Home bands -------------------------------------------------------------- */
@@ -636,19 +632,17 @@ h3 {
   background: var(--cobalt-soft);
 }
 
-@media (prefers-color-scheme: dark) {
-  .example-link a {
-    color: #0f1115;
-  }
+html:not([data-theme="light"]) .example-link a {
+  color: #0f1115;
+}
 
-  .example-link a:hover {
-    color: #0f1115;
-  }
+html:not([data-theme="light"]) .example-link a:hover {
+  color: #0f1115;
+}
 
-  .example-link a + a,
-  .example-link a + a:hover {
-    color: var(--cobalt);
-  }
+html:not([data-theme="light"]) .example-link a + a,
+html:not([data-theme="light"]) .example-link a + a:hover {
+  color: var(--cobalt);
 }
 
 .outline {
@@ -702,33 +696,53 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
-/* Syntax colours for the light highlight style on a dark ground ----------- */
+/* Syntax colours ----------------------------------------------------------- */
 
-@media (prefers-color-scheme: dark) {
-  .sourceCode span.kw,
-  .sourceCode span.cf { color: #c792ea; }
-  .sourceCode span.dt,
-  .sourceCode span.bu { color: #82aaff; }
-  .sourceCode span.st,
-  .sourceCode span.ss,
-  .sourceCode span.vs { color: #c3e88d; }
-  .sourceCode span.co,
-  .sourceCode span.do { color: #7a8294; font-style: italic; }
-  .sourceCode span.fu { color: #82aaff; }
-  .sourceCode span.va { color: #f0b45f; }
-  .sourceCode span.cn,
-  .sourceCode span.dv,
-  .sourceCode span.fl,
-  .sourceCode span.bn { color: #f78c6c; }
-  .sourceCode span.ot,
-  .sourceCode span.at,
-  .sourceCode span.an { color: #89ddff; }
-  .sourceCode span.op,
-  .sourceCode span.sc { color: #b6bcc9; }
-  .sourceCode span.al,
-  .sourceCode span.er { color: #ff5370; }
-  .sourceCode span.im { color: #c792ea; }
-}
+/* Pandoc's tango palette assumes a white ground. On the grey code background its
+   yellow, orange, green and red tokens fall below 4.5:1, so they are darkened. */
+.sourceCode span.at { color: #7a5c00; }
+.sourceCode span.op { color: #a84500; }
+.sourceCode span.st,
+.sourceCode span.ss,
+.sourceCode span.vs,
+.sourceCode span.ch { color: #3d7a05; }
+.sourceCode span.al { color: #c41a1a; }
+
+/* The same tokens on a dark ground. */
+
+html:not([data-theme="light"]) .sourceCode span.kw,
+html:not([data-theme="light"]) .sourceCode span.cf { color: #c792ea; }
+
+html:not([data-theme="light"]) .sourceCode span.dt,
+html:not([data-theme="light"]) .sourceCode span.bu { color: #82aaff; }
+
+html:not([data-theme="light"]) .sourceCode span.st,
+html:not([data-theme="light"]) .sourceCode span.ss,
+html:not([data-theme="light"]) .sourceCode span.vs { color: #c3e88d; }
+
+html:not([data-theme="light"]) .sourceCode span.co,
+html:not([data-theme="light"]) .sourceCode span.do { color: #7a8294; font-style: italic; }
+
+html:not([data-theme="light"]) .sourceCode span.fu { color: #82aaff; }
+
+html:not([data-theme="light"]) .sourceCode span.va { color: #f0b45f; }
+
+html:not([data-theme="light"]) .sourceCode span.cn,
+html:not([data-theme="light"]) .sourceCode span.dv,
+html:not([data-theme="light"]) .sourceCode span.fl,
+html:not([data-theme="light"]) .sourceCode span.bn { color: #f78c6c; }
+
+html:not([data-theme="light"]) .sourceCode span.ot,
+html:not([data-theme="light"]) .sourceCode span.at,
+html:not([data-theme="light"]) .sourceCode span.an { color: #89ddff; }
+
+html:not([data-theme="light"]) .sourceCode span.op,
+html:not([data-theme="light"]) .sourceCode span.sc { color: #b6bcc9; }
+
+html:not([data-theme="light"]) .sourceCode span.al,
+html:not([data-theme="light"]) .sourceCode span.er { color: #ff5370; }
+
+html:not([data-theme="light"]) .sourceCode span.im { color: #c792ea; }
 
 /* Footer ------------------------------------------------------------------ */
 
@@ -857,4 +871,41 @@ h3 {
   .previews img {
     transition: none;
   }
+}
+
+/* Theme switch ------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  opacity: 1;
+}
+
+.theme-toggle .theme-icon {
+  display: block;
+}
+
+html:not([data-theme="light"]) .theme-toggle .theme-icon--sun,
+html[data-theme="light"] .theme-toggle .theme-icon--moon {
+  display: none;
 }

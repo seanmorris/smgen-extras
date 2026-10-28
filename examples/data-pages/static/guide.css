@@ -1,7 +1,7 @@
 /* Greywater Range — a trail guide with contour lines and park-sign type. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   --scrollbar-thumb: var(--line);
   --paper: #f3f1ea;
   --paper-deep: #e9e5d9;
@@ -25,27 +25,25 @@
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #131a17;
-    --paper-deep: #1a231f;
-    --card: #1c2621;
-    --ink: #e8ece6;
-    --ink-soft: #aab5ae;
-    --ink-faint: #727d76;
-    --line: #2b3832;
-    --forest: #244a3b;
-    --forest-deep: #1a3a2d;
-    --moss: #8ec49c;
-    --moss-soft: #203329;
-    --sun: #f0b65a;
-    --sun-soft: #3d2f16;
-    --clay: #ee8a66;
-    --clay-soft: #3f2419;
-    --sky: #8dbfdd;
-    --sky-soft: #1f3340;
-    --contour: rgba(142, 196, 156, 0.14);
-  }
+:root:not([data-theme="light"]) {
+  --paper: #131a17;
+  --paper-deep: #1a231f;
+  --card: #1c2621;
+  --ink: #e8ece6;
+  --ink-soft: #aab5ae;
+  --ink-faint: #727d76;
+  --line: #2b3832;
+  --forest: #244a3b;
+  --forest-deep: #1a3a2d;
+  --moss: #8ec49c;
+  --moss-soft: #203329;
+  --sun: #f0b65a;
+  --sun-soft: #3d2f16;
+  --clay: #ee8a66;
+  --clay-soft: #3f2419;
+  --sky: #8dbfdd;
+  --sky-soft: #1f3340;
+  --contour: rgba(142, 196, 156, 0.14);
 }
 
 * {
@@ -164,14 +162,12 @@ h3 {
   color: var(--sky);
 }
 
-@media (prefers-color-scheme: dark) {
-  .pill--easy {
-    color: var(--moss);
-  }
+html:not([data-theme="light"]) .pill--easy {
+  color: var(--moss);
+}
 
-  .pill--moderate {
-    color: var(--sun);
-  }
+html:not([data-theme="light"]) .pill--moderate {
+  color: var(--sun);
 }
 
 .meter {
@@ -347,11 +343,9 @@ h3 {
   color: var(--forest);
 }
 
-@media (prefers-color-scheme: dark) {
-  .button--ghost {
-    border-color: var(--moss);
-    color: var(--moss);
-  }
+html:not([data-theme="light"]) .button--ghost {
+  border-color: var(--moss);
+  color: var(--moss);
 }
 
 .hero-stats {
@@ -837,10 +831,8 @@ h3 {
   font-weight: 700;
 }
 
-@media (prefers-color-scheme: dark) {
-  .highlights li {
-    color: var(--moss);
-  }
+html:not([data-theme="light"]) .highlights li {
+  color: var(--moss);
 }
 
 .prose {
@@ -1063,4 +1055,41 @@ h3 {
 @keyframes flicker {
   from { background-color: var(--sun-soft); }
   to { background-color: transparent; }
+}
+
+/* Theme switch ------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  opacity: 1;
+}
+
+.theme-toggle .theme-icon {
+  display: block;
+}
+
+html:not([data-theme="light"]) .theme-toggle .theme-icon--sun,
+html[data-theme="light"] .theme-toggle .theme-icon--moon {
+  display: none;
 }

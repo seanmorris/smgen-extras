@@ -37,9 +37,15 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .smgen-store-button {
+  html:not([data-theme="light"]) .smgen-store-button {
     background: #f4f4f4;
     border-color: #f4f4f4;
     color: #111;
   }
+}
+
+html[data-theme="dark"] .smgen-store-button {
+  background: #f4f4f4;
+  border-color: #f4f4f4;
+  color: #111;
 }

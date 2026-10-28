@@ -19,6 +19,7 @@ CORE_ASSETS:
   - nav-state.js
   - scrollbar.css
 SCRIPTS:
+  - /theme.js
   - /nav-state.js
 DEFER_SCRIPTS:
   - /main.js

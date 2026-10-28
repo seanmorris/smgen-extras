@@ -54,6 +54,10 @@ $endfor$
 				<a href="<?=escapeHtml(resolveAssetUrl('/campgrounds/index.html'))?>"<?=$section === 'campgrounds' ? ' aria-current="page"' : ''?>>Campgrounds</a>
 				<a href="<?=escapeHtml(resolveAssetUrl('/about.html'))?>"<?=$source === 'about.md' ? ' aria-current="page"' : ''?>>About</a>
 			</nav>
+				<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">
+				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+			</button>
 		</div>
 	</header>
 

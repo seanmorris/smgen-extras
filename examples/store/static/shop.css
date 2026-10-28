@@ -1,7 +1,7 @@
 /* Fernway Goods — a small storefront in warm neutrals and fern green. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   --scrollbar-thumb: var(--line);
   --bg: #faf7f1;
   --surface: #ffffff;
@@ -22,24 +22,22 @@
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #15161a;
-    --surface: #1d1f24;
-    --sand: #23262c;
-    --sand-deep: #2c3038;
-    --ink: #ece7dd;
-    --ink-soft: #b3ada2;
-    --ink-faint: #7f7a71;
-    --line: #2f333b;
-    --fern: #7cb98a;
-    --fern-deep: #a3d4ae;
-    --fern-soft: #223126;
-    --clay: #e58a6a;
-    --clay-soft: #3a2820;
-    --sky-soft: #22313c;
-    --sky-ink: #93bdd8;
-  }
+:root:not([data-theme="light"]) {
+  --bg: #15161a;
+  --surface: #1d1f24;
+  --sand: #23262c;
+  --sand-deep: #2c3038;
+  --ink: #ece7dd;
+  --ink-soft: #b3ada2;
+  --ink-faint: #7f7a71;
+  --line: #2f333b;
+  --fern: #7cb98a;
+  --fern-deep: #a3d4ae;
+  --fern-soft: #223126;
+  --clay: #e58a6a;
+  --clay-soft: #3a2820;
+  --sky-soft: #22313c;
+  --sky-ink: #93bdd8;
 }
 
 * {
@@ -966,4 +964,41 @@ h3 {
 @keyframes flicker {
   from { box-shadow: 0 0 0 4px var(--fern-soft); }
   to { box-shadow: 0 0 0 4px transparent; }
+}
+
+/* Theme switch ------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  opacity: 1;
+}
+
+.theme-toggle .theme-icon {
+  display: block;
+}
+
+html:not([data-theme="light"]) .theme-toggle .theme-icon--sun,
+html[data-theme="light"] .theme-toggle .theme-icon--moon {
+  display: none;
 }

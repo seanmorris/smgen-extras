@@ -1,7 +1,7 @@
 /* Field Notes — a journal set in the serif your device already has. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   --scrollbar-thumb: var(--rule);
   --paper: #f5efe4;
   --paper-deep: #ece3d2;
@@ -22,22 +22,20 @@
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #15191d;
-    --paper-deep: #1d2328;
-    --ink: #e9e2d4;
-    --ink-soft: #aeb5ba;
-    --ink-faint: #7b858c;
-    --rule: #30393f;
-    --harbour: #7fb1cf;
-    --harbour-ink: #a9cde3;
-    --ochre: #dba55a;
-    --ochre-soft: #3a2d1b;
-    --link: #8dbfdd;
-    --code-bg: #232a30;
-    --primary-contrast: #15191d;
-  }
+:root:not([data-theme="light"]) {
+  --paper: #15191d;
+  --paper-deep: #1d2328;
+  --ink: #e9e2d4;
+  --ink-soft: #aeb5ba;
+  --ink-faint: #7b858c;
+  --rule: #30393f;
+  --harbour: #7fb1cf;
+  --harbour-ink: #a9cde3;
+  --ochre: #dba55a;
+  --ochre-soft: #3a2d1b;
+  --link: #8dbfdd;
+  --code-bg: #232a30;
+  --primary-contrast: #15191d;
 }
 
 * {
@@ -937,4 +935,41 @@ summary:focus-visible {
 @keyframes flicker {
   from { background-color: var(--ochre-soft); }
   to { background-color: transparent; }
+}
+
+/* Theme switch ------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  opacity: 1;
+}
+
+.theme-toggle .theme-icon {
+  display: block;
+}
+
+html:not([data-theme="light"]) .theme-toggle .theme-icon--sun,
+html[data-theme="light"] .theme-toggle .theme-icon--moon {
+  display: none;
 }
