@@ -527,15 +527,15 @@ html:not([data-theme="light"]) .button--ghost:hover {
   margin-top: 0.3rem;
 }
 
-.prose code {
+code {
   padding: 0.1em 0.35em;
   border-radius: 0.3rem;
   background: var(--code-bg);
   font-size: 0.86em;
 }
 
-.prose pre,
-.prose div.sourceCode {
+pre,
+div.sourceCode {
   margin: 0 0 1.25rem;
   overflow-x: auto;
   border: 1px solid var(--code-line);
@@ -543,24 +543,24 @@ html:not([data-theme="light"]) .button--ghost:hover {
   background: var(--code-bg) !important;
 }
 
-.prose pre {
+pre {
   padding: 1rem 1.15rem;
   font-size: 0.85rem;
   line-height: 1.55;
 }
 
-.prose div.sourceCode pre {
+div.sourceCode pre {
   margin: 0;
   border: 0;
 }
 
-.prose pre code {
+pre code {
   padding: 0;
   background: none;
   font-size: inherit;
 }
 
-.prose pre a[aria-hidden] {
+pre a[aria-hidden] {
   display: none;
 }
 
