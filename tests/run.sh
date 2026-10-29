@@ -9,4 +9,5 @@ php "${ROOT_DIR}/packages/smgen-store/tests/run.php"
 php "${ROOT_DIR}/packages/smgen-categories/tests/run.php"
 php "${ROOT_DIR}/packages/smgen-timeline/tests/run.php"
 node --test "${ROOT_DIR}"/packages/smgen-phpdoc/tests/*.test.js
+node --test "${ROOT_DIR}"/packages/smgen-jsdoc/tests/*.test.js
 bash "${ROOT_DIR}/tests/integration.sh"

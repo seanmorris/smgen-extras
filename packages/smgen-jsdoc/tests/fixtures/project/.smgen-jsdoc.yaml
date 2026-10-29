@@ -1,0 +1,26 @@
+version: 1
+package:
+  title: Courier JavaScript API
+  description: Public messages, transports, and delivery helpers in Courier.
+  version: 2.4.0
+sources:
+  - path: src
+output: api
+visibility: [public, protected]
+grouping: module
+menu:
+  name: documentation
+  parent: reference
+  weight: 60
+llms:
+  section: reference
+assistant: true
+jsonld: true
+source:
+  repository: https://github.com/example/courier
+  ref: 0123456789abcdef0123456789abcdef01234567
+validation:
+  summaries: error
+  parameters: error
+  returns: error
+  brokenSee: error

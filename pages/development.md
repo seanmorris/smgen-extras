@@ -64,6 +64,7 @@ Each tag selects one workspace:
 smgen-data-pages-v0.1.0
 smgen-store-v0.1.0
 smgen-phpdoc-v0.1.0
+smgen-jsdoc-v0.1.0
 smgen-categories-v0.1.0
 smgen-timeline-v0.1.0
 ```

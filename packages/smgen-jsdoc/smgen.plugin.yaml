@@ -1,0 +1,10 @@
+apiVersion: smgen/v1
+id: smgen-jsdoc
+hooks:
+  prepare:
+    run: [node, ./bin/prepare.js]
+watch:
+  - bin
+  - schemas
+  - src
+  - smgen.plugin.yaml

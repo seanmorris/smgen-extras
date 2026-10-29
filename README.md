@@ -7,6 +7,7 @@ This workspace contains plugins that extend SMGen builds without adding code to 
 - [`smgen-data-pages`](packages/smgen-data-pages) validates CSV or TSV data and renders Markdown pages from PHP templates.
 - [`smgen-store`](packages/smgen-store) validates public checkout metadata and renders hosted payment links or provider buttons.
 - [`smgen-phpdoc`](packages/smgen-phpdoc) statically analyzes PHP and renders linked API reference pages without loading project code.
+- [`smgen-jsdoc`](packages/smgen-jsdoc) statically analyzes JavaScript and JSDoc and renders linked API reference pages without importing project modules.
 - [`smgen-categories`](packages/smgen-categories) groups pages by a frontmatter field and renders one rollup page per value, including dates by day, month, or year.
 - [`smgen-timeline`](packages/smgen-timeline) renders a dated archive menu with a calendar and day rollup pages built on `smgen-categories`.
 
@@ -31,6 +32,6 @@ SMGEN_BIN=/path/to/smgen/smgen.sh npm test
 
 ## Release a Package
 
-Each package has its own version and tag. A tag such as `smgen-data-pages-v0.1.0` publishes only that workspace; `smgen-store-v*`, `smgen-phpdoc-v*`, `smgen-categories-v*`, and `smgen-timeline-v*` publish the others. Publish `smgen-categories` before `smgen-timeline`, which depends on it.
+Each package has its own version and tag. A tag such as `smgen-data-pages-v0.1.0` publishes only that workspace; `smgen-store-v*`, `smgen-phpdoc-v*`, `smgen-jsdoc-v*`, `smgen-categories-v*`, and `smgen-timeline-v*` publish the others. Publish `smgen-categories` before `smgen-timeline`, which depends on it.
 
 The publish workflow expects npm trusted publishing or an `NPM_TOKEN` repository secret.

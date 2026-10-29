@@ -10,6 +10,9 @@ PLUGINS:
   - use: smgen-phpdoc
     options:
       config: .smgen-phpdoc.yaml
+  - use: smgen-jsdoc
+    options:
+      config: .smgen-jsdoc.yaml
 LLMS:
   title: Store Documentation
   summary: Build and extend the example store.

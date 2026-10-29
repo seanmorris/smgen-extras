@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+import {runCommand} from '../src/command.js';
+
+try
+{
+	process.exitCode = await runCommand(process.argv.slice(2));
+}
+catch(error)
+{
+	const message = error instanceof Error ? error.message : String(error);
+	process.stderr.write(`smgen-jsdoc: ${message}\n`);
+	process.exitCode = 1;
+}

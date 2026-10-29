@@ -9,3 +9,4 @@ static/examples/
 packages/smgen-phpdoc/vendor/
 examples/*/pages/.smgen-generated/
 examples/*/.smgen-phpdoc-cache/
+examples/*/.smgen-jsdoc-cache/

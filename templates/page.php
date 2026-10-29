@@ -9,6 +9,7 @@ $currentSource = basename((string) $pageFile);
 $navigation = [
 	['source' => 'index.md', 'path' => '/', 'label' => 'Overview'],
 	['source' => 'phpdoc.md', 'path' => '/phpdoc.html', 'label' => 'PHPDoc'],
+	['source' => 'jsdoc.md', 'path' => '/jsdoc.html', 'label' => 'JSDoc'],
 	['source' => 'data-pages.md', 'path' => '/data-pages.html', 'label' => 'Data Pages'],
 	['source' => 'categories.md', 'path' => '/categories.html', 'label' => 'Categories'],
 	['source' => 'timeline.md', 'path' => '/timeline.html', 'label' => 'Timeline'],
@@ -71,7 +72,7 @@ $endfor$
 		<div class="shell hero-inner">
 			<p class="eyebrow"><span>smgen/v1 plugin API</span><span>PHP 8.2</span><span>Node 20</span></p>
 			<h1>Build steps, not applications.</h1>
-			<p class="hero-lede">Five plugins that add PHP API references, pages from spreadsheets, category rollups, a dated archive, and a static storefront to an <a href="https://seanmorris.github.io/smgen/">SMGen</a> site. Each one runs at build time and publishes ordinary files. Nothing on the published site needs a server.</p>
+			<p class="hero-lede">Six plugins that add PHP and JavaScript API references, pages from spreadsheets, category rollups, a dated archive, and a static storefront to an <a href="https://seanmorris.github.io/smgen/">SMGen</a> site. Each one runs at build time and publishes ordinary files. Nothing on the published site needs a server.</p>
 			<p class="hero-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl('/phpdoc.html'))?>">Read the guides</a><a class="button button--ghost" href="#examples">See the examples</a></p>
 		</div>
 	</section>

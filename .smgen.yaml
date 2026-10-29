@@ -31,7 +31,7 @@ SEARCH_ENABLED: 0
 
 LLMS:
   title: smgen-plugins
-  summary: Add data-driven pages, static checkout controls, and generated PHP API references to SMGen sites.
+  summary: Add data-driven pages, static checkout controls, and generated PHP and JavaScript API references to SMGen sites.
   details: |
     Each package participates in the SMGen build and publishes ordinary static
     files. The generated site does not need a PHP or Node.js server.

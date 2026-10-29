@@ -24,18 +24,23 @@ printf '%s\n' '{"private":true}' > "${SITE}/package.json"
 DATA_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-data-pages" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
 STORE_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-store" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
 PHPDOC_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-phpdoc" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+JSDOC_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-jsdoc" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
 CATEGORIES_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-categories" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
 TIMELINE_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-timeline" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
 npm install --prefix "${SITE}" --ignore-scripts --no-package-lock --no-save \
 	"${TEMP_ROOT}/${DATA_TARBALL}" \
 	"${TEMP_ROOT}/${STORE_TARBALL}" \
-	"${TEMP_ROOT}/${PHPDOC_TARBALL}" >/dev/null
+	"${TEMP_ROOT}/${PHPDOC_TARBALL}" \
+	"${TEMP_ROOT}/${JSDOC_TARBALL}" >/dev/null
 
 "${SITE}/node_modules/.bin/smgen-data-pages" validate --root "${SITE}" >/dev/null
 "${SITE}/node_modules/.bin/smgen-store" validate --root "${SITE}" pages >/dev/null
 "${SITE}/node_modules/.bin/smgen-phpdoc" generate --root "${SITE}" --pages pages >/dev/null
 "${SITE}/node_modules/.bin/smgen-phpdoc" check --root "${SITE}" --pages pages >/dev/null
 "${SITE}/node_modules/.bin/smgen-phpdoc" clean --root "${SITE}" --pages pages >/dev/null
+"${SITE}/node_modules/.bin/smgen-jsdoc" generate --root "${SITE}" --pages pages >/dev/null
+"${SITE}/node_modules/.bin/smgen-jsdoc" check --root "${SITE}" --pages pages >/dev/null
+"${SITE}/node_modules/.bin/smgen-jsdoc" clean --root "${SITE}" --pages pages >/dev/null
 
 (
 	cd "${SITE}"
@@ -47,6 +52,7 @@ test -f "${SITE}/docs/products/index.html"
 test -f "${SITE}/docs/smgen-store/store.css"
 test -f "${SITE}/docs/api/index.html"
 test -f "${SITE}/docs/api/classes/store/product.html"
+test -f "${SITE}/docs/js-api/functions/cart/cart-label.html"
 test -f "${SITE}/docs/search.bin"
 test -f "${SITE}/docs/llms.txt"
 test -f "${SITE}/docs/sitemap.xml"
@@ -54,10 +60,14 @@ grep -Fq 'https://example.com/checkout/smgen-mug' "${SITE}/docs/products/smgen-m
 grep -Fq 'https://schema.org' "${SITE}/docs/products/smgen-mug.html"
 grep -Fq '/shop/smgen-store/store.css' "${SITE}/docs/products/smgen-mug.html"
 grep -Fq 'Store\\Product' "${SITE}/docs/api/classes/store/product.html"
+grep -Fq 'cartLabel' "${SITE}/docs/js-api/functions/cart/cart-label.html"
+grep -Fq '"programmingLanguage":"JavaScript"' "${SITE}/docs/js-api/functions/cart/cart-label.html"
 grep -Fq 'https://schema.org' "${SITE}/docs/api/classes/store/product.html"
 grep -Fq '/shop/api/' "${SITE}/docs/llms.txt"
 grep -Fq '/shop/api/classes/store/product.html' "${SITE}/docs/llms.txt"
+grep -Fq '/shop/js-api/functions/cart/cart-label.html' "${SITE}/docs/llms.txt"
 grep -Fq '/shop/api/classes/store/product.html' "${SITE}/docs/sitemap.xml"
+grep -Fq '/shop/js-api/functions/cart/cart-label.html' "${SITE}/docs/sitemap.xml"
 INDEX_FILE="${SITE}/docs/search.bin" "${ROOT_DIR}/node_modules/.bin/smgen-search" search 'catalog product' | grep -Fq 'api/classes/store/product'
 if ! grep -Fq '/shop/smgen-phpdoc/syntax-highlight.js' "${SITE}/docs/api/classes/store/product.html"; then
 	echo "PHP documentation did not load the syntax highlighter." >&2

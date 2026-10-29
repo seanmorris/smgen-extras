@@ -1,0 +1,45 @@
+PRODUCT_NAME: Signalbox
+TAGLINE: A small JavaScript signal library
+TITLE_PREFIX: Signalbox
+DEFAULT_THEME: theme-docs
+BASE_URL: http://localhost:8200/examples/jsdoc
+OUTPUT_DIR: ../../static/examples/jsdoc
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+STYLES: [/scrollbar.css, /docs.css]
+CORE_ASSETS:
+  - main.js
+  - nav-state.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+  - /nav-state.js
+DEFER_SCRIPTS:
+  - /main.js
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+HIGHLIGHT_STYLE: tango
+PLUGINS:
+  - use: smgen-jsdoc
+    options:
+      config: .smgen-jsdoc.yaml
+MENUS:
+  reference:
+    label: Reference
+    renderer: tree
+    hierarchy: manual
+    showLabel: false
+    links:
+      - id: guides
+        group: true
+        title: Guides
+        weight: 10
+        expanded: true
+      - id: api-reference
+        group: true
+        title: API reference
+        weight: 20
+        expanded: true
+MENU_REGIONS:
+  sidebar: [reference]

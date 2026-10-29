@@ -2,7 +2,7 @@
   "name": "smgen-plugins-workspace",
   "version": "0.1.0",
   "private": true,
-  "description": "Official data-page, static-store, and PHP API documentation plugins for SMGen.",
+  "description": "Official data-page, static-store, and API documentation plugins for SMGen.",
   "license": "Apache-2.0",
   "author": "Sean Morris",
   "workspaces": [
