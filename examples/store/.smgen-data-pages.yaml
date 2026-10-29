@@ -16,6 +16,7 @@ datasets:
       currency: Currency
       stock: Stock
       sku: SKU
+      image: Image
       color_name: Color Name
       color_hex: Color Hex
       dimensions: Dimensions

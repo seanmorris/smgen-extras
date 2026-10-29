@@ -31,8 +31,9 @@ echo $context->frontmatter([
 		'colorHex' => $row['color_hex'],
 		'colorName' => $row['color_name'],
 		'sku' => $row['sku'],
-		'tile' => shopTile($row, $context, 'hero'),
-		'cardTile' => shopTile($row, $context),
+		'image' => '/' . ltrim($row['image'], '/'),
+		'tile' => shopTile($row, $context, 'hero', '../images/products/'),
+		'cardTile' => shopTile($row, $context, 'card', '../images/products/'),
 	],
 	'store' => [
 		'schema' => 1,

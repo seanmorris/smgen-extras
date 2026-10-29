@@ -8,6 +8,10 @@ $layout = $frontmatter['layout'] ?? 'page';
 $product = $frontmatter['product'] ?? null;
 $activeCategory = $product['categorySlug'] ?? (is_array($frontmatter['category'] ?? null) ? ($frontmatter['category']['slug'] ?? '') : '');
 $source = preg_replace('#^.*?/pages/(?:\.smgen-generated/[^/]+/)?#', '', (string) $pageFile) ?? '';
+if(is_array($product) && is_string($product['image'] ?? null) && is_array($frontmatter['jsonld'] ?? null))
+{
+	$frontmatter['jsonld']['image'] = resolveAssetUrl($product['image']);
+}
 /** Escape text for the page body and double dollars so Pandoc treats them literally. */
 function tpl(string $value): string
 {

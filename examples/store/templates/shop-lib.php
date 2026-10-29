@@ -54,25 +54,50 @@ function shopInk(string $hex): string
 	return $luminance > 0.6 ? '#1c1a17' : '#fbf8f2';
 }
 
-/** Render the illustrated product tile used on cards and product pages. */
-function shopTile(array $row, object $context, string $size = 'card'): string
+/**
+ * Render a product photograph with the original illustrated tile as a fallback.
+ *
+ * @param array<string, string> $row Normalized product data.
+ * @param object $context Template context that escapes HTML.
+ * @param string $size Tile size modifier.
+ * @param string $imageBase Relative directory containing product images.
+ */
+function shopTile(array $row, object $context, string $size = 'card', string $imageBase = '../images/products/'): string
 {
 	$categories = shopCategories();
 	$icon = $categories[$row['category']]['slug'] ?? 'desk';
 	$hex = preg_match('/^#[0-9a-fA-F]{6}$/', $row['color_hex']) ? $row['color_hex'] : '#8a8a8a';
+	$image = trim((string) ($row['image'] ?? ''));
+	if($image !== '')
+	{
+		$source = $imageBase . basename($image);
+		$loading = $size === 'card' ? ' loading="lazy"' : '';
+		$priority = $size === 'hero' ? ' fetchpriority="high"' : '';
+		return '<div class="tile tile--photo tile--' . $context->escapeHtml($size) . '">'
+			. '<img src="' . $context->escapeHtml($source) . '" width="960" height="960" alt="' . $context->escapeHtml($row['title'] . ', ' . $row['color_name']) . '"' . $loading . $priority . '>'
+			. '<span class="tile-sku" aria-hidden="true">' . $context->escapeHtml($row['sku']) . '</span>'
+			. '</div>';
+	}
 	return '<div class="tile tile--' . $context->escapeHtml($size) . '" style="--tile: ' . $context->escapeHtml($hex) . '; --tile-ink: ' . $context->escapeHtml(shopInk($hex)) . '" role="img" aria-label="' . $context->escapeHtml($row['title'] . ' in ' . $row['color_name']) . '">'
 		. '<svg class="tile-icon" aria-hidden="true"><use href="#icon-' . $context->escapeHtml($icon) . '"/></svg>'
 		. '<span class="tile-sku" aria-hidden="true">' . $context->escapeHtml($row['sku']) . '</span>'
 		. '</div>';
 }
 
-/** Render one product card for a grid. */
-function shopCard(array $row, object $context, string $prefix): string
+/**
+ * Render one product card for a grid.
+ *
+ * @param array<string, string> $row Normalized product data.
+ * @param object $context Template context that escapes HTML.
+ * @param string $prefix Relative product-page prefix.
+ * @param string $imageBase Relative directory containing product images.
+ */
+function shopCard(array $row, object $context, string $prefix, string $imageBase): string
 {
 	$availability = shopAvailability($row['availability']);
 	$badge = $row['availability'] === 'in_stock' ? '' : '<span class="badge badge--' . $context->escapeHtml($availability['tone']) . '">' . $context->escapeHtml($availability['label']) . '</span>';
 	return '<li class="card"><a href="' . $prefix . $context->escapeHtml($row['slug']) . '.html">'
-		. shopTile($row, $context)
+		. shopTile($row, $context, 'card', $imageBase)
 		. '<span class="card-body"><span class="card-name">' . $context->escapeHtml($row['title']) . '</span>'
 		. '<span class="card-tagline">' . $context->escapeHtml($row['tagline']) . '</span>'
 		. '<span class="card-price">' . $context->escapeHtml(shopPrice($row)) . $badge . '</span></span>'

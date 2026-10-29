@@ -35,7 +35,7 @@ echo $context->frontmatter([
 </div>
 <ul class="cards">
 <?php foreach($matching as $row): ?>
-<?=shopCard($row, $context, '')?>
+<?=shopCard($row, $context, '', '../images/products/')?>
 <?php endforeach; ?>
 </ul>
 </section>

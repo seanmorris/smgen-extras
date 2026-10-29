@@ -33,7 +33,7 @@ echo $context->frontmatter([
 </div>
 <ul class="hero-tiles" aria-label="Featured products">
 <?php foreach(array_slice($featured, 0, 3) as $row): ?>
-<li><a href="products/<?=$context->escapeHtml($row['slug'])?>.html" aria-label="<?=$context->escapeHtml($row['title'])?>"><?=shopTile($row, $context, 'hero-grid')?></a></li>
+<li><a href="products/<?=$context->escapeHtml($row['slug'])?>.html" aria-label="<?=$context->escapeHtml($row['title'])?>"><?=shopTile($row, $context, 'hero-grid', 'images/products/')?></a></li>
 <?php endforeach; ?>
 </ul>
 </section>
@@ -45,7 +45,7 @@ echo $context->frontmatter([
 </div>
 <ul class="cards">
 <?php foreach($featured as $row): ?>
-<?=shopCard($row, $context, 'products/')?>
+<?=shopCard($row, $context, 'products/', 'images/products/')?>
 <?php endforeach; ?>
 </ul>
 </section>
