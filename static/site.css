@@ -352,6 +352,12 @@ html:not([data-theme="light"]) .button--ghost:hover {
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
+/* Each preview ships in both palettes; the one matching the theme is shown. */
+html:not([data-theme="light"]) .preview--light,
+html[data-theme="light"] .preview--dark {
+  display: none;
+}
+
 .previews a:hover img {
   transform: translateY(-3px);
   box-shadow: 0 14px 30px rgb(20 24 31 / 12%);
