@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Renders the Greywater Range guide shell with a nested menu and per-record layouts.
+ * Renders the Greywater Range guide as a trailhead map board: contour paper,
+ * routed wood sign boards, and trail-blaze grading, with a legend menu.
  */
 
 $layout = $frontmatter['layout'] ?? 'page';
@@ -63,18 +64,22 @@ $endfor$
 
 	<?php if($layout === 'home' && is_array($home)): ?>
 	<section class="hero">
+		<div class="hero-map" aria-hidden="true"></div>
 		<div class="hero-inner">
-			<p class="eyebrow">A fictional range, a real build</p>
-			<h1>Twenty trails. Four regions. One weekend is not enough.</h1>
-			<p class="hero-lede">From a half-hour boardwalk across the estuary to a full-day traverse over the ridge, every trail in the Greywater Range is here with its distance, climb, and the honest version of how hard it is.</p>
-			<p class="hero-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl('/trails/index.html'))?>">Browse the trails</a><a class="button button--ghost" href="<?=escapeHtml(resolveAssetUrl('/campgrounds/index.html'))?>">Find a campground</a></p>
+			<div>
+				<p class="eyebrow">Trailhead · a fictional range, a real build</p>
+				<h1>Twenty trails. Four regions. One weekend is not enough.</h1>
+				<p class="hero-lede">From a half-hour boardwalk across the estuary to a full-day traverse over the ridge, every trail in the Greywater Range is here with its distance, climb, and the honest version of how hard it is.</p>
+				<p class="hero-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl('/trails/index.html'))?>">Browse the trails</a><a class="button button--ghost" href="<?=escapeHtml(resolveAssetUrl('/campgrounds/index.html'))?>">Find a campground</a></p>
+				<p class="scale-bar" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4 km</span></p>
+			</div>
+			<ul class="hero-stats" aria-label="Guide at a glance">
+				<li><b><?=escapeHtml($home['trails'])?></b><span>trails</span></li>
+				<li><b><?=escapeHtml($home['km'])?></b><span>kilometres</span></li>
+				<li><b><?=escapeHtml($home['gain'])?> m</b><span>biggest climb</span></li>
+				<li><b><?=escapeHtml($home['regions'])?></b><span>regions</span></li>
+			</ul>
 		</div>
-		<ul class="hero-stats" aria-label="Guide at a glance">
-			<li><b><?=escapeHtml($home['trails'])?></b><span>trails</span></li>
-			<li><b><?=escapeHtml($home['km'])?></b><span>kilometres</span></li>
-			<li><b><?=escapeHtml($home['gain'])?> m</b><span>biggest climb</span></li>
-			<li><b><?=escapeHtml($home['regions'])?></b><span>regions</span></li>
-		</ul>
 	</section>
 	<?php endif; ?>
 

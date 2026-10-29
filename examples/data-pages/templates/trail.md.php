@@ -36,7 +36,7 @@ echo $context->frontmatter([
 		'dogs' => guideDogs($row['dogs']),
 		'season' => $row['season'],
 		'trailhead' => $row['trailhead'],
-		'profile' => guideProfile($row, $context),
+		'profile' => guideProfile($row, $context, true),
 	],
 	'jsonld' => [
 		'@context' => 'https://schema.org',

@@ -62,36 +62,93 @@ function guideTitleFromSlug(string $slug): string
 	return implode(' ', $words);
 }
 
-/** Draw a small, deterministic elevation profile shaped by route type and gain. */
-function guideProfile(array $row, object $context): string
+/** Sample the deterministic elevation shape of a trail as fractions of its height. */
+function guideProfileShape(array $row, int $steps = 24): array
 {
-	$gain = max(0, (int) $row['gain_m']);
-	$height = 8 + min(32, (int) round($gain / 32));
 	$seed = crc32($row['slug']);
-	$wobble = static fn(int $index): float => (($seed >> ($index * 3)) % 7) - 3;
-	$points = [];
-	$steps = 12;
+	$wobble = static fn(int $index): float => (($seed >> (($index % 10) * 3)) % 7) - 3;
+	$shape = [];
 	for($i = 0; $i <= $steps; $i++)
 	{
 		$x = $i / $steps;
-		$shape = match($row['route_type'])
+		$value = match($row['route_type'])
 		{
 			'loop' => sin($x * M_PI) * 0.75 + sin($x * M_PI * 2) * 0.25,
 			'point-to-point' => $x < 0.7 ? $x / 0.7 : 1 - (($x - 0.7) / 0.3) * 0.35,
 			default => sin($x * M_PI),
 		};
-		$y = 44 - max(0, $shape) * $height + ($i > 0 && $i < $steps ? $wobble($i) * ($height / 40) : 0);
-		$points[] = round($x * 120, 1) . ',' . round(min(44, $y), 1);
+		$value = max(0, $value) + ($i > 0 && $i < $steps ? $wobble($i) / 40 : 0);
+		$shape[] = max(0, min(1, $value));
+	}
+	return $shape;
+}
+
+/**
+ * Draw an elevation profile. Cards get a small sparkline; a detailed chart adds
+ * gridlines, kilometre ticks, and the climb so the figure reads as a chart.
+ */
+function guideProfile(array $row, object $context, bool $detailed = false): string
+{
+	$gain = max(0, (int) $row['gain_m']);
+	$distance = max(0.1, (float) $row['distance_km']);
+	$shape = guideProfileShape($row);
+	$steps = count($shape) - 1;
+	if(!$detailed)
+	{
+		$height = 8 + min(32, (int) round($gain / 32));
+		$points = [];
+		foreach($shape as $i => $value)
+		{
+			$points[] = round($i / $steps * 120, 1) . ',' . round(44 - $value * $height, 1);
+		}
+		$line = implode(' ', $points);
+		return '<svg class="profile" viewBox="0 0 120 48" preserveAspectRatio="none" aria-hidden="true">'
+			. '<path d="M0,48 L' . $context->escapeHtml($line) . ' L120,48 Z" class="profile-fill"/>'
+			. '<polyline points="' . $context->escapeHtml($line) . '" class="profile-line"/>'
+			. '<line x1="0" y1="47.5" x2="120" y2="47.5" class="profile-base"/></svg>';
+	}
+	$width = 480;
+	$left = 10;
+	$right = 470;
+	$base = 128;
+	$top = 30;
+	$points = [];
+	foreach($shape as $i => $value)
+	{
+		$points[] = round($left + $i / $steps * ($right - $left), 1) . ',' . round($base - $value * ($base - $top), 1);
 	}
 	$line = implode(' ', $points);
-	return '<svg class="profile" viewBox="0 0 120 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,48 L' . $context->escapeHtml($line) . ' L120,48 Z" class="profile-fill"/><polyline points="' . $context->escapeHtml($line) . '" class="profile-line"/></svg>';
+	$svg = '<svg class="profile profile--detailed" viewBox="0 0 ' . $width . ' 170" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Elevation profile: ' . $context->escapeHtml((string) $gain) . ' metres of climb over ' . $context->escapeHtml((string) $distance) . ' kilometres">';
+	foreach([0.25, 0.5, 0.75, 1] as $fraction)
+	{
+		$y = round($base - $fraction * ($base - $top), 1);
+		$svg .= '<line x1="' . $left . '" y1="' . $y . '" x2="' . $right . '" y2="' . $y . '" class="profile-grid" stroke-dasharray="3 5"/>';
+	}
+	$svg .= '<path d="M' . $left . ',' . $base . ' L' . $context->escapeHtml($line) . ' L' . $right . ',' . $base . ' Z" class="profile-fill"/>';
+	$svg .= '<polyline points="' . $context->escapeHtml($line) . '" class="profile-line"/>';
+	$svg .= '<line x1="' . $left . '" y1="' . $base . '" x2="' . $right . '" y2="' . $base . '" class="profile-base"/>';
+	$kilometres = (int) floor($distance);
+	$every = $kilometres > 12 ? 4 : ($kilometres > 6 ? 2 : 1);
+	for($km = 0; $km <= $kilometres; $km += $every)
+	{
+		$x = round($left + $km / $distance * ($right - $left), 1);
+		$svg .= '<line x1="' . $x . '" y1="' . $base . '" x2="' . $x . '" y2="' . ($base + 6) . '" class="profile-base"/>';
+		if($km === 0 || $distance - $km >= $every * 0.6)
+		{
+			$svg .= '<text x="' . $x . '" y="' . ($base + 22) . '" text-anchor="' . ($km === 0 ? 'start' : 'middle') . '">' . $km . '</text>';
+		}
+	}
+	$svg .= '<text x="' . $right . '" y="' . ($base + 22) . '" text-anchor="end">' . $context->escapeHtml((string) $distance) . ' km</text>';
+	$svg .= '<text x="' . $left . '" y="' . ($top - 10) . '" class="profile-gain">+' . number_format($gain) . ' m</text>';
+	$svg .= '<text x="' . $right . '" y="' . ($top - 10) . '" text-anchor="end">' . $context->escapeHtml(guideRouteType($row['route_type'])) . '</text>';
+	return $svg . '</svg>';
 }
 
 /** Render one trail card for the home page and the trails index. */
 function guideTrailCard(array $row, object $context, string $prefix): string
 {
 	$difficulty = guideDifficulty($row['difficulty']);
-	return '<li class="trail-card"><a href="' . $prefix . $context->escapeHtml($row['slug']) . '.html">'
+	return '<li class="trail-card region-' . $context->pathSegment($row['region']) . '"><a href="' . $prefix . $context->escapeHtml($row['slug']) . '.html">'
 		. guideProfile($row, $context)
 		. '<span class="trail-card-head"><span class="trail-card-region">' . $context->escapeHtml($row['region']) . '</span><span class="pill pill--' . $context->escapeHtml($row['difficulty']) . '">' . $context->escapeHtml($difficulty['label']) . '</span></span>'
 		. '<strong class="trail-card-name">' . $context->escapeHtml($row['name']) . '</strong>'
@@ -104,7 +161,7 @@ function guideTrailCard(array $row, object $context, string $prefix): string
 function guideCampgroundCard(array $row, object $context, string $prefix): string
 {
 	$fee = (float) $row['fee_usd'] === 0.0 ? 'Free' : '$' . $row['fee_usd'] . ' a night';
-	return '<li class="camp-card"><a href="' . $prefix . $context->escapeHtml($row['slug']) . '.html">'
+	return '<li class="camp-card region-' . $context->pathSegment($row['region']) . '"><a href="' . $prefix . $context->escapeHtml($row['slug']) . '.html">'
 		. '<span class="trail-card-head"><span class="trail-card-region">' . $context->escapeHtml($row['region']) . '</span><span class="pill pill--neutral">' . $context->escapeHtml($row['reservations'] === 'reservable' ? 'Reservable' : 'First come') . '</span></span>'
 		. '<strong class="trail-card-name">' . $context->escapeHtml($row['name']) . '</strong>'
 		. '<span class="trail-card-summary">' . $context->escapeHtml($row['summary']) . '</span>'
