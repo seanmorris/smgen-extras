@@ -543,7 +543,15 @@ h1, h2, h3 {
   overflow-y: auto;
   padding-right: 0.5rem;
   font-size: 0.92rem;
+  /* The legend scrolls on its own, but its bar only shows while the pointer is on it. */
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  scrollbar-color: transparent transparent;
+}
+
+.sidebar nav:hover,
+.sidebar nav:focus-within {
+  scrollbar-color: var(--line-strong) transparent;
 }
 
 .sidebar ul {
