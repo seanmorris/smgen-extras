@@ -1,0 +1,27 @@
+version: 1
+package:
+  title: Postbox API
+  description: Classes, interfaces, enums, and functions for composing and delivering mail with Postbox.
+  version: 1.2.0
+sources:
+  - path: src/postbox
+php: '8.2'
+output: postbox/api
+visibility: [public]
+grouping: namespace
+menu:
+  name: reference
+  parent: postbox-api
+  weight: 10
+  symbols: true
+llms: false
+assistant: false
+jsonld: true
+source:
+  repository: https://github.com/seanmorris/smgen-plugins
+  ref: main
+  prefix: examples/dispatch
+validation:
+  summaries: error
+  parameters: error
+  returns: error

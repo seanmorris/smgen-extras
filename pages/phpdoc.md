@@ -4,7 +4,7 @@ description: Generate linked SMGen API pages through static PHP analysis.
 weight: 1
 guide:
   package: smgen-phpdoc
-  example: examples/phpdoc/
+  example: examples/dispatch/postbox/
 llms:
   section: plugins
   description: Configure smgen-phpdoc, its generated pages, validation policy, and CLI.
@@ -28,7 +28,7 @@ jsonld:
 including a source file, or running bootstrap code. It turns the resulting
 symbol graph into ordinary SMGen Markdown pages.
 
-<p class="example-link"><a href="examples/phpdoc/" target="_blank" rel="noopener noreferrer">Open the PHPDoc example site</a></p>
+<p class="example-link"><a href="examples/dispatch/postbox/" target="_blank" rel="noopener noreferrer">Open the PHPDoc example in the Dispatch site</a></p>
 
 ## Install and Activate
 

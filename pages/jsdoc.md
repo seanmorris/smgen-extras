@@ -4,7 +4,7 @@ description: Generate linked SMGen API pages from JavaScript and JSDoc without r
 weight: 2
 guide:
   package: smgen-jsdoc
-  example: examples/jsdoc/
+  example: examples/dispatch/signalbox/
 llms:
   section: plugins
   description: Configure smgen-jsdoc, its generated pages, documentation policy, and CLI.
@@ -28,7 +28,7 @@ jsonld:
 exports and JSDoc, and turns the result into ordinary SMGen Markdown pages. It
 does not import the modules or run their top-level statements.
 
-<p class="example-link"><a href="examples/jsdoc/" target="_blank" rel="noopener noreferrer">Open the JSDoc example site</a></p>
+<p class="example-link"><a href="examples/dispatch/signalbox/" target="_blank" rel="noopener noreferrer">Open the JSDoc example in the Dispatch site</a></p>
 
 ## Install and Activate
 

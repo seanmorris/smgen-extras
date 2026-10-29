@@ -1,0 +1,74 @@
+PRODUCT_NAME: Dispatch
+TAGLINE: Postbox and Signalbox, documented from source
+TITLE_PREFIX: Dispatch
+DEFAULT_THEME: theme-dispatch
+BASE_URL: http://localhost:8200/examples/dispatch
+OUTPUT_DIR: ../../static/examples/dispatch
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+STYLES: [/scrollbar.css, /docs.css]
+CORE_ASSETS:
+  - main.js
+  - nav-state.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+  - /nav-state.js
+DEFER_SCRIPTS:
+  - /main.js
+  - /smgen-phpdoc/vendor/highlight.js/highlight.min.js
+  - /smgen-phpdoc/syntax-highlight.js
+SEARCH_ENABLED: 0
+SMGEN_ENGINE: php
+HIGHLIGHT_STYLE: tango
+PLUGINS:
+  - use: smgen-phpdoc
+    options:
+      config: .smgen-phpdoc.yaml
+  - use: smgen-jsdoc
+    options:
+      config: .smgen-jsdoc.yaml
+MENUS:
+  reference:
+    label: Reference
+    renderer: tree
+    hierarchy: manual
+    showLabel: false
+    links:
+      - id: postbox
+        group: true
+        title: Postbox
+        weight: 10
+        expanded: false
+      - id: postbox-guides
+        group: true
+        parent: postbox
+        title: Guides
+        weight: 10
+        expanded: true
+      - id: postbox-api
+        group: true
+        parent: postbox
+        title: API reference
+        weight: 20
+        expanded: true
+      - id: signalbox
+        group: true
+        title: Signalbox
+        weight: 20
+        expanded: false
+      - id: signalbox-guides
+        group: true
+        parent: signalbox
+        title: Guides
+        weight: 10
+        expanded: true
+      - id: signalbox-api
+        group: true
+        parent: signalbox
+        title: API reference
+        weight: 20
+        expanded: true
+MENU_REGIONS:
+  sidebar: [reference]
