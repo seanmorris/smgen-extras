@@ -836,8 +836,16 @@ summary:focus-visible {
     border-top: 1px solid var(--rule);
   }
 
-  .rail .archive-calendar {
-    max-width: 20rem;
+  /* Stacked under the content, the archive splits into calendar and list. */
+  .rail .archive-widget {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0 2.5rem;
+    align-items: start;
+  }
+
+  .rail .archive-widget > .navigation-widget-title {
+    grid-column: 1 / -1;
   }
 }
 
@@ -846,6 +854,10 @@ summary:focus-visible {
   .page,
   .colophon {
     width: min(100% - 2rem, 74rem);
+  }
+
+  .rail .archive-widget {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .masthead-line span:nth-child(2) {
