@@ -475,14 +475,14 @@ h1, h2, h3, h4 {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.index nav {
-  padding: 1.5rem 1rem 3rem 0;
-  border-right: 1px solid var(--line);
-  font-size: 0.9rem;
-}
-
 .index {
   align-self: stretch;
+  border-right: 1px solid var(--line);
+}
+
+.index nav {
+  padding: 1.5rem 1rem 3rem 0;
+  font-size: 0.9rem;
 }
 
 .index ul {
@@ -1174,9 +1174,12 @@ html:not([data-theme="light"]) .sourceCode span.er { color: #ff7b7b; }
     grid-template-columns: 1fr;
   }
 
+  .index {
+    border-right: 0;
+  }
+
   .index nav {
     padding: 1.25rem 0 0;
-    border-right: 0;
     border-bottom: 1px solid var(--line);
   }
 
