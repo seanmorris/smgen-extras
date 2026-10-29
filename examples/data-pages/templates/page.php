@@ -156,6 +156,9 @@ $endfor$
 				<h1>$title$</h1>
 				<p class="lede"><?=escapeHtml($index['lede'])?></p>
 			</header>
+			<?php if(!empty($index['photo'])): ?>
+			<figure class="index-photo"><img src="<?=escapeHtml(resolveAssetUrl('/images/' . $index['photo'] . '.webp'))?>" srcset="<?=escapeHtml(resolveAssetUrl('/images/' . $index['photo'] . '-800.webp'))?> 800w, <?=escapeHtml(resolveAssetUrl('/images/' . $index['photo'] . '.webp'))?> 1600w" sizes="(max-width: 44rem) 100vw, 70vw" width="1600" height="900" alt="<?=escapeHtml($index['photoAlt'] ?? '')?>" fetchpriority="high" decoding="async"></figure>
+			<?php endif; ?>
 			$body$
 			<?php elseif($layout === 'home'): ?>
 			$body$

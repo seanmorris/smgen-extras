@@ -7,6 +7,8 @@ TOC: false
 
 # About this guide
 
+![The map board at the Sawmill Creek trailhead, where most North Fork walks begin.](images/trailhead-board.webp)
+
 The Greywater Range does not exist. Its trails, campgrounds, and place names
 were invented to show what `smgen-data-pages` can do with two ordinary
 spreadsheets.

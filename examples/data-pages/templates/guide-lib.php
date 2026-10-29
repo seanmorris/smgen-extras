@@ -8,11 +8,21 @@
 function guideRegions(): array
 {
 	return [
-		'North Fork' => ['slug' => 'north-fork', 'blurb' => 'Creek valleys and old-growth cedar below the fire lookout.'],
-		'Saddle Ridge' => ['slug' => 'saddle-ridge', 'blurb' => 'The high country: the summit, the larch basin, and the cirque.'],
-		'Lower Basin' => ['slug' => 'lower-basin', 'blurb' => 'Reservoirs, sandstone bluffs, and the old railway to the sea.'],
-		'Coastal Bluffs' => ['slug' => 'coastal-bluffs', 'blurb' => 'Cliff paths, pocket beaches, and the estuary marsh.'],
+		'North Fork' => ['slug' => 'north-fork', 'blurb' => 'Creek valleys and old-growth cedar below the fire lookout.', 'alt' => 'A timber footbridge over a creek under old-growth cedar, with the fire lookout on the ridge above'],
+		'Saddle Ridge' => ['slug' => 'saddle-ridge', 'blurb' => 'The high country: the summit, the larch basin, and the cirque.', 'alt' => 'The summit ridge above a larch basin turning gold and a small tarn in the cirque'],
+		'Lower Basin' => ['slug' => 'lower-basin', 'blurb' => 'Reservoirs, sandstone bluffs, and the old railway to the sea.', 'alt' => 'A reservoir below sandstone bluffs with the old railway grade curving toward the sea'],
+		'Coastal Bluffs' => ['slug' => 'coastal-bluffs', 'blurb' => 'Cliff paths, pocket beaches, and the estuary marsh.', 'alt' => 'A cliff path above pocket beaches and sea stacks, with the estuary marsh behind'],
 	];
+}
+
+/**
+ * Render one of the guide's photographs with its 800 px and 1600 px variants.
+ * The prefix is the relative path back to the site root from the page.
+ */
+function guidePhoto(string $name, string $alt, object $context, string $prefix, string $sizes = '(max-width: 44rem) 100vw, 50vw', bool $eager = false): string
+{
+	$base = $prefix . 'images/' . $context->escapeHtml($name);
+	return '<img src="' . $base . '.webp" srcset="' . $base . '-800.webp 800w, ' . $base . '.webp 1600w" sizes="' . $context->escapeHtml($sizes) . '" width="1600" height="900" alt="' . $context->escapeHtml($alt) . '"' . ($eager ? ' fetchpriority="high"' : ' loading="lazy"') . ' decoding="async">';
 }
 
 /** Describe a difficulty code with a label, a rank, and a short meaning. */

@@ -41,7 +41,7 @@ echo $context->frontmatter([
 <?php foreach($regions as $name => $region): ?>
 <?php $matching = array_filter($rows, static fn(array $row): bool => $row['region'] === $name); ?>
 <?php $km = array_sum(array_map(static fn(array $row): float => (float) $row['distance_km'], $matching)); ?>
-<li><a href="trails/index.html#<?=$context->escapeHtml($region['slug'])?>"><span class="region-mark region-mark--<?=$context->escapeHtml($region['slug'])?>" aria-hidden="true"></span><strong><?=$context->escapeHtml($name)?></strong><span><?=$context->escapeHtml($region['blurb'])?></span><small><?=count($matching)?> trails · <?=number_format($km, 0)?> km</small></a></li>
+<li><a href="trails/index.html#<?=$context->escapeHtml($region['slug'])?>"><span class="region-photo"><?=guidePhoto($region['slug'], $region['alt'], $context, '', '(max-width: 44rem) 100vw, 25vw')?></span><span class="region-body"><strong><?=$context->escapeHtml($name)?></strong><span><?=$context->escapeHtml($region['blurb'])?></span><small><?=count($matching)?> trails · <?=number_format($km, 0)?> km</small></span></a></li>
 <?php endforeach; ?>
 </ul>
 </section>
@@ -66,5 +66,8 @@ echo $context->frontmatter([
 
 <section class="band band--camp" aria-labelledby="camp-title">
 <div class="band-head"><h2 id="camp-title">Stay the night</h2><a href="campgrounds/index.html">All campgrounds</a></div>
+<div class="camp-feature">
+<figure class="camp-photo"><?=guidePhoto('camp-alpine-pass', 'Three tents pitched among cairns on an alpine pass at dawn, with cloud filling the valleys below', $context, '', '(max-width: 44rem) 100vw, 40vw')?></figure>
 <p class="band-copy">Eight campgrounds from a sandy reservoir beach to a windy alpine pass. Each page lists the trails that start from camp, so you can plan a weekend without a car.</p>
+</div>
 </section>

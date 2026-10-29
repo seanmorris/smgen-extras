@@ -18,6 +18,8 @@ echo $context->frontmatter([
 	'index' => [
 		'kicker' => 'Campgrounds',
 		'lede' => count($rows) . ' places to spend the night, from a reservoir beach to an alpine pass.',
+		'photo' => 'camp-reservoir-beach',
+		'photoAlt' => 'Two tents on a sandy reservoir beach at dawn with a canoe pulled up on the shore',
 	],
 ]);
 ?>
