@@ -8,6 +8,31 @@ use Postbox\Exception\MessageException;
 
 /**
  * A mutable email message assembled with a fluent interface.
+ *
+ * A message starts from a sender and gains recipients, a subject, bodies,
+ * headers, and a priority through chained calls. Nothing is validated until
+ * `assertSendable()` runs, which a transport does for you just before the
+ * socket opens, so a half-built message is an ordinary value you can pass
+ * around, store, and finish later.
+ *
+ * Three rules keep messages predictable:
+ *
+ * - Recipients are de-duplicated by address, case-insensitively, in the order
+ *   they were first added.
+ * - Subjects and header values have line breaks stripped, so a header can
+ *   never smuggle in a second header.
+ * - An HTML body never replaces the text body. It is sent as an alternative,
+ *   and `textFromHtml()` can derive the text when you only have markup.
+ *
+ * ```php
+ * $message = Message::from(address('Studio <studio@example.test>'))
+ *     ->to(address('mara@example.test'))
+ *     ->subject('Proofs are ready')
+ *     ->text('The proofs are on the sill.');
+ * ```
+ *
+ * The builder methods return `static`, so a subclass keeps its own type
+ * through the chain.
  */
 class Message
 {

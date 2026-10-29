@@ -9,6 +9,22 @@ use Postbox\Message;
 
 /**
  * Delivers messages over SMTP with STARTTLS.
+ *
+ * The transport opens one connection per `send()` call, upgrades it with
+ * STARTTLS when the server offers it, and authenticates only after the
+ * upgrade succeeds. It never falls back to a plaintext login: a server that
+ * refuses STARTTLS gets the message without credentials or not at all.
+ *
+ * Delivery is reported per recipient. A refused address does not abort the
+ * rest of the envelope, so inspect the returned `DeliveryResult` rather than
+ * treating a return as success for every recipient:
+ *
+ * 1. `accepted()` lists the addresses the server took.
+ * 2. `refused()` maps each refused address to the server's reply.
+ * 3. `failed()` is true only when the whole envelope was rejected.
+ *
+ * Connection failures, timeouts, and a rejected envelope throw a
+ * `DeliveryException`; everything else is a result you can log.
  */
 final class SmtpTransport implements Transport
 {

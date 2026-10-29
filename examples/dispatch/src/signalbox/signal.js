@@ -20,7 +20,21 @@
 /**
  * Remove one listener from its signal.
  *
- * Calling `unsubscribe()` more than once is safe.
+ * Every call to `subscribe()` returns one of these. Holding on to it is the
+ * only way to remove a listener deliberately; there is no `off()` that takes
+ * the function back, because the same function may be registered more than
+ * once with different options.
+ *
+ * Calling `unsubscribe()` more than once is safe. After the first call:
+ *
+ * - `closed` reports `true`;
+ * - the listener is no longer counted by the signal's `size()`;
+ * - the `cleanup` function has already run and is not run again.
+ *
+ * ```js
+ * const subscription = selected.subscribe(render, {once: true});
+ * subscription.unsubscribe(); // idempotent
+ * ```
  */
 export class Subscription
 {
