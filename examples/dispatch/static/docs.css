@@ -288,6 +288,13 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
 }
 
+.cover-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 3rem 4rem;
+  align-items: center;
+}
+
 .cover h1 {
   max-width: 14ch;
   margin: 0 0 1rem;
@@ -305,22 +312,24 @@ h1, h2, h3, h4 {
   line-height: 1.5;
 }
 
-.landing {
+.landing.prose {
+  max-width: none;
   padding: 2.5rem 0 4rem;
 }
 
 .board {
-  margin: 0 0 3rem;
+  margin: 0;
   padding: 0;
   border: 1px solid var(--line-strong);
   border-radius: 0.4rem;
   background: var(--sheet);
   list-style: none;
   overflow: hidden;
+  box-shadow: 0 1.2rem 2.5rem rgb(0 0 0 / 18%);
 }
 
 .board::before {
-  content: "No.\A0\A0\A0\A0 Library\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0\A0 Language\A0\A0\A0\A0\A0\A0 Version";
+  content: "No.\A0\A0\A0\A0 Library";
   display: block;
   padding: 0.5rem 1.25rem;
   background: var(--slate);
@@ -330,14 +339,12 @@ h1, h2, h3, h4 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: pre;
-  overflow: hidden;
 }
 
 .board-row {
   display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr) 7rem 6rem auto;
-  align-items: center;
-  gap: 1rem;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0.35rem 1rem;
   padding: 1.1rem 1.25rem;
   border-top: 1px dashed var(--line-strong);
   --row-accent: var(--ink-faint);
@@ -347,6 +354,7 @@ h1, h2, h3, h4 {
 .board-row--signalbox { --row-accent: var(--amber); }
 
 .board-no {
+  grid-row: 1 / span 3;
   color: var(--row-accent);
   font-family: var(--mono);
   font-size: 1.3rem;
@@ -355,7 +363,7 @@ h1, h2, h3, h4 {
 
 .board-name a {
   color: var(--ink);
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -371,25 +379,25 @@ h1, h2, h3, h4 {
   font-size: 0.95rem;
 }
 
-.board-lang,
-.board-ver {
+.board-meta {
   font-family: var(--mono);
-  font-size: 0.86rem;
-  color: var(--ink-soft);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
 }
 
 .board-links {
   display: flex;
   gap: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .board-links a {
-  padding: 0.4rem 0.9rem;
+  padding: 0.35rem 0.85rem;
   border: 1.5px solid var(--row-accent);
   border-radius: 0.3rem;
   color: var(--row-accent);
   font-family: var(--mono);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-decoration: none;
@@ -401,31 +409,51 @@ h1, h2, h3, h4 {
   color: var(--sheet);
 }
 
+/* Each sample runs the full width: label on the left, code on the right. */
 .samples {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 3rem;
 }
 
 .sample {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: start;
   min-width: 0;
-  padding: 1.25rem 1.4rem 1rem;
+  padding: 1.25rem 1.4rem;
   border: 1px solid var(--line);
-  border-top: 4px solid var(--ink-faint);
+  border-left: 5px solid var(--ink-faint);
   border-radius: 0.4rem;
   background: var(--sheet);
 }
 
-.sample--postbox { border-top-color: var(--red); --accent: var(--red); }
-.sample--signalbox { border-top-color: var(--amber); --accent: var(--amber); }
+.sample--postbox { border-left-color: var(--red); --accent: var(--red); }
+.sample--signalbox { border-left-color: var(--amber); --accent: var(--amber); }
 
 .sample h2 {
-  margin: 0 0 1rem;
+  grid-column: 1;
+  grid-row: 1;
+  display: block;
+  margin: 0.25rem 0 0.75rem;
   font-size: 1.15rem;
 }
 
+.landing .sample h2::after {
+  content: none;
+}
+
+.sample > div.sourceCode,
+.sample > pre {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+}
+
 .sample-link {
+  grid-column: 1;
+  grid-row: 2;
   margin: 0;
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -850,61 +878,91 @@ h1, h2, h3, h4 {
   color: var(--ink-soft);
 }
 
-/* Library home: guide list as a numbered manifest. */
-.landing-grid {
-  counter-reset: guide;
+/* Library home: the guides as a numbered manifest beside the overview. */
+.library-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: 0.75rem;
-  margin: 0 0 2.5rem;
+  gap: 2.5rem;
 }
 
-.landing-card {
+.manifest-label {
+  margin: 0 0 0.6rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.manifest-list {
+  counter-reset: guide;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.manifest-list a {
+  height: 100%;
+}
+
+.manifest-list a {
   counter-increment: guide;
+  position: relative;
   display: block;
-  padding: 1rem 1.1rem 0.9rem 3.2rem;
+  padding: 0.85rem 1rem 0.8rem 3rem;
   border: 1px solid var(--line);
   border-radius: 0.4rem;
   background: var(--sheet);
   color: var(--ink);
   text-decoration: none;
-  position: relative;
 }
 
-.landing-card::before {
+.manifest-list a::before {
   content: counter(guide, decimal-leading-zero);
   position: absolute;
-  top: 1rem;
-  left: 1.1rem;
+  top: 0.9rem;
+  left: 1rem;
   color: var(--accent);
   font-family: var(--mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
 }
 
-.landing-card:hover {
+.manifest-list a:hover {
   border-color: var(--accent);
 }
 
-.landing-card strong {
+.manifest-list strong {
   display: block;
-  margin-bottom: 0.25rem;
-  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
 }
 
-.landing-card span {
+.manifest-list span {
   color: var(--ink-soft);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
-.landing-card--api {
+.manifest-api a {
   border-style: dashed;
 }
 
-.landing-card--api::before {
+.manifest-api a::before {
   content: "API";
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   letter-spacing: 0.1em;
+}
+
+.prose--library {
+  max-width: none;
+}
+
+.prose--library > h2:first-child {
+  margin-top: 0;
 }
 
 /* API pages --------------------------------------------------------------- */
@@ -1197,22 +1255,18 @@ html:not([data-theme="light"]) .sourceCode span.er { color: #ff7b7b; }
     padding: 1.5rem 0 3rem;
   }
 
-  .samples,
+  .cover-inner,
+  .sample,
   .ledger-list {
     grid-template-columns: 1fr;
   }
 
-  .board-row {
-    grid-template-columns: 3rem minmax(0, 1fr) auto;
-  }
-
-  .board-lang,
-  .board-ver {
-    display: none;
-  }
-
-  .board::before {
-    content: "No.\A0\A0\A0\A0 Library";
+  .sample > div.sourceCode,
+  .sample > pre,
+  .sample h2,
+  .sample-link {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
 
@@ -1247,15 +1301,6 @@ html:not([data-theme="light"]) .sourceCode span.er { color: #ff7b7b; }
 
   .cover {
     padding: 2.5rem 0 2rem;
-  }
-
-  .board-row {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    gap: 0.5rem 0.75rem;
-  }
-
-  .board-links {
-    grid-column: 2;
   }
 
   .ticket {

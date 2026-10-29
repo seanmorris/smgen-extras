@@ -2,6 +2,16 @@
 title: Signalbox
 description: A small JavaScript library for signals, subscriptions, and deliberately timed work, documented from its JSDoc.
 layout: library
+guides:
+  - href: guides/getting-started.html
+    title: Getting started
+    summary: Create a signal, subscribe, emit a value, and clean up.
+  - href: guides/listeners.html
+    title: Listeners
+    summary: One-shot listeners, abort signals, and explicit subscriptions.
+  - href: guides/scheduling.html
+    title: Scheduling
+    summary: Queue, cancel, and debounce work without hiding the timer.
 TOC: false
 menus:
   reference:
@@ -15,13 +25,6 @@ jsonld:
   description: A small JavaScript library for signals and scheduled work.
   programmingLanguage: JavaScript
 ---
-
-<div class="landing-grid">
-<a class="landing-card" href="guides/getting-started.html"><strong>Getting started</strong><span>Create a signal, subscribe, emit a value, and clean up.</span></a>
-<a class="landing-card" href="guides/listeners.html"><strong>Listeners</strong><span>One-shot listeners, abort signals, and explicit subscriptions.</span></a>
-<a class="landing-card" href="guides/scheduling.html"><strong>Scheduling</strong><span>Queue, cancel, and debounce work without hiding the timer.</span></a>
-<a class="landing-card landing-card--api" href="api/index.html"><strong>API reference</strong><span>Every public export and member, regenerated from JSDoc on each build.</span></a>
-</div>
 
 ## A signal in six lines
 

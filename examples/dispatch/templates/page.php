@@ -11,8 +11,8 @@ $layout = $frontmatter['layout'] ?? 'doc';
 $isApi = !empty($frontmatter['api-page']);
 $source = preg_replace('#^.*?/pages/(?:\.smgen-generated/[^/]+/)?#', '', (string) $pageFile) ?? '';
 $libraries = [
-	'postbox' => ['name' => 'Postbox', 'language' => 'PHP 8.2', 'version' => '1.2.0', 'plugin' => 'smgen-phpdoc', 'sep' => '\\'],
-	'signalbox' => ['name' => 'Signalbox', 'language' => 'ES2022', 'version' => '0.8.0', 'plugin' => 'smgen-jsdoc', 'sep' => '/'],
+	'postbox' => ['name' => 'Postbox', 'language' => 'PHP 8.2', 'version' => '1.2.0', 'plugin' => 'smgen-phpdoc', 'sep' => '\\', 'tagline' => 'Compose and deliver email'],
+	'signalbox' => ['name' => 'Signalbox', 'language' => 'ES2022', 'version' => '0.8.0', 'plugin' => 'smgen-jsdoc', 'sep' => '/', 'tagline' => 'Signals, subscriptions, and timed work'],
 ];
 $libraryKey = explode('/', $source)[0];
 $library = $libraries[$libraryKey] ?? null;
@@ -76,9 +76,21 @@ $endfor$
 	<?php if($layout === 'landing'): ?>
 	<section class="cover">
 		<div class="cover-inner">
-			<p class="cover-kicker">Dispatch · developer documentation · issued on every build</p>
-			<h1>Two libraries, one desk.</h1>
-			<p class="cover-lede"><?=escapeHtml($frontmatter['description'] ?? '')?></p>
+			<div class="cover-copy">
+				<p class="cover-kicker">Dispatch · developer documentation · issued on every build</p>
+				<h1>Two libraries, one desk.</h1>
+				<p class="cover-lede"><?=escapeHtml($frontmatter['description'] ?? '')?></p>
+			</div>
+			<ol class="board" aria-label="Libraries">
+				<?php $number = 0; foreach($libraries as $key => $entry): $number++; ?>
+				<li class="board-row board-row--<?=escapeHtml($key)?>">
+					<span class="board-no"><?=sprintf('%02d', $number)?></span>
+					<span class="board-name"><a href="<?=escapeHtml(resolveAssetUrl('/' . $key . '/'))?>"><?=escapeHtml($entry['name'])?></a><small><?=escapeHtml($entry['tagline'])?></small></span>
+					<span class="board-meta"><?=escapeHtml($entry['language'])?> · v<?=escapeHtml($entry['version'])?></span>
+					<span class="board-links"><a href="<?=escapeHtml(resolveAssetUrl('/' . $key . '/guides/getting-started.html'))?>">Guides</a><a href="<?=escapeHtml(resolveAssetUrl('/' . $key . '/api/index.html'))?>">API</a></span>
+				</li>
+				<?php endforeach; ?>
+			</ol>
 		</div>
 	</section>
 	<main id="content" class="landing prose">
@@ -122,6 +134,18 @@ $endfor$
 				<p class="ticket-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl($libraryBase . '/guides/getting-started.html'))?>">Start with the guide</a><a class="button button--outline" href="<?=escapeHtml(resolveAssetUrl($libraryBase . '/api/index.html'))?>">Open the reference</a></p>
 			</header>
 			<?php endif; ?>
+			<?php if($layout === 'library' && is_array($frontmatter['guides'] ?? null)): ?>
+			<div class="library-grid">
+			<nav class="manifest" aria-label="<?=escapeHtml($library['name'] ?? '')?> guides">
+				<p class="manifest-label">Guides</p>
+				<ol class="manifest-list">
+					<?php foreach($frontmatter['guides'] as $guide): ?>
+					<li><a href="<?=escapeHtml(resolveAssetUrl($libraryBase . '/' . ltrim((string) ($guide['href'] ?? ''), '/')))?>"><strong><?=escapeHtml((string) ($guide['title'] ?? ''))?></strong><span><?=escapeHtml((string) ($guide['summary'] ?? ''))?></span></a></li>
+					<?php endforeach; ?>
+					<li class="manifest-api"><a href="<?=escapeHtml(resolveAssetUrl($libraryBase . '/api/index.html'))?>"><strong>API reference</strong><span>Every public symbol, regenerated from the source on each build.</span></a></li>
+				</ol>
+			</nav>
+			<?php endif; ?>
 			<article class="prose<?=$isApi ? ' prose--api' : ''?><?=$layout === 'library' ? ' prose--library' : ''?>">
 				<?php if($isApi): ?>
 				<header class="api-head">
@@ -133,6 +157,9 @@ $endfor$
 				<?php endif; ?>
 				$body$
 			</article>
+			<?php if($layout === 'library' && is_array($frontmatter['guides'] ?? null)): ?>
+			</div>
+			<?php endif; ?>
 			$if(toc)$
 			<nav class="outline" aria-label="On this page">
 				<p class="outline-label">On this page</p>

@@ -11,23 +11,6 @@ jsonld:
   description: Developer documentation for the Postbox and Signalbox libraries.
 ---
 
-<ol class="board" aria-label="Libraries">
-<li class="board-row board-row--postbox">
-<span class="board-no">01</span>
-<span class="board-name"><a href="postbox/">Postbox</a><small>Compose and deliver email</small></span>
-<span class="board-lang">PHP 8.2</span>
-<span class="board-ver">v1.2.0</span>
-<span class="board-links"><a href="postbox/guides/getting-started.html">Guides</a><a href="postbox/api/index.html">API</a></span>
-</li>
-<li class="board-row board-row--signalbox">
-<span class="board-no">02</span>
-<span class="board-name"><a href="signalbox/">Signalbox</a><small>Signals, subscriptions, and timed work</small></span>
-<span class="board-lang">ES2022</span>
-<span class="board-ver">v0.8.0</span>
-<span class="board-links"><a href="signalbox/guides/getting-started.html">Guides</a><a href="signalbox/api/index.html">API</a></span>
-</li>
-</ol>
-
 <div class="samples">
 <section class="sample sample--postbox" aria-labelledby="sample-postbox">
 <h2 id="sample-postbox">A message in twelve lines</h2>
