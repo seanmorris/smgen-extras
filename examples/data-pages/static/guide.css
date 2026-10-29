@@ -859,7 +859,6 @@ h1, h2, h3 {
 }
 
 .region-photo img,
-.region-banner img,
 .index-photo img,
 .camp-photo img,
 .prose figure img {
@@ -874,7 +873,6 @@ h1, h2, h3 {
   padding: 0.9rem 1.1rem 0.9rem;
 }
 
-.region-banner,
 .index-photo,
 .camp-photo {
   margin: 0;
@@ -882,11 +880,6 @@ h1, h2, h3 {
   border-radius: 0.45rem;
   overflow: hidden;
   background: var(--paper-deep);
-}
-
-.region-banner {
-  aspect-ratio: 21 / 7;
-  margin-bottom: 1rem;
 }
 
 .index-photo {
