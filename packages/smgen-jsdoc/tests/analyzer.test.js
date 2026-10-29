@@ -56,6 +56,20 @@ test('renderer creates linked SMGen pages, source URLs, and JavaScript structure
 	assert.match(modulePage.content, /classes\/courier\/courier\.html/);
 });
 
+test('renderer can leave the page H1 to a frontmatter-aware site template', async () => {
+	const config = await loadConfig(fixture);
+	const graph = await analyze(config, await discoverSources(config));
+	const defaultRender = await renderGraph(graph, config);
+	assert.ok(defaultRender.pages.every((page) => /^# /m.test(page.content)));
+
+	const headinglessRender = await renderGraph(graph, {...config, bodyHeading: false});
+	assert.ok(headinglessRender.pages.every((page) => !/^# /m.test(page.content)));
+	const courier = headinglessRender.pages.find((page) => page.path === 'classes/courier/courier.md');
+	assert.ok(courier);
+	assert.match(courier.content, /^title: Courier$/m);
+	assert.match(courier.content, /^## Declaration$/m);
+});
+
 test('graph validation and folded route collisions fail before output', async () => {
 	assert.throws(() => validateGraph({schemaVersion: 2, package: {}, diagnostics: [], symbols: []}), /Unsupported JSDoc graph schema/);
 	const config = await loadConfig(fixture);

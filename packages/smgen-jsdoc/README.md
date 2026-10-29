@@ -196,6 +196,22 @@ The analyzer creates a TypeScript program over the configured files. It never
 imports a project module, calls its exports, or runs its top-level statements.
 Syntax errors stop generation before output changes.
 
+## Choose the Page Heading Owner
+
+Generated Markdown starts with a level-one heading by default. SMGen's stock
+template renders the Markdown body without adding another page heading.
+
+A site template that renders the frontmatter `title` as its own H1 should turn
+off the body heading:
+
+```yaml
+bodyHeading: false
+```
+
+The plugin keeps `title` in frontmatter and preserves every section below the
+page heading. Trusted renderer modules receive the same heading choice in
+`page.content`.
+
 ## Override Rendering
 
 Trusted ESM modules can replace the body for a page role:

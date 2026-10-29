@@ -27,6 +27,7 @@
  * @property {{repository:string,ref:string,prefix:string,template:string}} source Source-link settings.
  * @property {{summaries:ValidationLevel,parameters:ValidationLevel,returns:ValidationLevel,brokenSee:ValidationLevel}} validation Documentation policy.
  * @property {'markdown'|'plain'} prose Documentation prose handling policy.
+ * @property {boolean} bodyHeading Whether the built-in Markdown body starts with its page title as an H1.
  * @property {string} cache Project-relative cache directory.
  * @property {{landing:string,module:string,symbol:string}} templates Optional trusted renderer modules.
  */

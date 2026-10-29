@@ -9,7 +9,7 @@ import {LineCounter, parseDocument} from 'yaml';
 const topFields = new Set([
 	'version', 'package', 'sources', 'php', 'output', 'visibility', 'grouping',
 	'routes', 'menu', 'llms', 'assistant', 'jsonld', 'source', 'validation',
-	'prose', 'cache', 'templates',
+	'prose', 'bodyHeading', 'cache', 'templates',
 ]);
 
 /**
@@ -110,6 +110,7 @@ export async function loadConfig(projectRoot, configName = '.smgen-phpdoc.yaml')
 			brokenSee: validationLevel(validationValue.brokenSee ?? 'warn', 'validation.brokenSee'),
 		},
 		prose: /** @type {'markdown'|'plain'} */ (enumValue(value.prose ?? 'markdown', ['markdown', 'plain'], 'prose')),
+		bodyHeading: booleanValue(value.bodyHeading ?? true, 'bodyHeading'),
 		cache,
 		templates: {
 			landing: optionalString(templatesValue.landing, ''),

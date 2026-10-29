@@ -32,7 +32,7 @@ export async function renderGraph(graph, config)
 			const summary = `Exports documented from the ${module} module.`;
 			pages.push(await finishPage(pageShell(
 				`${route}.md`, route, module, summary, 'module', null, module,
-				renderModule(module, symbols, routes),
+				renderModule(module, symbols, routes, config),
 			), graph, config));
 		}
 	}
@@ -159,7 +159,8 @@ function groupedModules(symbols)
  */
 function renderLanding(graph, modules, routes, config)
 {
-	let body = `# ${escapeHeading(graph.package.title)}\n\n${prose(graph.package.description, config)}\n`;
+	let body = config.bodyHeading ? `# ${escapeHeading(graph.package.title)}\n\n` : '';
+	body += `${prose(graph.package.description, config)}\n`;
 	if(graph.package.version !== '') body += `\nVersion ${code(graph.package.version)}.\n`;
 	if(config.grouping === 'module')
 	{
@@ -183,12 +184,14 @@ function renderLanding(graph, modules, routes, config)
  * @param {string} module Module name.
  * @param {GraphSymbol[]} symbols Public symbols in the module.
  * @param {Map<string,string>} routes Symbol routes.
+ * @param {JsDocConfig} config Normalized configuration.
  * @returns {string} Markdown body.
  */
-function renderModule(module, symbols, routes)
+function renderModule(module, symbols, routes, config)
 {
 	const current = moduleRoute(module);
-	let body = `# ${escapeHeading(module)}\n\n[API reference](${relativeLink(current, 'index')})\n\nExports documented from ${code(module)}.\n`;
+	let body = config.bodyHeading ? `# ${escapeHeading(module)}\n\n` : '';
+	body += `[API reference](${relativeLink(current, 'index')})\n\nExports documented from ${code(module)}.\n`;
 	for(const kind of ['class', 'function', 'constant', 'variable', 'typedef', 'callback'])
 	{
 		const matching = symbols.filter((symbol) => symbol.kind === kind);
@@ -214,7 +217,7 @@ function renderModule(module, symbols, routes)
 function renderSymbol(symbol, graph, routes, config)
 {
 	const current = requiredRoute(routes, symbol.id);
-	let body = `# ${escapeHeading(symbol.name)}\n\n`;
+	let body = config.bodyHeading ? `# ${escapeHeading(symbol.name)}\n\n` : '';
 	if(symbol.docs.deprecated !== '') body += `> **Deprecated:** ${prose(symbol.docs.deprecated, config)}\n\n`;
 	body += `${prose(summaryFor(symbol), config)}\n`;
 	if(symbol.docs.description !== '') body += `\n${prose(symbol.docs.description, config)}\n`;

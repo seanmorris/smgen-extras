@@ -110,6 +110,18 @@ The landing page joins the selected menu. Set `symbols: true` to add export
 pages. Module and export pages carry breadcrumbs. Search, the sitemap,
 `llms.txt`, and the assistant corpus see the same generated Markdown.
 
+## Choose the Page Heading Owner
+
+Generated Markdown begins with its page title as an H1. SMGen's stock template
+expects that heading in the body. If the site template renders the frontmatter
+`title` as its own H1, turn off the generated copy:
+
+```yaml
+bodyHeading: false
+```
+
+The frontmatter title and the remaining section headings stay in place.
+
 ## Choose a Documentation Policy
 
 Each rule accepts `off`, `warn`, or `error`:

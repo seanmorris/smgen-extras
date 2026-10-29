@@ -37,6 +37,22 @@ test('source discovery accepts JavaScript module extensions and excludes tests',
 	});
 });
 
+test('body headings default on and can be delegated to the site template', async () => {
+	await withTemporaryProject(async (project) => {
+		await fs.mkdir(path.join(project, 'src'));
+		await fs.writeFile(path.join(project, 'src', 'example.js'), '/** Example. */\nexport const example = true;\n');
+		const configPath = path.join(project, '.smgen-jsdoc.yaml');
+		await fs.writeFile(configPath, 'version: 1\npackage: {title: Example}\n');
+		assert.equal((await loadConfig(project)).bodyHeading, true);
+
+		await fs.writeFile(configPath, 'version: 1\npackage: {title: Example}\nbodyHeading: false\n');
+		assert.equal((await loadConfig(project)).bodyHeading, false);
+
+		await fs.writeFile(configPath, 'version: 1\npackage: {title: Example}\nbodyHeading: title\n');
+		await assert.rejects(loadConfig(project), /bodyHeading must be true or false/);
+	});
+});
+
 /**
  * Create and clean one isolated configuration project.
  *

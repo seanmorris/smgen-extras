@@ -100,6 +100,18 @@ The landing page joins the selected menu. Set `symbols: true` to add each
 symbol page as well. Search indexing, the sitemap, `llms.txt`, and the
 assistant corpus use the same generated Markdown.
 
+## Choose the Page Heading Owner
+
+Generated Markdown begins with its page title as an H1. SMGen's stock template
+expects that heading in the body. If the site template renders the frontmatter
+`title` as its own H1, turn off the generated copy:
+
+```yaml
+bodyHeading: false
+```
+
+The frontmatter title and the remaining section headings stay in place.
+
 ## Choose a Documentation Policy
 
 Each validation rule accepts `off`, `warn`, or `error`:

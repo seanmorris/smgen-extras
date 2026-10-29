@@ -31,7 +31,7 @@ export async function renderGraph(graph, config)
 			const title = namespace === '' ? 'Global namespace' : namespace;
 			const summary = namespace === '' ? 'Global PHP declarations.' : `Declarations in the ${namespace} namespace.`;
 			const page = pageShell(`${route}.md`, route, title, summary, 'namespace', null, namespace,
-				renderNamespace(namespace, symbols, routes));
+				renderNamespace(namespace, symbols, routes, config));
 			pages.push(await finishPage(page, graph, config));
 		}
 	}
@@ -155,7 +155,8 @@ function groupedNamespaces(symbols)
  */
 function renderLanding(graph, namespaces, routes, config)
 {
-	let body = `# ${escapeHeading(graph.package.title)}\n\n${prose(graph.package.description, config)}\n`;
+	let body = config.bodyHeading ? `# ${escapeHeading(graph.package.title)}\n\n` : '';
+	body += `${prose(graph.package.description, config)}\n`;
 	if(graph.package.version !== '') body += `\nVersion ${code(graph.package.version)}.\n`;
 	if(config.grouping === 'namespace')
 	{
@@ -182,13 +183,15 @@ function renderLanding(graph, namespaces, routes, config)
  * @param {string} namespace Qualified namespace.
  * @param {GraphSymbol[]} symbols Namespace declarations.
  * @param {Map<string,string>} routes Symbol routes.
+ * @param {PhpDocConfig} config Normalized configuration.
  * @returns {string} Markdown body.
  */
-function renderNamespace(namespace, symbols, routes)
+function renderNamespace(namespace, symbols, routes, config)
 {
 	const title = namespace === '' ? 'Global namespace' : namespace;
 	const current = namespaceRoute(namespace);
-	let body = `# ${escapeHeading(title)}\n\n[API reference](${relativeLink(current, 'index')})\n\n`;
+	let body = config.bodyHeading ? `# ${escapeHeading(title)}\n\n` : '';
+	body += `[API reference](${relativeLink(current, 'index')})\n\n`;
 	body += namespace === '' ? 'These declarations are in the global namespace.\n' : `These declarations are in ${code(namespace)}.\n`;
 	for(const kind of ['class', 'interface', 'trait', 'enum', 'function', 'constant'])
 	{
@@ -218,7 +221,7 @@ function renderSymbol(symbol, graph, routes, config)
 {
 	const current = routes.get(symbol.id);
 	if(current === undefined) throw new Error(`Missing route for ${symbol.id}.`);
-	let body = `# ${escapeHeading(symbol.name)}\n\n`;
+	let body = config.bodyHeading ? `# ${escapeHeading(symbol.name)}\n\n` : '';
 	if(symbol.docs.deprecated !== '') body += `> **Deprecated:** ${prose(symbol.docs.deprecated, config)}\n\n`;
 	if(symbol.conditional) body += '> This declaration is conditional. Static analysis cannot prove that it exists in every runtime.\n\n';
 	body += `${prose(summaryFor(symbol), config)}\n`;

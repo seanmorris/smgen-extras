@@ -161,6 +161,18 @@ The PHPDoc parser understands parameters, returns, thrown types, variables, depr
 
 The parser records conditional declarations, `class_alias`, anonymous classes, and `eval` as static-analysis limits. Runtime-generated classes and bootstrap-only aliases cannot be recovered without executing the project. The default adapter never loads the target autoloader, includes source files, or runs bootstrap code.
 
+## Choose the Page Heading Owner
+
+Generated Markdown starts with a level-one heading by default. SMGen's stock template renders the Markdown body without adding another page heading.
+
+A site template that renders the frontmatter `title` as its own H1 should turn off the body heading:
+
+```yaml
+bodyHeading: false
+```
+
+The plugin keeps `title` in frontmatter and preserves every section below the page heading. Trusted renderer modules receive the same heading choice in `page.content`.
+
 ## Override Rendering
 
 Trusted ESM modules can replace the body for a page role:

@@ -89,6 +89,7 @@
       }
     },
     "prose": {"enum": ["markdown", "plain"]},
+    "bodyHeading": {"type": "boolean"},
     "cache": {"type": "string", "minLength": 1},
     "templates": {
       "type": "object",

@@ -59,6 +59,20 @@ test('renderer creates linked SMGen pages without browser assets', async () => {
 	assert.match(landing.content, /namespaces\/acme\//);
 });
 
+test('renderer can leave the page H1 to a frontmatter-aware site template', async () => {
+	const config = await loadConfig(fixture);
+	const graph = await analyze(config, await discoverSources(config));
+	const defaultRender = await renderGraph(graph, config);
+	assert.ok(defaultRender.pages.every((page) => /^# /m.test(page.content)));
+
+	const headinglessRender = await renderGraph(graph, {...config, bodyHeading: false});
+	assert.ok(headinglessRender.pages.every((page) => !/^# /m.test(page.content)));
+	const widget = headinglessRender.pages.find((page) => page.path === 'classes/acme/widget.md');
+	assert.ok(widget);
+	assert.match(widget.content, /^title: Acme\\Widget$/m);
+	assert.match(widget.content, /^## Declaration$/m);
+});
+
 test('graph and route collisions stop before files are written', async () => {
 	assert.throws(() => validateGraph({schemaVersion: 2, package: {}, diagnostics: [], symbols: []}), /unsupported graph schema/);
 	const config = await loadConfig(fixture);
