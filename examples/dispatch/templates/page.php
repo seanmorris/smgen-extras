@@ -39,6 +39,9 @@ $endif$
 	<link rel="icon" type="image/svg+xml" href="<?=escapeHtml(resolveAssetUrl('/mark.svg'))?>">
 <?php renderJsonLd($frontmatter, $pageFile); ?>
 	<style>$styles.html()$</style>
+	<link rel="preload" as="font" type="font/woff2" crossorigin href="<?=escapeHtml(resolveAssetUrl('/fonts/archivo-variable.woff2'))?>">
+	<link rel="preload" as="font" type="font/woff2" crossorigin href="<?=escapeHtml(resolveAssetUrl('/fonts/ibm-plex-mono-400.woff2'))?>">
+	<link rel="preload" as="font" type="font/woff2" crossorigin href="<?=escapeHtml(resolveAssetUrl('/fonts/ibm-plex-mono-600.woff2'))?>">
 $for(css)$
 	<link rel="stylesheet" href="${css}">
 $endfor$
