@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Renders the Greywater Range guide as a trailhead map board: contour paper,
+ * Renders the Greywater Range guide as a trailhead map board: an aerial hero,
  * routed wood sign boards, and trail-blaze grading, with a legend menu.
  */
 
@@ -69,7 +69,6 @@ $endfor$
 	<?php if($layout === 'home' && is_array($home)): ?>
 	<section class="hero">
 		<img class="hero-photo" src="<?=escapeHtml(resolveAssetUrl('/images/hero-aerial.webp'))?>" srcset="<?=escapeHtml(resolveAssetUrl('/images/hero-aerial-1200.webp'))?> 1200w, <?=escapeHtml(resolveAssetUrl('/images/hero-aerial.webp'))?> 1942w" sizes="100vw" width="1942" height="809" alt="" fetchpriority="high" decoding="async">
-		<div class="hero-map" aria-hidden="true"></div>
 		<div class="hero-inner">
 			<div>
 				<p class="eyebrow">Trailhead · a fictional range, a real build</p>

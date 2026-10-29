@@ -1,4 +1,4 @@
-/* Greywater Range — a trailhead map board: contour paper, routed wood signs, trail blazes. */
+/* Greywater Range — a trailhead map board: aerial hero, routed wood signs, trail blazes. */
 
 @font-face { font-family: "Barlow"; font-style: normal; font-weight: 400; font-display: block; src: url("fonts/barlow-400.woff2") format("woff2"); }
 @font-face { font-family: "Barlow"; font-style: normal; font-weight: 700; font-display: block; src: url("fonts/barlow-700.woff2") format("woff2"); }
@@ -17,7 +17,6 @@
   --ink-faint: #8b917f;
   --line: #d2c7a9;
   --line-strong: #b9ab86;
-  --contour: rgba(120, 104, 64, 0.42);
   --forest: #1f4a3a;
   --forest-deep: #163428;
   --moss: #3f7a55;
@@ -49,7 +48,6 @@
   --ink-faint: #6f7f75;
   --line: #27393a;
   --line-strong: #3a5250;
-  --contour: rgba(143, 201, 160, 0.22);
   --forest: #1f4a3a;
   --forest-deep: #14302a;
   --moss: #8fc9a0;
@@ -335,7 +333,7 @@ h1, h2, h3 {
 }
 
 /* The aerial sits under a wash that keeps the left third readable and fades
-   the bottom edge into the page; the contour mask lies over it like a map. */
+   the bottom edge into the page. */
 .hero-photo {
   position: absolute;
   inset: 0;
@@ -356,16 +354,6 @@ h1, h2, h3 {
     linear-gradient(90deg, var(--wash) 0%, color-mix(in srgb, var(--wash) 88%, transparent) 38%, color-mix(in srgb, var(--wash) 45%, transparent) 60%, color-mix(in srgb, var(--wash) 10%, transparent) 100%);
 }
 
-.hero-map {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: var(--contour);
-  -webkit-mask: url("contours.svg") center / cover no-repeat;
-  mask: url("contours.svg") center / cover no-repeat;
-  opacity: 0.55;
-  pointer-events: none;
-}
 
 .hero-inner {
   position: relative;
