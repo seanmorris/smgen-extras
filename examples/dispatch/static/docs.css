@@ -175,7 +175,7 @@ h1, h2, h3, h4 {
 .cover-inner,
 .landing,
 .colophon-inner {
-  width: min(100% - 3rem, 82rem);
+  width: min(100% - 3rem, 86rem);
   margin-inline: auto;
 }
 
