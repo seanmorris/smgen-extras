@@ -476,22 +476,13 @@ h1, h2, h3, h4 {
 }
 
 .index nav {
-  position: sticky;
-  top: 4.4rem;
-  max-height: calc(100vh - 4.4rem);
-  overflow-y: auto;
   padding: 1.5rem 1rem 3rem 0;
   border-right: 1px solid var(--line);
   font-size: 0.9rem;
-  /* The index scrolls on its own, but its bar only shows while the pointer is on it. */
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
-  scrollbar-color: transparent transparent;
 }
 
-.index nav:hover,
-.index nav:focus-within {
-  scrollbar-color: var(--line-strong) transparent;
+.index {
+  align-self: stretch;
 }
 
 .index ul {
@@ -1184,8 +1175,6 @@ html:not([data-theme="light"]) .sourceCode span.er { color: #ff7b7b; }
   }
 
   .index nav {
-    position: static;
-    max-height: none;
     padding: 1.25rem 0 0;
     border-right: 0;
     border-bottom: 1px solid var(--line);
