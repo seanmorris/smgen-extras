@@ -68,6 +68,7 @@ $endfor$
 
 	<?php if($layout === 'home' && is_array($home)): ?>
 	<section class="hero">
+		<img class="hero-photo" src="<?=escapeHtml(resolveAssetUrl('/images/hero-aerial.webp'))?>" srcset="<?=escapeHtml(resolveAssetUrl('/images/hero-aerial-1200.webp'))?> 1200w, <?=escapeHtml(resolveAssetUrl('/images/hero-aerial.webp'))?> 1942w" sizes="100vw" width="1942" height="809" alt="" fetchpriority="high" decoding="async">
 		<div class="hero-map" aria-hidden="true"></div>
 		<div class="hero-inner">
 			<div>

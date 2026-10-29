@@ -328,22 +328,48 @@ h1, h2, h3 {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 4rem 0 3rem;
+  padding: 4.5rem 0 3.5rem;
   background: var(--paper-deep);
   border-bottom: 1px solid var(--line);
+  --wash: var(--paper-deep);
+}
+
+/* The aerial sits under a wash that keeps the left third readable and fades
+   the bottom edge into the page; the contour mask lies over it like a map. */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 70%, var(--wash) 100%),
+    linear-gradient(90deg, var(--wash) 0%, color-mix(in srgb, var(--wash) 88%, transparent) 38%, color-mix(in srgb, var(--wash) 45%, transparent) 60%, color-mix(in srgb, var(--wash) 10%, transparent) 100%);
 }
 
 .hero-map {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: var(--contour);
   -webkit-mask: url("contours.svg") center / cover no-repeat;
   mask: url("contours.svg") center / cover no-repeat;
+  opacity: 0.55;
   pointer-events: none;
 }
 
 .hero-inner {
   position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 3rem;
@@ -1318,6 +1344,12 @@ h1, h2, h3 {
 
   .hero {
     padding: 2.5rem 0 2rem;
+  }
+
+  .hero::before {
+    background:
+      linear-gradient(180deg, transparent 70%, var(--wash) 100%),
+      color-mix(in srgb, var(--wash) 84%, transparent);
   }
 
   .hero h1 {
