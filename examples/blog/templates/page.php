@@ -9,7 +9,7 @@
  */
 
 $layout = $frontmatter['layout'] ?? 'page';
-$showArchive = in_array($layout, ['journal', 'topic', 'day'], true);
+$showArchive = in_array($layout, ['journal', 'topic', 'day', 'post'], true);
 $source = preg_replace('#^.*?/pages/#', '', (string) $pageFile) ?? '';
 $topics = [
 	'Workshop' => ['slug' => 'workshop', 'blurb' => 'Press days, ink recipes, and the slow care of old machines.'],

@@ -446,6 +446,11 @@ summary:focus-visible {
   margin: 0 auto;
 }
 
+/* Beside the archive rail the note lines up with the journal entries. */
+.page--with-rail .post {
+  margin-left: 0;
+}
+
 .post-header {
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
