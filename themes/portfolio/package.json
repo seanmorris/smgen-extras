@@ -1,0 +1,51 @@
+{
+  "name": "smgen-theme-portfolio",
+  "version": "0.1.0",
+  "description": "A portfolio theme for SMGen: a statement, a grid of work drawn from the work pages, project pages with a facts strip, about and contact. No plugins.",
+  "keywords": [
+    "smgen",
+    "smgen-theme",
+    "static-site-generator",
+    "theme",
+    "portfolio",
+    "personal-site"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/themes/portfolio",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "themes/portfolio"
+  },
+  "smgen": {
+    "theme": "theme.json"
+  },
+  "files": [
+    ".smgen.yaml",
+    "pages",
+    "templates",
+    "static",
+    "theme.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "lint": "find templates -type f -name '*.php' -exec php -l {} +"
+  },
+  "peerDependencies": {
+    "smgen": ">=0.3.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "smgen": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
