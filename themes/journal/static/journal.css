@@ -404,6 +404,9 @@ h1, h2, h3 {
 .colophon-links a { color: var(--ink-soft); text-decoration: none; }
 
 /* Syntax colours (Pandoc "kate" style) tuned for both grounds. */
+html:not([data-theme="light"]) pre.sourceCode,
+html:not([data-theme="light"]) code.sourceCode,
+html:not([data-theme="light"]) code.sourceCode > span { color: var(--ink); }
 html:not([data-theme="light"]) .sourceCode span.kw,
 html:not([data-theme="light"]) .sourceCode span.cf { color: #c9a0ff; }
 html:not([data-theme="light"]) .sourceCode span.dt,
