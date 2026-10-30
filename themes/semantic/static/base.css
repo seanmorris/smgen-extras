@@ -9,11 +9,10 @@ pre { overflow: auto; }
 table { border-collapse: collapse; }
 td, th { padding: 0.25em 0.6em; border: 1px solid; }
 @media (min-width: 64rem) {
-  body { display: grid; grid-template-columns: 14rem minmax(0, 1fr) 14rem; grid-template-areas: "header header header" "nav main aside" "footer footer footer"; column-gap: 2rem; }
-  body > header { grid-area: header; }
-  body > nav { grid-area: nav; }
-  main { grid-area: main; justify-self: center; width: 100%; }
-  body > aside { grid-area: aside; }
-  body > footer { grid-area: footer; }
-  body > nav, body > aside { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto; }
+  body { display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 2rem; }
+  body > header, body > footer { flex: 0 0 100%; }
+  body > nav { flex: 0 1 14rem; }
+  main { flex: 1 1 0; min-width: 0; max-width: none; }
+  body > aside { flex: 0 1 14rem; }
+  body > nav, body > aside { position: sticky; top: 0; max-height: 100vh; overflow: auto; }
 }

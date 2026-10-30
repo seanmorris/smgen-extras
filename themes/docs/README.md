@@ -1,7 +1,7 @@
 # smgen-theme-docs
 
 A reference manual built with [SMGen](https://seanmorris.github.io/smgen/).
-Serif text with numbered sections, notes and warnings in the margin beside
+Set like a datasheet in IBM Plex, with numbered sections, notes and warnings in the margin beside
 the paragraph they belong to, code with a rule and a language label, the
 contents and the page's outline together on the left, search in the
 masthead. No plugins.
@@ -21,7 +21,7 @@ and its source under `examples/kestrel`.
   Guides group, FAQ, Changelog and About. Directories carry a `.fm.yaml`
   with their title and order in the contents.
 - `templates/page.php`, `static/docs.css`, `static/theme.js`.
-- `static/fonts/`: Source Serif 4 and IBM Plex Mono (OFL), preloaded.
+- `static/fonts/`: IBM Plex Sans and IBM Plex Mono (OFL), preloaded.
 
 ## Writing
 

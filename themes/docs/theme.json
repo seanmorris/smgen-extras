@@ -2,7 +2,7 @@
   "name": "docs",
   "package": "smgen-theme-docs",
   "title": "Docs",
-  "description": "A reference manual. Serif text with numbered sections, notes and warnings in the margin beside the paragraph they belong to, code with a rule and a language label, the contents and the page outline together on the left, search in the masthead. Neutral starter pages; the Kestrel example shows it finished. No plugins.",
+  "description": "A reference manual. Set like a datasheet in IBM Plex, with numbered sections, notes and warnings in the margin beside the paragraph they belong to, code with a rule and a language label, the contents and the page outline together on the left, search in the masthead. Neutral starter pages; the Kestrel example shows it finished. No plugins.",
   "demo": {
     "productName": "Kestrel",
     "tagline": "Backups you can read",
@@ -14,7 +14,7 @@
     "Numbered sections and subsections, matched in the outline",
     "Note, tip and warning fenced divs set as margin notes on wide screens",
     "Code blocks with a left rule and a language label",
-    "Self-hosted Source Serif 4 and IBM Plex Mono, preloaded",
+    "Self-hosted IBM Plex Sans and IBM Plex Mono, preloaded",
     "Search through smgen-search when it is installed",
     "Edition and version in the masthead, edit link at the foot",
     "System light and dark with a toggle"

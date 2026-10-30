@@ -12,8 +12,8 @@ menus:
 
 This site is the SMGen **semantic** theme running with nothing hidden. The
 template writes a header, a navigation landmark, a main article, an outline
-aside and a footer, in that order, and the only stylesheet is twenty lines
-long: on a wide screen it places them as the classic three columns, and on
+aside and a footer, in that order, and the only stylesheet is under twenty
+lines: on a wide screen it places them as the classic three columns, and on
 a narrow one it does nothing at all. Everything else you see is what a
 browser does with correct HTML on its own.
 
@@ -27,6 +27,6 @@ you care about. Either way the markup underneath will not change under you.
   so you can see the HTML before you style it.
 - [Writing pages](guide/writing.html) covers frontmatter, menus and the
   table of contents.
-- [Adding a stylesheet](guide/styling.html) walks through growing the twenty
+- [Adding a stylesheet](guide/styling.html) walks through growing those
   lines into a design of your own.
 - [About](about.html) says what this site is and is not.

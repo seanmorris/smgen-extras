@@ -31,7 +31,7 @@ $endif$
 <?php if(llmsEnabled()): ?>
 	<link rel="describedby" type="text/markdown" href="<?=escapeHtml(resolveAssetUrl('/llms.txt'))?>">
 <?php endif; ?>
-<?php foreach(['source-serif-4-variable', 'ibm-plex-mono-400'] as $font): ?>
+<?php foreach(['ibm-plex-sans-variable', 'ibm-plex-mono-400'] as $font): ?>
 	<link rel="preload" href="<?=escapeHtml(resolveAssetUrl('/fonts/' . $font . '.woff2'))?>" as="font" type="font/woff2" crossorigin>
 <?php endforeach; ?>
 <?php renderJsonLd($frontmatter, $pageFile); ?>
@@ -101,7 +101,7 @@ $endfor$
 	</div>
 
 	<footer class="colophon">
-		<p><?=escapeHtml(getConf('PRODUCT_NAME'))?> <?=escapeHtml(strtolower($edition))?><?php if($version !== ''): ?>, <?=escapeHtml($version)?><?php endif; ?>. Set in Source Serif and IBM Plex Mono; built with <a href="https://seanmorris.github.io/smgen/">SMGen</a> and the <a href="https://seanmorris.github.io/smgen-extras/themes.html#theme-docs">docs theme</a>.</p>
+		<p><?=escapeHtml(getConf('PRODUCT_NAME'))?> <?=escapeHtml(strtolower($edition))?><?php if($version !== ''): ?>, <?=escapeHtml($version)?><?php endif; ?>. Set in IBM Plex Sans and Mono; built with <a href="https://seanmorris.github.io/smgen/">SMGen</a> and the <a href="https://seanmorris.github.io/smgen-extras/themes.html#theme-docs">docs theme</a>.</p>
 	</footer>
 </body>
 </html>

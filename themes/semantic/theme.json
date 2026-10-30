@@ -8,21 +8,35 @@
     "tagline": "A site that documents its own markup"
   },
   "features": [
-    "A twenty-line stylesheet you can delete: a three-column grid on wide screens, a reading measure, table borders",
+    "A stylesheet under twenty lines you can delete: three columns on wide screens, a colour scheme, table borders",
     "Semantic landmarks: header, nav, main, article, aside, footer",
     "Site menu and breadcrumbs from SMGen core",
     "Light and dark through the browser's own colour scheme",
     "No scripts"
   ],
   "sampleContent": [
-    {"path": "pages/index.md", "purpose": "Home page"},
-    {"path": "pages/elements.md", "purpose": "Every Markdown construct and the HTML it produces"},
-    {"path": "pages/guide/", "purpose": "Two short guides: writing pages and adding a stylesheet"},
-    {"path": "pages/about.md", "purpose": "About page; says the site is a demo"}
+    {
+      "path": "pages/index.md",
+      "purpose": "Home page"
+    },
+    {
+      "path": "pages/elements.md",
+      "purpose": "Every Markdown construct and the HTML it produces"
+    },
+    {
+      "path": "pages/guide/",
+      "purpose": "Two short guides: writing pages and adding a stylesheet"
+    },
+    {
+      "path": "pages/about.md",
+      "purpose": "About page; says the site is a demo"
+    }
   ],
-  "layouts": ["page"],
+  "layouts": [
+    "page"
+  ],
   "notes": [
-    "static/base.css places the three columns, sets a reading measure and colour-scheme; remove it and the page stacks in reading order",
+    "static/base.css places the three columns and sets the colour scheme; remove it and the page stacks in reading order",
     "The menu is the core tree renderer over the pages directory, so new pages appear automatically"
   ]
 }
