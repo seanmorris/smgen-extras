@@ -2,10 +2,12 @@
   "name": "portfolio",
   "package": "smgen-theme-portfolio",
   "title": "Portfolio",
-  "description": "A maker's catalogue set like a fine-press book: running heads in small capitals, numbered entries, photographs as captioned plates, a specification block on each project, a drop cap and a colophon. Bone paper, black ink, one rubric red. No plugins.",
+  "description": "A maker's catalogue set like a fine-press book: running heads in small capitals, numbered entries, photographs as captioned plates, a specification block on each project, a drop cap and a colophon. Bone paper, black ink, one rubric red. Neutral starter entries; the Halden Bindery example shows it finished. No plugins.",
   "demo": {
     "productName": "Halden Bindery",
-    "tagline": "Books bound by hand in a harbour town"
+    "tagline": "Books bound by hand in a harbour town",
+    "path": "examples/halden-bindery/",
+    "starterPath": "themes/portfolio/"
   },
   "features": [
     "Catalogue built from pages/work/*.md frontmatter, numbered newest first",
@@ -18,19 +20,19 @@
   "sampleContent": [
     {
       "path": "pages/index.md",
-      "purpose": "The statement and the first four entries"
+      "purpose": "The statement and the first entries"
     },
     {
       "path": "pages/work/",
-      "purpose": "Six sample projects; one file each"
-    },
-    {
-      "path": "static/images/",
-      "purpose": "Sample photographs at three widths; replace with your own"
+      "purpose": "Three starter entries that explain the frontmatter; no photographs yet"
     },
     {
       "path": "pages/about.md, pages/contact.md",
       "purpose": "About and contact pages"
+    },
+    {
+      "path": "examples/halden-bindery/ (in the repository)",
+      "purpose": "A finished catalogue with photographs, built on this template"
     }
   ],
   "layouts": [

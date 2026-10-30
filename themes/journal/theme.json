@@ -2,10 +2,12 @@
   "name": "journal",
   "package": "smgen-theme-journal",
   "title": "Journal",
-  "description": "A notebook of dated entries. The front page lists posts from their frontmatter, topics are plain pages, and SMGen core writes the RSS feed. No plugins.",
+  "description": "A notebook of dated entries. The front page lists posts from their frontmatter, topics are plain pages, and SMGen core writes the RSS feed. Neutral starter entries; the Commonplace example shows it finished. No plugins.",
   "demo": {
     "productName": "Commonplace",
-    "tagline": "A working notebook, kept in public"
+    "tagline": "A working notebook, kept in public",
+    "path": "examples/commonplace/",
+    "starterPath": "themes/journal/"
   },
   "features": [
     "Entries listed newest first from pages/posts/*.md frontmatter",
@@ -16,12 +18,33 @@
     "System light and dark with a toggle"
   ],
   "sampleContent": [
-    {"path": "pages/index.md", "purpose": "Front page: a short note, then every entry by month"},
-    {"path": "pages/posts/", "purpose": "Twelve sample entries across three topics; delete freely"},
-    {"path": "pages/topics/", "purpose": "One page per topic; add a file to add a topic"},
-    {"path": "pages/about.md", "purpose": "About page; says the notebook is a demo"}
+    {
+      "path": "pages/index.md",
+      "purpose": "Front page: a short note, then every entry by month"
+    },
+    {
+      "path": "pages/posts/",
+      "purpose": "Four starter entries that explain the theme; delete freely"
+    },
+    {
+      "path": "pages/topics/",
+      "purpose": "One page per topic; add a file to add a topic"
+    },
+    {
+      "path": "pages/about.md",
+      "purpose": "About page; says the notebook is a starter"
+    },
+    {
+      "path": "examples/commonplace/ (in the repository)",
+      "purpose": "A finished notebook built on this template"
+    }
   ],
-  "layouts": ["journal", "post", "topic", "page"],
+  "layouts": [
+    "journal",
+    "post",
+    "topic",
+    "page"
+  ],
   "notes": [
     "RSS_FEEDS.posts.title and description in .smgen.yaml keep the sample text until you edit them",
     "A post needs title, description, description-meta, date, topic and feeds: [posts] in its frontmatter"

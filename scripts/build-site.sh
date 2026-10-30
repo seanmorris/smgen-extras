@@ -41,11 +41,18 @@ if [[ "${COMMAND}" == build || "${COMMAND}" == watch ]]; then
 	fi
 	rm -rf -- "${EXAMPLE_OUTPUT}"
 	SITE_BASE_URL="${BASE_URL:-http://localhost:8200}"
-	for example in dispatch data-pages store blog tidewatch kestrel; do
+	for example in dispatch data-pages store blog tidewatch kestrel commonplace halden-bindery; do
 		(
 			cd "${ROOT_DIR}/examples/${example}"
 			BASE_URL="${SITE_BASE_URL%/}/examples/${example}" "${SMGEN_COMMAND}" build
 		)
+		# An example that keeps its own static directory names its theme in
+		# .theme; the theme's stylesheet, script and mark are copied in after
+		# the build, never over a file the example ships itself.
+		if [[ -f "${ROOT_DIR}/examples/${example}/.theme" ]]; then
+			theme="$(tr -d '[:space:]' < "${ROOT_DIR}/examples/${example}/.theme")"
+			cp -Rn "${ROOT_DIR}/themes/${theme}/static/." "${EXAMPLE_OUTPUT}/${example}/"
+		fi
 	done
 	THEME_OUTPUT="${ROOT_DIR}/static/themes"
 	if [[ -L "${THEME_OUTPUT}" ]]; then

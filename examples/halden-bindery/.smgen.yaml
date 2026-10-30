@@ -1,0 +1,30 @@
+PRODUCT_NAME: Halden Bindery
+TITLE_PREFIX: Halden Bindery
+TAGLINE: Books bound by hand in a harbour town
+ORGANIZATION: Halden Bindery
+
+# The example owns its pages and its photographs. The template comes from the
+# portfolio theme, and the hub build copies the theme's stylesheet, script and
+# mark into the output (see .theme and scripts/build-site.sh), so the demo can
+# never drift from what users get.
+BASE_URL: http://localhost:8200/examples/halden-bindery
+OUTPUT_DIR: ../../static/examples/halden-bindery
+
+DEFAULT_THEME: theme-portfolio
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../../themes/portfolio/templates
+STATIC_DIR: ./static
+SMGEN_ENGINE: php
+SEARCH_ENABLED: 0
+INHERIT_CORE_STATIC: 0
+HIGHLIGHT_STYLE: monochrome
+CORE_ASSETS:
+  - main.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+DEFER_SCRIPTS:
+  - /main.js
+STYLES:
+  - /scrollbar.css
+  - /portfolio.css

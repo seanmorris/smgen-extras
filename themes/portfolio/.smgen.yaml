@@ -1,6 +1,6 @@
-PRODUCT_NAME: Halden Bindery
-TITLE_PREFIX: Halden Bindery
-TAGLINE: Books bound by hand in a harbour town
+PRODUCT_NAME: Your Studio
+TITLE_PREFIX: Your Studio
+TAGLINE: One line under the name
 BASE_URL: ''
 OUTPUT_DIR: ./docs
 

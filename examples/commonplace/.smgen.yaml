@@ -1,0 +1,36 @@
+PRODUCT_NAME: Commonplace
+TITLE_PREFIX: Commonplace
+TAGLINE: A working notebook, kept in public
+ORGANIZATION: Commonplace
+
+# The example owns only its pages. Template, styles and scripts come from the
+# journal theme so the demo can never drift from what users get.
+BASE_URL: http://localhost:8200/examples/commonplace
+OUTPUT_DIR: ../../static/examples/commonplace
+
+DEFAULT_THEME: theme-journal
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../../themes/journal/templates
+STATIC_DIR: ../../themes/journal/static
+SMGEN_ENGINE: php
+SEARCH_ENABLED: 0
+INHERIT_CORE_STATIC: 0
+HIGHLIGHT_STYLE: kate
+CORE_ASSETS:
+  - main.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+DEFER_SCRIPTS:
+  - /main.js
+STYLES:
+  - /scrollbar.css
+  - /journal.css
+RSS_FEEDS:
+  posts:
+    path: /feed.xml
+    title: Commonplace
+    description: New entries in the notebook.
+    link: /
+    language: en
+    limit: 20

@@ -95,9 +95,12 @@ conventions:
 - The theme's own pages are a neutral starter, so nobody scaffolds someone
   else's product. A finished demo lives under `examples/<name>` with only
   `pages/` and a `.smgen.yaml` whose `TEMPLATE_DIR` and `STATIC_DIR` point at
-  `../../themes/<theme>`, so the demo can never drift from the theme; add the
-  example to the loop in `scripts/build-site.sh` and name it in `theme.json`
-  as `demo.path`, with `demo.starterPath` for the bare starter.
+  `../../themes/<theme>`, so the demo can never drift from the theme. A demo
+  that ships assets of its own (Halden Bindery's photographs) keeps its own
+  `STATIC_DIR` and names its theme in a `.theme` file; the hub build copies
+  the theme's static files into its output afterwards. Add the example to
+  the loop in `scripts/build-site.sh` and name it in `theme.json` as
+  `demo.path`, with `demo.starterPath` for the bare starter.
 
 Then add `"smgen-theme-<name>": "<version>"` to
 `themes/create-smgen-site/package.json` (the pin must equal the theme's own

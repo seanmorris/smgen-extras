@@ -15,12 +15,18 @@ npm create smgen-site@latest my-studio -- --theme portfolio
 
 - `pages/work/*.md`: one file per project. The front page lists the newest
   four (`show:` in `pages/index.md`) and `pages/work/index.md` lists them
-  all, numbered in order of `year`, newest first, then `weight`.
+  all, numbered in order of `year`, newest first, then `weight`. The three
+  starter entries explain the frontmatter and ship without photographs.
 - `pages/index.md`, `pages/about.md`, `pages/contact.md`.
-- `static/images/`: the sample photographs, each at 2400, 1200 and 800
-  pixels wide. The template offers the smaller renditions through `srcset`
-  when files named `<name>-1200.webp` and `<name>-800.webp` exist.
+- `static/images/`: put photographs here at 2400, 1200 and 800 pixels wide.
+  The template offers the smaller renditions through `srcset` when files
+  named `<name>-1200.webp` and `<name>-800.webp` exist.
 - `templates/page.php`, `static/portfolio.css`, `static/theme.js`.
+
+The sample content is a neutral starter. For a finished catalogue with
+photographs built on this template, see the Halden Bindery example in
+[smgen-extras](https://seanmorris.github.io/smgen-extras/examples/halden-bindery/)
+and its source under `examples/halden-bindery`.
 
 ## A project
 

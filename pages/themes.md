@@ -23,10 +23,13 @@ jsonld:
 # Themes
 
 A theme is a complete, working SMGen site: configuration, one PHP template,
-a stylesheet, and real sample pages. Nothing in it needs a plugin. You copy
-it, rename it, and start replacing the sample content with your own. Each
-theme is also built and published here, so you can read it before you pick
-it.
+a stylesheet, and starter pages that explain themselves. Nothing in it needs
+a plugin. You copy it, rename it, and replace the starter pages with your
+own. Each theme has two sites published here: a finished example built on
+it, with a product, a studio or a notebook that has something to say, and
+the bare starter exactly as the command delivers it. The examples live under
+`examples/` in the repository and borrow the theme's template, so what you
+see in one is what you get from the other.
 
 ## Start a site
 
@@ -52,8 +55,8 @@ git clone https://github.com/seanmorris/smgen.git ../smgen
 ```
 
 The site lands in `docs/`. Set `BASE_URL` in `.smgen.yaml` before you publish
-under a path such as a GitHub Pages project site. Where the sample content
-lives, and what to edit first, is listed per theme below and in the README
+under a path such as a GitHub Pages project site. Where the starter pages
+live, and what to edit first, is listed per theme below and in the README
 the command writes into the new site.
 
 Older npm clients can run the same package directly:

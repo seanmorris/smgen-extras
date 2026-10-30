@@ -1,6 +1,6 @@
-PRODUCT_NAME: Commonplace
-TITLE_PREFIX: Commonplace
-TAGLINE: A working notebook, kept in public
+PRODUCT_NAME: Your Notebook
+TITLE_PREFIX: Your Notebook
+TAGLINE: One line under the name
 BASE_URL: ''
 OUTPUT_DIR: ./docs
 
@@ -25,8 +25,8 @@ STYLES:
 RSS_FEEDS:
   posts:
     path: /feed.xml
-    title: Commonplace
-    description: New entries in the notebook.
+    title: Your Notebook
+    description: New entries.
     link: /
     language: en
     limit: 20
