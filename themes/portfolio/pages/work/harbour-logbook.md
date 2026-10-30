@@ -3,17 +3,19 @@ title: "Harbour logbook"
 description: "A logbook for a working fishing boat, bound to be written in wet and read for forty years."
 layout: project
 kind: "Commission"
+image: /images/harbour-logbook.webp
+imageAlt: "A quarter-leather logbook with dark blue cloth boards on the bench, a coil of rope behind it"
 year: 2026
 weight: 10
-cover:
-  cloth: "#1f3a4d"
-  paper: "#e9e2d2"
-  label: "LOG"
 facts:
   Format: "Quarter leather over cloth"
   Pages: "320, lined, numbered"
   Paper: "Cotton rag, 120 gsm"
   Edition: "One"
+gallery:
+  - image: /images/sewing.webp
+    alt: "Hands sewing a text block on a sewing frame"
+    caption: "The text block, sewn on tapes so the spine can flex."
 ---
 
 The skipper asked for a book that would survive the wheelhouse. That meant a tight back so the pages stay flat on a shelf that is never level, a leather spine that can be wiped, and paper heavy enough that a wet hand does not go through it.

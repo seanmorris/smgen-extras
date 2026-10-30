@@ -3,12 +3,10 @@ title: "Tide tables, bound"
 description: "Ten years of a harbour's tide tables bound into one volume for the harbour office wall."
 layout: project
 kind: "Commission"
+image: /images/tide-tables.webp
+imageAlt: "A thick blue cloth-bound volume with year tabs standing on a windowsill above the harbour"
 year: 2024
 weight: 10
-cover:
-  cloth: "#0b4f8a"
-  paper: "#eef1f4"
-  label: "TIDES"
 facts:
   Format: "Case binding, cloth"
   Pages: "480"

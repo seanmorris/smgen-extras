@@ -3,12 +3,10 @@ title: "Wedding album"
 description: "A photograph album made to be opened every year, with pages that will not cockle."
 layout: project
 kind: "Commission"
+image: /images/wedding-album.webp
+imageAlt: "A deep red post-bound album with tissue interleaves lifting in soft light"
 year: 2024
 weight: 20
-cover:
-  cloth: "#7a2e3c"
-  paper: "#f3ebe1"
-  label: "ALBUM"
 facts:
   Format: "Post binding, expandable"
   Pages: "40 leaves"

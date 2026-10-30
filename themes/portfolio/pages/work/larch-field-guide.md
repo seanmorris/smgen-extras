@@ -3,12 +3,10 @@ title: "Larch field guide"
 description: "A pocket field guide to the larch basin, printed letterpress and sewn in a single section."
 layout: project
 kind: "Edition of 40"
+image: /images/larch-field-guide.webp
+imageAlt: "Copies of a small olive-green pamphlet fanned out beside larch needles"
 year: 2025
 weight: 10
-cover:
-  cloth: "#6a7a3a"
-  paper: "#f1ead8"
-  label: "LARCH"
 facts:
   Format: "Pamphlet, single section"
   Pages: "24"

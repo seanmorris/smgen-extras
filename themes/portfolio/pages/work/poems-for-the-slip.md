@@ -3,12 +3,10 @@ title: "Poems for the slip"
 description: "A chapbook of harbour poems, printed and bound for a reading on the old ferry slip."
 layout: project
 kind: "Edition of 120"
+image: /images/poems-for-the-slip.webp
+imageAlt: "A stack of grey chapbooks sewn with white thread on a weathered crate, one open"
 year: 2023
 weight: 10
-cover:
-  cloth: "#444"
-  paper: "#efe6d6"
-  label: "POEMS"
 facts:
   Format: "Pamphlet, two sections"
   Pages: "48"

@@ -2,26 +2,44 @@
   "name": "portfolio",
   "package": "smgen-theme-portfolio",
   "title": "Portfolio",
-  "description": "A personal site for someone who makes things. A statement on the front page, a grid of work read from the work pages' frontmatter, project pages with a facts strip, about and contact. Covers are drawn from two colours, so there is nothing to photograph before you start. No plugins.",
+  "description": "A photo-first personal site for someone who makes things. A statement and one large photograph on the front page, a grid of work led by each project's picture, project pages with a full-width image, a facts strip, prose and a gallery, then about and contact. No plugins.",
   "demo": {
     "productName": "Halden Bindery",
     "tagline": "Books bound by hand in a harbour town"
   },
   "features": [
-    "Work grid built from pages/work/*.md frontmatter",
-    "Covers drawn from each project's two colours, no images required",
-    "Project pages with a facts strip from frontmatter",
+    "Work grid built from pages/work/*.md frontmatter, newest project shown large",
+    "Responsive photographs with srcset from files you drop in static/images",
+    "Project pages with a full-width image, a facts strip and a gallery",
+    "Next-project link at the foot of every project",
     "About and contact pages",
     "System light and dark with a toggle"
   ],
   "sampleContent": [
-    {"path": "pages/index.md", "purpose": "The statement and the work grid"},
-    {"path": "pages/work/", "purpose": "Six sample projects; one file each"},
-    {"path": "pages/about.md, pages/contact.md", "purpose": "About and contact pages"}
+    {
+      "path": "pages/index.md",
+      "purpose": "The statement, the hero photograph and the work grid"
+    },
+    {
+      "path": "pages/work/",
+      "purpose": "Six sample projects; one file each"
+    },
+    {
+      "path": "static/images/",
+      "purpose": "Sample photographs at three widths; replace with your own"
+    },
+    {
+      "path": "pages/about.md, pages/contact.md",
+      "purpose": "About and contact pages"
+    }
   ],
-  "layouts": ["home", "project", "page"],
+  "layouts": [
+    "home",
+    "project",
+    "page"
+  ],
   "notes": [
-    "A project's cover is cloth and paper colours in its frontmatter; set image: to use a photograph instead",
+    "A project names its photograph with image: and imageAlt:; without one it shows a plain tile in its cloth: colour",
     "Projects sort by year, newest first, then by weight"
   ]
 }

@@ -2,7 +2,10 @@
 title: "Halden Bindery"
 description: "Books bound by hand in a harbour town: editions, repairs and one-off commissions."
 layout: home
-show: 6
+show: 5
+hero: /images/bench.webp
+heroAlt: "The bindery bench from above: tools laid out and a book in the finishing press"
+heroCaption: "The bench, most mornings."
 TOC: false
 ---
 

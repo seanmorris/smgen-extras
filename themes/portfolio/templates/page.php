@@ -1,10 +1,11 @@
 <?php
 
 /**
- * Renders Halden Bindery: a statement and a grid of work on the front page,
- * project pages with a facts strip, and plain pages for about and contact.
- * Projects are the files under pages/work/; each cover is drawn here from
- * the project's cloth and paper colours unless it names an image.
+ * Renders Halden Bindery, a photo-first portfolio: a statement and a hero
+ * photograph on the front page, a grid of work led by each project's
+ * photograph, project pages with a full-width image, a facts strip, prose
+ * and a gallery, and plain pages for about and contact. Projects are the
+ * files under pages/work/.
  */
 
 $layout = $frontmatter['layout'] ?? 'page';
@@ -28,8 +29,9 @@ function studioProjects(): array
 			'year' => (string) ($metadata['year'] ?? ''),
 			'weight' => (int) ($metadata['weight'] ?? 50),
 			'description' => (string) ($metadata['description'] ?? ''),
-			'cover' => is_array($metadata['cover'] ?? null) ? $metadata['cover'] : [],
 			'image' => (string) ($metadata['image'] ?? ''),
+			'imageAlt' => (string) ($metadata['imageAlt'] ?? ''),
+			'cloth' => (string) ($metadata['cloth'] ?? ''),
 		];
 	}
 	usort($projects, static fn(array $a, array $b): int => [$b['year'], $a['weight'], $a['title']] <=> [$a['year'], $b['weight'], $b['title']]);
@@ -43,18 +45,46 @@ function studioColour(mixed $value, string $fallback): string
 	return preg_match('/^#[0-9a-fA-F]{3,8}$|^[a-zA-Z]+$|^(rgb|hsl|oklch|lab)a?\([^;{}<>"]+\)$/', $value) ? $value : $fallback;
 }
 
-/** Draw a project's cover: a photograph if it names one, otherwise cloth and paper. */
-function studioCover(array $project, string $alt): string
+/**
+ * Render a responsive photograph. Smaller renditions named <name>-1200.webp
+ * and <name>-800.webp beside the file are offered through srcset when they
+ * exist; width and height come from the file so the layout does not jump.
+ */
+function studioImage(string $path, string $alt, string $sizes, bool $eager = false): string
+{
+	$staticDir = rtrim(getConf('STATIC_DIR') ?: './static', '/');
+	$file = $staticDir . '/' . ltrim($path, '/');
+	$size = is_file($file) ? @getimagesize($file) : false;
+	$dimensions = $size ? ' width="' . (int) $size[0] . '" height="' . (int) $size[1] . '"' : '';
+	$candidates = [];
+	$extension = pathinfo($path, PATHINFO_EXTENSION);
+	$stem = substr($path, 0, -strlen($extension) - 1);
+	foreach([800, 1200] as $width)
+	{
+		$variant = $stem . '-' . $width . '.' . $extension;
+		if(is_file($staticDir . '/' . ltrim($variant, '/')))
+		{
+			$candidates[] = escapeHtml(resolveAssetUrl($variant)) . ' ' . $width . 'w';
+		}
+	}
+	if($candidates !== [] && $size)
+	{
+		$candidates[] = escapeHtml(resolveAssetUrl($path)) . ' ' . (int) $size[0] . 'w';
+	}
+	$srcset = $candidates !== [] ? ' srcset="' . implode(', ', $candidates) . '" sizes="' . escapeHtml($sizes) . '"' : '';
+	$loading = $eager ? ' fetchpriority="high"' : ' loading="lazy"';
+	return '<img src="' . escapeHtml(resolveAssetUrl($path)) . '"' . $srcset . $dimensions . ' alt="' . escapeHtml($alt) . '"' . $loading . ' decoding="async">';
+}
+
+/** A project's photograph, or a plain cloth-coloured tile when it has none yet. */
+function studioCover(array $project, string $sizes, bool $eager = false): string
 {
 	if($project['image'] !== '')
 	{
-		return '<img class="cover cover--image" src="' . escapeHtml(resolveAssetUrl($project['image'])) . '" alt="' . escapeHtml($alt) . '" loading="lazy">';
+		return studioImage($project['image'], $project['imageAlt'] !== '' ? $project['imageAlt'] : $project['title'], $sizes, $eager);
 	}
-	$cloth = studioColour($project['cover']['cloth'] ?? '', '#6b2d2d');
-	$paper = studioColour($project['cover']['paper'] ?? '', '#efe6d6');
-	$label = (string) ($project['cover']['label'] ?? $project['title']);
-	return '<span class="cover cover--drawn" role="img" aria-label="' . escapeHtml($alt) . '" style="--cloth: ' . $cloth . '; --paper: ' . $paper . '">'
-		. '<span class="cover-spine"></span><span class="cover-board"><span class="cover-label">' . escapeHtml($label) . '</span></span></span>';
+	$cloth = studioColour($project['cloth'], 'var(--accent)');
+	return '<span class="cover-plain" role="img" aria-label="' . escapeHtml($project['title']) . '" style="--cloth: ' . $cloth . '"><span>' . escapeHtml($project['title']) . '</span></span>';
 }
 
 /** Escape text for the page body and double dollars so Pandoc leaves them alone. */
@@ -65,13 +95,33 @@ function tpl(string $value): string
 
 $projects = studioProjects();
 $project = null;
+$projectIndex = null;
 if($layout === 'project')
 {
 	$slug = basename($source, '.md');
-	foreach($projects as $candidate) if($candidate['slug'] === $slug) $project = $candidate;
+	foreach($projects as $index => $candidate)
+	{
+		if($candidate['slug'] === $slug) { $project = $candidate; $projectIndex = $index; }
+	}
 }
 $facts = is_array($frontmatter['facts'] ?? null) ? $frontmatter['facts'] : [];
+$gallery = is_array($frontmatter['gallery'] ?? null) ? $frontmatter['gallery'] : [];
+$show = (int) ($frontmatter['show'] ?? 5);
 $navigation = [['href' => '/work/', 'label' => 'Work', 'match' => 'work/'], ['href' => '/about.html', 'label' => 'About', 'match' => 'about.md'], ['href' => '/contact.html', 'label' => 'Contact', 'match' => 'contact.md']];
+
+/** Render one tile of the work grid. */
+function studioTile(array $item, bool $featured): string
+{
+	$sizes = $featured ? '(max-width: 44rem) 100vw, min(100vw - 3rem, 78rem)' : '(max-width: 44rem) 100vw, min(50vw - 2.5rem, 38rem)';
+	$meta = trim($item['kind'] . ($item['year'] !== '' ? ' · ' . $item['year'] : ''), ' ·');
+	return '<li class="work-item' . ($featured ? ' work-item--featured' : '') . '">'
+		. '<a href="' . escapeHtml(resolveAssetUrl('/work/' . $item['slug'] . '.html')) . '">'
+		. '<span class="work-photo">' . studioCover($item, $sizes, $featured) . '</span>'
+		. '<span class="work-meta"><strong>' . escapeHtml($item['title']) . '</strong>'
+		. ($meta !== '' ? '<span>' . escapeHtml($meta) . '</span>' : '')
+		. ($featured && $item['description'] !== '' ? '<em>' . tpl($item['description']) . '</em>' : '')
+		. '</span></a></li>';
+}
 
 ?><!DOCTYPE html>
 <html lang="en" class="<?=escapeHtml(getConf('DEFAULT_THEME') ?: 'theme-portfolio')?>">
@@ -111,28 +161,35 @@ $endfor$
 		</nav>
 	</header>
 
-	<?php if($layout === 'home' || $layout === 'work'): ?>
+	<?php if($layout === 'home'): ?>
 	<main id="content" class="page">
 		<section class="statement prose">
 			$body$
 		</section>
+		<?php if(!empty($frontmatter['hero'])): ?>
+		<figure class="hero">
+			<?=studioImage((string) $frontmatter['hero'], (string) ($frontmatter['heroAlt'] ?? ''), '(max-width: 44rem) 100vw, min(100vw - 3rem, 78rem)', true)?>
+			<?php if(!empty($frontmatter['heroCaption'])): ?><figcaption><?=tpl((string) $frontmatter['heroCaption'])?></figcaption><?php endif; ?>
+		</figure>
+		<?php endif; ?>
 		<section class="work" aria-labelledby="work-title">
-			<h2 id="work-title" class="section-title"><?=$layout === 'home' ? 'Selected work' : 'All work'?></h2>
+			<div class="section-head"><h2 id="work-title">Selected work</h2><?php if(count($projects) > $show): ?><a href="<?=escapeHtml(resolveAssetUrl('/work/'))?>">All work</a><?php endif; ?></div>
 			<ul class="work-grid">
-			<?php foreach($layout === 'home' ? array_slice($projects, 0, (int) ($frontmatter['show'] ?? 6)) : $projects as $item): ?>
-				<li class="work-item">
-					<a href="<?=escapeHtml(resolveAssetUrl('/work/' . $item['slug'] . '.html'))?>">
-						<?=studioCover($item, $item['title'] . ($item['kind'] !== '' ? ', ' . $item['kind'] : ''))?>
-						<span class="work-meta"><strong><?=escapeHtml($item['title'])?></strong><span><?=escapeHtml(trim($item['kind'] . ($item['year'] !== '' ? ' · ' . $item['year'] : ''), ' ·'))?></span></span>
-					</a>
-				</li>
-			<?php endforeach; ?>
+				<?php foreach(array_slice($projects, 0, $show) as $index => $item) echo studioTile($item, $index === 0); ?>
 			</ul>
-			<?php if($layout === 'home' && count($projects) > (int) ($frontmatter['show'] ?? 6)): ?><p class="work-more"><a href="<?=escapeHtml(resolveAssetUrl('/work/'))?>">All work</a></p><?php endif; ?>
 		</section>
 	</main>
+	<?php elseif($layout === 'work'): ?>
+	<main id="content" class="page">
+		<section class="statement prose">
+			$body$
+		</section>
+		<ul class="work-grid work-grid--all">
+			<?php foreach($projects as $item) echo studioTile($item, false); ?>
+		</ul>
+	</main>
 	<?php elseif($layout === 'project'): ?>
-	<main id="content" class="page page--project">
+	<main id="content" class="page">
 		<article class="project">
 			<header class="project-head">
 				<p class="kicker"><a href="<?=escapeHtml(resolveAssetUrl('/work/'))?>">Work</a><?php if($project !== null && $project['kind'] !== ''): ?> · <?=escapeHtml($project['kind'])?><?php endif; ?><?php if($project !== null && $project['year'] !== ''): ?> · <?=escapeHtml($project['year'])?><?php endif; ?></p>
@@ -140,18 +197,32 @@ $endfor$
 				<?php if(!empty($frontmatter['description'])): ?><p class="standfirst"><?=tpl((string) $frontmatter['description'])?></p><?php endif; ?>
 			</header>
 			<?php if($project !== null): ?>
-			<figure class="project-cover"><?=studioCover($project, (string) ($frontmatter['coverAlt'] ?? $project['title']))?></figure>
+			<figure class="project-photo"><?=studioCover($project, '(max-width: 44rem) 100vw, min(100vw - 3rem, 78rem)', true)?></figure>
 			<?php endif; ?>
-			<?php if($facts !== []): ?>
-			<dl class="facts">
-				<?php foreach($facts as $label => $value): ?>
-				<div><dt><?=tpl((string) $label)?></dt><dd><?=tpl((string) $value)?></dd></div>
-				<?php endforeach; ?>
-			</dl>
-			<?php endif; ?>
-			<div class="prose">
-				$body$
+			<div class="project-body">
+				<?php if($facts !== []): ?>
+				<dl class="facts">
+					<?php foreach($facts as $label => $value): ?>
+					<div><dt><?=tpl((string) $label)?></dt><dd><?=tpl((string) $value)?></dd></div>
+					<?php endforeach; ?>
+				</dl>
+				<?php endif; ?>
+				<div class="prose">
+					$body$
+				</div>
 			</div>
+			<?php if($gallery !== []): ?>
+			<ul class="gallery">
+				<?php foreach($gallery as $entry): if(!is_array($entry) || empty($entry['image'])) continue; ?>
+				<li><figure><?=studioImage((string) $entry['image'], (string) ($entry['alt'] ?? ''), '(max-width: 44rem) 100vw, min(50vw - 2.5rem, 38rem)')?><?php if(!empty($entry['caption'])): ?><figcaption><?=tpl((string) $entry['caption'])?></figcaption><?php endif; ?></figure></li>
+				<?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
+			<?php if($projectIndex !== null && count($projects) > 1): $next = $projects[($projectIndex + 1) % count($projects)]; ?>
+			<nav class="next" aria-label="Next project">
+				<a href="<?=escapeHtml(resolveAssetUrl('/work/' . $next['slug'] . '.html'))?>"><span class="kicker">Next</span><strong><?=escapeHtml($next['title'])?></strong><span><?=escapeHtml(trim($next['kind'] . ($next['year'] !== '' ? ' · ' . $next['year'] : ''), ' ·'))?></span></a>
+			</nav>
+			<?php endif; ?>
 		</article>
 	</main>
 	<?php else: ?>
@@ -164,7 +235,7 @@ $endfor$
 
 	<footer class="colophon">
 		<p><strong><?=escapeHtml(getConf('PRODUCT_NAME'))?></strong><?php if(getConf('TAGLINE')): ?> · <?=escapeHtml(getConf('TAGLINE'))?><?php endif; ?></p>
-		<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/contact.html'))?>">Contact</a><a href="https://seanmorris.github.io/smgen-extras/themes.html#portfolio">Portfolio theme</a></p>
+		<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/contact.html'))?>">Contact</a><a href="https://seanmorris.github.io/smgen-extras/themes.html#theme-portfolio">Portfolio theme</a></p>
 	</footer>
 </body>
 </html>
