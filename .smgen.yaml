@@ -31,14 +31,18 @@ SEARCH_ENABLED: 0
 
 LLMS:
   title: smgen-extras
-  summary: Add data-driven pages, static checkout controls, and generated PHP and JavaScript API references to SMGen sites.
+  summary: Five base themes to start an SMGen site from, and six plugins that add data-driven pages, static checkout controls, and generated PHP and JavaScript API references.
   details: |
-    Each package participates in the SMGen build and publishes ordinary static
+    Themes are complete starter sites copied by `npm create smgen-site`. Each
+    plugin participates in the SMGen build and publishes ordinary static
     files. The generated site does not need a PHP or Node.js server.
   sections:
     start:
       title: Start Here
       weight: 0
+    themes:
+      title: Themes
+      weight: 5
     plugins:
       title: Plugins
       weight: 10
@@ -48,7 +52,7 @@ LLMS:
 
 MENUS:
   documentation:
-    label: Plugins
+    label: Guides
     renderer: tree
     hierarchy: source
     showLabel: true

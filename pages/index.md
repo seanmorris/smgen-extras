@@ -1,11 +1,11 @@
 ---
 title: SMGen Extras
-description: Add PHP and JavaScript API references, spreadsheet-driven pages, category rollups, a dated archive, and static checkout controls to an SMGen site.
+description: Five starter themes to begin an SMGen site from, and six plugins that add API references, spreadsheet-driven pages, category rollups, a dated archive, and static checkout controls.
 layout: home
 TOC: false
 llms:
   section: start
-  description: Choose and install the official SMGen plugins.
+  description: Choose a theme to start from and the plugins to install.
 menus:
   documentation:
     title: Overview
@@ -17,7 +17,7 @@ jsonld:
       "@id": https://seanmorris.github.io/smgen-extras/#website
       url: https://seanmorris.github.io/smgen-extras/
       name: smgen-extras
-      description: Focused extensions for static SMGen sites.
+      description: Themes and plugins for static SMGen sites.
       inLanguage: en
     - "@type": CollectionPage
       "@id": https://seanmorris.github.io/smgen-extras/#page
@@ -31,8 +31,20 @@ jsonld:
         url: https://seanmorris.github.io/smgen/
 ---
 
+<section class="band" id="themes" aria-labelledby="themes-title">
+<div class="band-head"><h2 id="themes-title">Five themes, one command</h2><p>Each theme is a complete, plugin-free site with real sample pages. Copy one with <code>npm create smgen-site</code>, rename it, and start writing.</p></div>
+<ul class="previews previews--three">
+<li><a href="themes/docs/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/theme-docs-dark.png" width="900" height="585" alt="Kestrel documentation home page" loading="lazy"><img class="preview preview--light" src="previews/theme-docs-light.png" width="900" height="585" alt="Kestrel documentation home page" loading="lazy"><span class="preview-body"><strong>Docs</strong><span>Contents, article and outline, with search and callouts. Shown as Kestrel, a backup tool's manual.</span><small class="package">smgen-theme-docs</small></span></a></li>
+<li><a href="themes/journal/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/theme-journal-dark.png" width="900" height="585" alt="Commonplace journal home page" loading="lazy"><img class="preview preview--light" src="previews/theme-journal-light.png" width="900" height="585" alt="Commonplace journal home page" loading="lazy"><span class="preview-body"><strong>Journal</strong><span>Dated entries listed from their frontmatter, topic pages and an RSS feed. Shown as Commonplace.</span><small class="package">smgen-theme-journal</small></span></a></li>
+<li><a href="themes/portfolio/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/theme-portfolio-dark.png" width="900" height="585" alt="Halden Bindery portfolio home page" loading="lazy"><img class="preview preview--light" src="previews/theme-portfolio-light.png" width="900" height="585" alt="Halden Bindery portfolio home page" loading="lazy"><span class="preview-body"><strong>Portfolio</strong><span>A statement, a grid of work with drawn covers, and project pages with a facts strip. Shown as Halden Bindery.</span><small class="package">smgen-theme-portfolio</small></span></a></li>
+<li><a href="themes/landing/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/theme-landing-dark.png" width="900" height="585" alt="Tidewatch landing page" loading="lazy"><img class="preview preview--light" src="previews/theme-landing-light.png" width="900" height="585" alt="Tidewatch landing page" loading="lazy"><span class="preview-body"><strong>Landing</strong><span>A one-page product site whose hero, features, plans and FAQ are YAML in the front page. Shown as Tidewatch.</span><small class="package">smgen-theme-landing</small></span></a></li>
+<li><a href="themes/semantic/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/theme-semantic-dark.png" width="900" height="585" alt="Plain semantic site home page" loading="lazy"><img class="preview preview--light" src="previews/theme-semantic-light.png" width="900" height="585" alt="Plain semantic site home page" loading="lazy"><span class="preview-body"><strong>Semantic</strong><span>Classless HTML and an eight-line stylesheet, with pages that show every Markdown construct. Shown as Plain.</span><small class="package">smgen-theme-semantic</small></span></a></li>
+<li class="preview-cta"><a href="themes.html"><span class="preview-body"><strong>Pick one</strong><span>The Themes guide walks through the command, what each theme contains, and how to make your own.</span></span></a></li>
+</ul>
+</section>
+
 <section class="band" id="examples" aria-labelledby="examples-title">
-<div class="band-head"><h2 id="examples-title">Four sites, built from this repository</h2><p>Every example is rebuilt by CI from the sources in <code>examples/</code>. Open one and view the page source.</p></div>
+<div class="band-head"><h2 id="examples-title">Four sites, built with the plugins</h2><p>Every example is rebuilt by CI from the sources in <code>examples/</code>. Open one and view the page source.</p></div>
 <ul class="previews">
 <li><a href="examples/store/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/store-dark.png" width="900" height="585" alt="Fernway Goods storefront home page" loading="lazy"><img class="preview preview--light" src="previews/store-light.png" width="900" height="585" alt="Fernway Goods storefront home page" loading="lazy"><span class="preview-body"><strong>Fernway Goods</strong><span>A storefront whose catalog is a CSV, with generated category pages and hosted checkout.</span><small class="package">smgen-data-pages + smgen-categories + smgen-store</small></span></a></li>
 <li><a href="examples/blog/" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="previews/blog-dark.png" width="900" height="585" alt="Field Notes journal home page" loading="lazy"><img class="preview preview--light" src="previews/blog-light.png" width="900" height="585" alt="Field Notes journal home page" loading="lazy"><span class="preview-body"><strong>Field Notes</strong><span>A journal of Markdown files with generated topic pages and a dated archive.</span><small class="package">smgen-timeline + smgen-categories</small></span></a></li>

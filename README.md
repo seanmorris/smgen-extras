@@ -1,8 +1,23 @@
 # SMGen Extras
 
-This workspace contains plugins that extend SMGen builds without adding code to SMGen core:
+Themes to start an [SMGen](https://seanmorris.github.io/smgen/) site from, and plugins that extend SMGen builds without adding code to SMGen core. The [documentation site](https://seanmorris.github.io/smgen-extras/) has the guides and a live demo of every theme and example.
 
-[Read the plugin guides](https://seanmorris.github.io/smgen-extras/) or open a package reference below.
+## Themes
+
+A theme is a complete, plugin-free site with real sample pages. Copy one with:
+
+```sh
+npm create smgen-site@latest my-site -- --theme journal
+```
+
+- [`smgen-theme-docs`](themes/docs): a technical manual with contents, outline, search and callouts.
+- [`smgen-theme-journal`](themes/journal): dated entries listed from frontmatter, topic pages and an RSS feed.
+- [`smgen-theme-portfolio`](themes/portfolio): a statement, a grid of work with drawn covers, and project pages.
+- [`smgen-theme-landing`](themes/landing): a one-page product site edited in YAML, with pricing, changelog and privacy pages.
+- [`smgen-theme-semantic`](themes/semantic): classless HTML and an eight-line stylesheet, for building a design from nothing.
+- [`create-smgen-site`](themes/create-smgen-site): the scaffolder behind the command above.
+
+## Plugins
 
 - [`smgen-data-pages`](plugins/smgen-data-pages) validates CSV or TSV data and renders Markdown pages from PHP templates.
 - [`smgen-store`](plugins/smgen-store) validates public checkout metadata and renders hosted payment links or provider buttons.
@@ -30,8 +45,18 @@ checkout lives somewhere else:
 SMGEN_BIN=/path/to/smgen/smgen.sh npm test
 ```
 
+## Layout
+
+```text
+plugins/<name>/            smgen-<name>
+themes/<name>/             smgen-theme-<name>, plus theme.json
+themes/create-smgen-site/  the scaffolder
+examples/<name>/           plugin demos built into the site under examples/
+pages/, templates/, static/   the documentation site
+```
+
 ## Release a Package
 
-Each package has its own version and tag. A tag such as `smgen-data-pages-v0.1.0` publishes only that workspace; `smgen-store-v*`, `smgen-phpdoc-v*`, `smgen-jsdoc-v*`, `smgen-categories-v*`, and `smgen-timeline-v*` publish the others. Publish `smgen-categories` before `smgen-timeline`, which depends on it.
+Each package has its own version and tag, `<package>-v<version>`, such as `smgen-data-pages-v0.1.0` or `smgen-theme-journal-v0.1.0`. The workflow finds the workspace by package name and publishes only that one. Publish `smgen-categories` before `smgen-timeline`, which depends on it, and publish changed themes before `create-smgen-site`, which pins their exact versions.
 
 The publish workflow expects npm trusted publishing or an `NPM_TOKEN` repository secret.

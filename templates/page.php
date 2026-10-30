@@ -8,6 +8,7 @@ $layout = $frontmatter['layout'] ?? 'guide';
 $currentSource = basename((string) $pageFile);
 $navigation = [
 	['source' => 'index.md', 'path' => '/', 'label' => 'Overview'],
+	['source' => 'themes.md', 'path' => '/themes.html', 'label' => 'Themes'],
 	['source' => 'phpdoc.md', 'path' => '/phpdoc.html', 'label' => 'PHPDoc'],
 	['source' => 'jsdoc.md', 'path' => '/jsdoc.html', 'label' => 'JSDoc'],
 	['source' => 'data-pages.md', 'path' => '/data-pages.html', 'label' => 'Data Pages'],
@@ -17,6 +18,30 @@ $navigation = [
 	['source' => 'development.md', 'path' => '/development.html', 'label' => 'Development'],
 ];
 $guide = $frontmatter['guide'] ?? null;
+
+/**
+ * Read every theme manifest in the workspace, sorted by name.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function hubThemes(): array
+{
+	$pagesDir = realpath(getConf('PAGES_DIR') ?: 'pages');
+	$root = $pagesDir === false ? getcwd() : dirname($pagesDir);
+	$themes = [];
+	foreach(glob($root . '/themes/*/theme.json') ?: [] as $manifest)
+	{
+		$theme = json_decode((string) file_get_contents($manifest), true);
+		if(is_array($theme) && isset($theme['name']))
+		{
+			$themes[] = $theme;
+		}
+	}
+	usort($themes, static fn(array $a, array $b): int => strcmp((string) $a['name'], (string) $b['name']));
+	return $themes;
+}
+
+$themes = $layout === 'themes' ? hubThemes() : [];
 
 ?><!DOCTYPE html>
 <html lang="en" class="theme-plugins">
@@ -70,10 +95,10 @@ $endfor$
 	<?php if($layout === 'home'): ?>
 	<section class="hero">
 		<div class="shell hero-inner">
-			<p class="eyebrow"><span>smgen/v1 plugin API</span><span>PHP 8.2</span><span>Node 20</span></p>
+			<p class="eyebrow"><span>6 plugins</span><span>5 themes</span><span>PHP 8.2</span><span>Node 20</span></p>
 			<h1>Build steps, not applications.</h1>
-			<p class="hero-lede">Six plugins that add PHP and JavaScript API references, pages from spreadsheets, category rollups, a dated archive, and a static storefront to an <a href="https://seanmorris.github.io/smgen/">SMGen</a> site. Each one runs at build time and publishes ordinary files. Nothing on the published site needs a server.</p>
-			<p class="hero-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl('/phpdoc.html'))?>">Read the guides</a><a class="button button--ghost" href="#examples">See the examples</a></p>
+			<p class="hero-lede">Six plugins that add PHP and JavaScript API references, pages from spreadsheets, category rollups, a dated archive, and a static storefront to an <a href="https://seanmorris.github.io/smgen/">SMGen</a> site, and five complete starter themes to build a new site from. Everything runs at build time and publishes ordinary files. Nothing on the published site needs a server.</p>
+			<p class="hero-actions"><a class="button" href="<?=escapeHtml(resolveAssetUrl('/themes.html'))?>">Start from a theme</a><a class="button button--ghost" href="<?=escapeHtml(resolveAssetUrl('/phpdoc.html'))?>">Read the plugin guides</a></p>
 		</div>
 	</section>
 	<main id="content" class="shell home">
@@ -86,11 +111,33 @@ $endfor$
 			<p class="eyebrow"><span>Plugin guide</span><span class="package"><?=escapeHtml($guide['package'])?></span></p>
 			<?php endif; ?>
 			$body$
+			<?php if($themes): ?>
+			<h2 id="the-themes">The themes</h2>
+			<?php foreach($themes as $theme): $name = (string) $theme['name']; $demoUrl = resolveAssetUrl('/themes/' . $name . '/'); ?>
+			<section class="theme" id="theme-<?=escapeHtml($name)?>" aria-labelledby="theme-<?=escapeHtml($name)?>-title">
+				<div class="theme-head"><h3 id="theme-<?=escapeHtml($name)?>-title"><?=escapeHtml((string) $theme['title'])?></h3><span class="package"><?=escapeHtml((string) $theme['package'])?></span></div>
+				<p class="theme-description"><?=escapeHtml((string) $theme['description'])?></p>
+				<a class="theme-preview" href="<?=escapeHtml($demoUrl)?>" target="_blank" rel="noopener noreferrer"><img class="preview preview--dark" src="<?=escapeHtml(resolveAssetUrl('/previews/theme-' . $name . '-dark.png'))?>" width="900" height="585" alt="<?=escapeHtml((string) ($theme['demo']['productName'] ?? $theme['title']))?> home page, dark" loading="lazy"><img class="preview preview--light" src="<?=escapeHtml(resolveAssetUrl('/previews/theme-' . $name . '-light.png'))?>" width="900" height="585" alt="<?=escapeHtml((string) ($theme['demo']['productName'] ?? $theme['title']))?> home page, light" loading="lazy"></a>
+				<div class="theme-columns">
+					<div><h4>What it does</h4><ul><?php foreach($theme['features'] ?? [] as $feature): ?><li><?=escapeHtml((string) $feature)?></li><?php endforeach; ?></ul></div>
+					<div><h4>Sample content</h4><dl class="theme-content"><?php foreach($theme['sampleContent'] ?? [] as $entry): ?><dt><code><?=escapeHtml((string) ($entry['path'] ?? ''))?></code></dt><dd><?=escapeHtml((string) ($entry['purpose'] ?? ''))?></dd><?php endforeach; ?></dl></div>
+				</div>
+				<?php if(!empty($theme['notes'])): ?>
+				<ul class="theme-notes"><?php foreach($theme['notes'] as $note): ?><li><?=escapeHtml((string) $note)?></li><?php endforeach; ?></ul>
+				<?php endif; ?>
+				<pre class="theme-command"><code>npm create smgen-site@latest my-site -- --theme <?=escapeHtml($name)?></code></pre>
+				<p class="theme-links"><a href="<?=escapeHtml($demoUrl)?>" target="_blank" rel="noopener noreferrer">Open the demo: <?=escapeHtml((string) ($theme['demo']['productName'] ?? $theme['title']))?></a><a href="https://github.com/seanmorris/smgen-extras/tree/main/themes/<?=escapeHtml($name)?>" target="_blank" rel="noopener noreferrer">Theme source</a><a href="https://www.npmjs.com/package/<?=escapeHtml((string) $theme['package'])?>" target="_blank" rel="noopener noreferrer">npm</a></p>
+			</section>
+			<?php endforeach; ?>
+			<?php endif; ?>
 		</article>
 		$if(toc)$
 		<aside class="outline" aria-label="On this page">
 			<p class="outline-title">On this page</p>
 			${toc}
+			<?php if($themes): ?>
+			<ul><li><a href="#the-themes">The themes</a><ul><?php foreach($themes as $theme): ?><li><a href="#theme-<?=escapeHtml((string) $theme['name'])?>"><?=escapeHtml((string) $theme['title'])?></a></li><?php endforeach; ?></ul></li></ul>
+			<?php endif; ?>
 			<?php if(is_array($guide)): ?>
 			<p class="outline-links"><a href="<?=escapeHtml($guide['example'])?>" target="_blank" rel="noopener noreferrer">Open the example</a><a href="https://github.com/seanmorris/smgen-extras/tree/main/plugins/<?=escapeHtml($guide['package'])?>" target="_blank" rel="noopener noreferrer">Package source</a></p>
 			<?php endif; ?>

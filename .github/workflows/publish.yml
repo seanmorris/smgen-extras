@@ -9,6 +9,8 @@ on:
       - smgen-jsdoc-v*
       - smgen-categories-v*
       - smgen-timeline-v*
+      - smgen-theme-*-v*
+      - create-smgen-site-v*
 
 permissions:
   contents: read
@@ -22,7 +24,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out plugins
+      - name: Check out the workspace
         uses: actions/checkout@v4
 
       - name: Check out SMGen
@@ -62,23 +64,34 @@ jobs:
         run: |
           set -Eeuo pipefail
           tag="${GITHUB_REF_NAME}"
-          case "${tag}" in
-            smgen-data-pages-v*) package="smgen-data-pages"; version="${tag#smgen-data-pages-v}" ;;
-            smgen-store-v*) package="smgen-store"; version="${tag#smgen-store-v}" ;;
-            smgen-phpdoc-v*) package="smgen-phpdoc"; version="${tag#smgen-phpdoc-v}" ;;
-            smgen-jsdoc-v*) package="smgen-jsdoc"; version="${tag#smgen-jsdoc-v}" ;;
-            smgen-categories-v*) package="smgen-categories"; version="${tag#smgen-categories-v}" ;;
-            smgen-timeline-v*) package="smgen-timeline"; version="${tag#smgen-timeline-v}" ;;
-            *) echo "Unsupported release tag: ${tag}" >&2; exit 1 ;;
-          esac
-          declared="$(node -p "require('./plugins/${package}/package.json').version")"
+          if [[ ! "${tag}" =~ ^([a-z0-9-]+)-v([0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?)$ ]]; then
+            echo "Unsupported release tag: ${tag}" >&2
+            exit 1
+          fi
+          package="${BASH_REMATCH[1]}"
+          version="${BASH_REMATCH[2]}"
+          directory=""
+          for candidate in plugins/*/ themes/*/; do
+            candidate="${candidate%/}"
+            [[ -f "${candidate}/package.json" ]] || continue
+            if [[ "$(node -p "require('./${candidate}/package.json').name")" == "${package}" ]]; then
+              directory="${candidate}"
+              break
+            fi
+          done
+          if [[ -z "${directory}" ]]; then
+            echo "Tag ${tag} names no workspace package: ${package}" >&2
+            exit 1
+          fi
+          declared="$(node -p "require('./${directory}/package.json').version")"
           if [[ "${declared}" != "${version}" ]]; then
             echo "Tag ${tag} does not match ${package} version ${declared}." >&2
             exit 1
           fi
           echo "name=${package}" >> "${GITHUB_OUTPUT}"
+          echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
 
       - name: Publish tagged workspace
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --workspace "plugins/${{ steps.package.outputs.name }}" --access public --provenance
+        run: npm publish --workspace "${{ steps.package.outputs.directory }}" --access public --provenance
