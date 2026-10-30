@@ -10,10 +10,10 @@ A theme is a complete, plugin-free site with real sample pages. Copy one with:
 npm create smgen-site@latest my-site -- --theme journal
 ```
 
-- [`smgen-theme-docs`](themes/docs): a technical manual with contents, outline, search and callouts.
+- [`smgen-theme-docs`](themes/docs): a reference manual in two inks, numbered sections and margin notes; shown finished as [Kestrel](examples/kestrel).
 - [`smgen-theme-journal`](themes/journal): dated entries listed from frontmatter, topic pages and an RSS feed.
 - [`smgen-theme-portfolio`](themes/portfolio): a maker's catalogue set like a fine-press book, with numbered entries, photographs as plates and a specification block per project.
-- [`smgen-theme-landing`](themes/landing): a one-page product site edited in YAML, with pricing, changelog and privacy pages.
+- [`smgen-theme-landing`](themes/landing): a one-page product site edited in YAML, with a screen drawn from data; shown finished as [Tidewatch](examples/tidewatch).
 - [`smgen-theme-semantic`](themes/semantic): classless HTML in a three-column grid and a twenty-line stylesheet, for building a design from nothing.
 - [`create-smgen-site`](themes/create-smgen-site): the scaffolder behind the command above.
 
@@ -51,7 +51,7 @@ SMGEN_BIN=/path/to/smgen/smgen.sh npm test
 plugins/<name>/            smgen-<name>
 themes/<name>/             smgen-theme-<name>, plus theme.json
 themes/create-smgen-site/  the scaffolder
-examples/<name>/           plugin demos built into the site under examples/
+examples/<name>/           plugin demos and theme demos, built into the site under examples/
 pages/, templates/, static/   the documentation site
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-description: "Short answers to the questions that come up most."
+description: "The questions people ask after reading Getting started."
 menus:
   docs:
     weight: 50
@@ -8,29 +8,19 @@ menus:
 
 # FAQ
 
-## Is the store encrypted?
+Keep each answer to a paragraph and link to the page that goes deeper.
 
-No. Kestrel stores plain files so they stay readable without Kestrel. Put the
-store on an encrypted volume if the disk might leave your control.
+## Can I run it on a schedule?
 
-## How much space does a snapshot take?
+Yes. Any scheduler that can run a command will do; the command prints
+nothing on success unless `--verbose` is set, so logs stay quiet.
 
-Only the changed files. Unchanged files are hard links to the store, so a
-daily snapshot of a mostly static home directory costs kilobytes.
+## Where does the output go?
 
-## Can I back up to cloud storage?
+To `project.output` in the configuration file, `./build` by default. See
+[Configuration](configuration.html).
 
-Yes, to anything that presents as a filesystem with hard links: a mounted
-block volume, NFS, or SSHFS. Object stores do not support hard links and are
-not supported.
+## Something failed. Where do I look?
 
-## What happens if a file changes during a backup?
-
-Kestrel hashes the file as it reads it and stores what it read. The snapshot
-records the hash it stored, so a later check will tell you the file was
-captured mid-write.
-
-## Why TOML?
-
-Because the file is read by people far more often than it is written by
-programs, and TOML stays readable with comments and no indentation rules.
+The exit code says which stage failed; see
+[Commands](reference/commands.html). The message names the file.

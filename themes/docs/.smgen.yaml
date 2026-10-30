@@ -1,6 +1,6 @@
-PRODUCT_NAME: Kestrel
-TITLE_PREFIX: Kestrel
-TAGLINE: Backups you can read
+PRODUCT_NAME: Your Product
+TITLE_PREFIX: Your Product
+TAGLINE: Reference manual
 BASE_URL: ''
 OUTPUT_DIR: ./docs
 
@@ -12,8 +12,8 @@ SMGEN_ENGINE: php
 SEARCH_ENABLED: auto
 INHERIT_CORE_STATIC: 0
 HIGHLIGHT_STYLE: kate
-DOCS_VERSION: v2.4.0
-DOCS_REPOSITORY: https://github.com/seanmorris/smgen-extras/tree/main/themes/docs
+DOCS_VERSION: v1.0.0
+DOCS_REPOSITORY: ""
 CORE_ASSETS:
   - main.js
   - nav-state.js

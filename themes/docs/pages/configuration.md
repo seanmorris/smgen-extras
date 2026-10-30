@@ -1,6 +1,6 @@
 ---
 title: "Configuration"
-description: "The kestrel.toml file: sources, stores, excludes and retention."
+description: "The configuration file, where it is read from, and what each key does."
 menus:
   docs:
     weight: 20
@@ -8,51 +8,40 @@ menus:
 
 # Configuration
 
-Kestrel reads `kestrel.toml` from the current directory, then from
-`~/.config/kestrel/`. Command-line flags override the file.
+Say where the file lives, in what order the locations are read, and what
+wins when a flag and a file disagree.
 
 ## A complete example
 
 ```toml
-[store]
-path = "/mnt/backups/laptop"
+[project]
+name = "example"
+output = "./build"
 
 [[source]]
-path = "~/Documents"
-exclude = ["**/node_modules", "**/.cache", "*.tmp"]
-
-[[source]]
-path = "~/Photos"
+path = "./src"
+exclude = ["**/node_modules", "*.tmp"]
 
 [retention]
-daily = 14
-weekly = 8
-monthly = 24
+keep = 14
 ```
 
-## Sources
+## Keys
 
-Each `[[source]]` is a directory to back up. Paths expand `~`. Excludes are
-gitignore-style globs matched against paths relative to the source.
+| Key | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `project.name` | string | directory name | Shown in reports |
+| `project.output` | path | `./build` | Where results are written |
+| `source.path` | path | required | A directory to read |
+| `source.exclude` | list | `[]` | Glob patterns to skip |
+| `retention.keep` | integer | `14` | How many results to keep |
 
 ::: tip
-Keep excludes close to the source they apply to. A global exclude that
-quietly skips `*.db` will one day skip the one database you needed.
+Put the table of keys on this page and nowhere else, then link to it from
+the command pages. One table is easier to keep true than five.
 :::
 
-## Retention
+## Flags
 
-Retention keeps the newest snapshot in each bucket and prunes the rest when
-you run [`kestrel prune`](commands/prune.html). Nothing is deleted
-automatically.
-
-| Key | Meaning | Default |
-| --- | --- | --- |
-| `daily` | Snapshots to keep, one per day | `7` |
-| `weekly` | One per week, after the daily window | `4` |
-| `monthly` | One per month, after the weekly window | `12` |
-
-## Environment
-
-`KESTREL_STORE` sets the store path when no file or flag does.
-`KESTREL_LOG=debug` prints every file decision.
+Every key can be set on the command line as `--key value`, with dots in the
+key name: `--retention.keep 30`. Flags override the file.

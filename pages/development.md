@@ -29,7 +29,7 @@ that documents both:
 plugins/<name>/            smgen-<name>: a build-time plugin with its manifest and tests
 themes/<name>/             smgen-theme-<name>: a complete starter site plus theme.json
 themes/create-smgen-site/  the scaffolder that copies a theme into a new directory
-examples/<name>/           the four plugin demos, built into the hub under examples/
+examples/<name>/           the plugin demos and the theme demos, built into the hub under examples/
 pages/, templates/, static/   this site
 ```
 
@@ -92,6 +92,12 @@ conventions:
 - Light and dark are both designed: tokens on `:root`, the dark values under
   `@media (prefers-color-scheme: dark)` guarded by
   `:root:not([data-theme="light"])`, and again under `:root[data-theme="dark"]`.
+- The theme's own pages are a neutral starter, so nobody scaffolds someone
+  else's product. A finished demo lives under `examples/<name>` with only
+  `pages/` and a `.smgen.yaml` whose `TEMPLATE_DIR` and `STATIC_DIR` point at
+  `../../themes/<theme>`, so the demo can never drift from the theme; add the
+  example to the loop in `scripts/build-site.sh` and name it in `theme.json`
+  as `demo.path`, with `demo.starterPath` for the bare starter.
 
 Then add `"smgen-theme-<name>": "<version>"` to
 `themes/create-smgen-site/package.json` (the pin must equal the theme's own

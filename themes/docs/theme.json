@@ -2,29 +2,50 @@
   "name": "docs",
   "package": "smgen-theme-docs",
   "title": "Docs",
-  "description": "A technical manual. Contents tree on the left from the pages directory, the article in the middle, an outline on the right, search in the header, callouts, and a version badge. No plugins.",
+  "description": "A reference manual. Serif text with numbered sections, notes and warnings in the margin beside the paragraph they belong to, code with a rule and a language label, the contents and the page outline together on the left, search in the masthead. Neutral starter pages; the Kestrel example shows it finished. No plugins.",
   "demo": {
     "productName": "Kestrel",
-    "tagline": "Backups you can read"
+    "tagline": "Backups you can read",
+    "path": "examples/kestrel/",
+    "starterPath": "themes/docs/"
   },
   "features": [
-    "Three columns: contents, article, outline",
-    "Contents from SMGen's tree menu over the pages directory",
+    "Contents from SMGen's tree menu, with the page outline beneath it",
+    "Numbered sections and subsections, matched in the outline",
+    "Note, tip and warning fenced divs set as margin notes on wide screens",
+    "Code blocks with a left rule and a language label",
+    "Self-hosted Source Serif 4 and IBM Plex Mono, preloaded",
     "Search through smgen-search when it is installed",
-    "Note, tip and warning callouts from fenced divs",
-    "Version badge and edit link in the masthead",
+    "Edition and version in the masthead, edit link at the foot",
     "System light and dark with a toggle"
   ],
   "sampleContent": [
-    {"path": "pages/index.md", "purpose": "Getting started, the first page"},
-    {"path": "pages/install.md, pages/configuration.md", "purpose": "Install and configuration reference"},
-    {"path": "pages/commands/", "purpose": "One page per command, grouped in the contents"},
-    {"path": "pages/recipes.md, pages/faq.md, pages/changelog.md", "purpose": "Longer-form pages"},
-    {"path": "pages/about.md", "purpose": "About page; says the product is a demo"}
+    {
+      "path": "pages/index.md",
+      "purpose": "Getting started: what the first page should do"
+    },
+    {
+      "path": "pages/install.md, pages/configuration.md",
+      "purpose": "Install and configuration pages with a keys table"
+    },
+    {
+      "path": "pages/reference/, pages/guides/",
+      "purpose": "Two groups in the contents, with .fm.yaml for title and order"
+    },
+    {
+      "path": "pages/faq.md, pages/changelog.md, pages/about.md",
+      "purpose": "Short pages; about says this is a starter"
+    },
+    {
+      "path": "examples/kestrel/ (in the repository)",
+      "purpose": "A finished manual built on this template"
+    }
   ],
-  "layouts": ["doc"],
+  "layouts": [
+    "doc"
+  ],
   "notes": [
-    "Set DOCS_VERSION and DOCS_REPOSITORY in .smgen.yaml for the masthead badge and edit links",
+    "Set DOCS_VERSION and DOCS_REPOSITORY in .smgen.yaml for the masthead edition and edit links",
     "Search needs the smgen-search package on the build machine; the theme hides the box when it is not"
   ]
 }
