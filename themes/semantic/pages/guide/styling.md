@@ -15,6 +15,8 @@ menus:
 body { min-height: 100vh; margin: 0 auto; max-width: 90rem; padding: 0 1rem; line-height: 1.5; font-family: system-ui, sans-serif; }
 body > header { padding: 1rem 0; border-bottom: 1px solid; }
 body > footer { position: sticky; top: 100vh; padding: 1rem 0; border-top: 1px solid; }
+nav[aria-label="Breadcrumb"] ol { display: flex; flex-wrap: wrap; gap: 0.4em; margin: 1rem 0 0; padding: 0; list-style: none; font-size: 0.9em; }
+nav[aria-label="Breadcrumb"] li + li::before { content: "/"; margin-right: 0.4em; opacity: 0.5; }
 img, svg, video { max-width: 100%; height: auto; }
 pre { overflow: auto; }
 table { border-collapse: collapse; }
@@ -32,7 +34,8 @@ td, th { padding: 0.25em 0.6em; border: 1px solid; }
 The first rule is the one that matters. `color-scheme: light dark` tells the
 browser to render its default colours in whichever scheme the visitor
 prefers, so the site is already light and dark without a single colour
-declared. The body is at least as tall as the window and the footer is
+declared. The two breadcrumb rules turn SMGen's breadcrumb list into one line with a
+slash between the steps, keyed on its `aria-label` rather than a class. The body is at least as tall as the window and the footer is
 sticky at `top: 100vh`, which pins it to the bottom of a short page without
 a wrapper element. The media query at the end is the layout: above 64rem
 the body becomes a flex row that wraps, the header and footer take the full
