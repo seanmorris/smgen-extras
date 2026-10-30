@@ -1,0 +1,24 @@
+PRODUCT_NAME: Tidewatch
+TITLE_PREFIX: Tidewatch
+TAGLINE: Tide times that fit in a pocket
+BASE_URL: ''
+OUTPUT_DIR: ./docs
+
+DEFAULT_THEME: theme-landing
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+SMGEN_ENGINE: php
+SEARCH_ENABLED: 0
+INHERIT_CORE_STATIC: 0
+HIGHLIGHT_STYLE: kate
+CORE_ASSETS:
+  - main.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+DEFER_SCRIPTS:
+  - /main.js
+STYLES:
+  - /scrollbar.css
+  - /landing.css

@@ -35,6 +35,7 @@
   "dependencies": {
     "smgen-theme-docs": "0.1.0",
     "smgen-theme-journal": "0.1.0",
+    "smgen-theme-landing": "0.1.0",
     "smgen-theme-semantic": "0.1.0"
   },
   "engines": {

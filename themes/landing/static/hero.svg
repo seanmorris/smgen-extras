@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" width="520" height="360" role="img" aria-label="A tide chart for one day with high water marked">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b4f8a" stop-opacity="0.35"/><stop offset="1" stop-color="#0b4f8a" stop-opacity="0.02"/></linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="519" height="359" rx="18" fill="var(--sheet, #fff)" stroke="var(--line, #d9dde2)"/>
+  <text x="32" y="44" font-family="system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="1.5" fill="var(--ink-faint, #777)">THURSDAY 28 MARCH · HARBOUR MOUTH</text>
+  <g stroke="var(--line, #d9dde2)" stroke-dasharray="2 5"><path d="M32 110H488M32 180H488M32 250H488"/></g>
+  <path d="M32 230 C 90 230, 110 90, 170 90 S 250 240, 310 240 S 390 92, 450 92 S 488 150, 488 160 V 320 H 32 Z" fill="url(#sea)"/>
+  <path d="M32 230 C 90 230, 110 90, 170 90 S 250 240, 310 240 S 390 92, 450 92 S 488 150, 488 160" fill="none" stroke="#0b4f8a" stroke-width="3.5" stroke-linecap="round"/>
+  <g font-family="system-ui, sans-serif" font-size="13" fill="var(--ink-soft, #555)">
+    <text x="32" y="345">00:00</text><text x="150" y="345">06:00</text><text x="268" y="345">12:00</text><text x="386" y="345">18:00</text><text x="470" y="345">24:00</text>
+  </g>
+  <circle cx="170" cy="90" r="6" fill="#f2b84b" stroke="var(--sheet, #fff)" stroke-width="3"/>
+  <circle cx="450" cy="92" r="6" fill="#f2b84b" stroke="var(--sheet, #fff)" stroke-width="3"/>
+  <g font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="var(--ink, #222)">
+    <text x="150" y="74">HW 05:12 · 4.8 m</text><text x="488" y="76" text-anchor="end">HW 17:41 · 4.6 m</text>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="13" fill="var(--ink-soft, #555)"><text x="268" y="268">LW 11:26 · 0.7 m</text></g>
+</svg>

@@ -1,0 +1,27 @@
+{
+  "name": "landing",
+  "package": "smgen-theme-landing",
+  "title": "Landing",
+  "description": "A one-page product site. The hero, feature sections, plan table and FAQ are data in the front page's frontmatter, so the page is edited in YAML, not HTML. Pricing, changelog and privacy pages ride along. No plugins.",
+  "demo": {
+    "productName": "Tidewatch",
+    "tagline": "Tide times that fit in a pocket"
+  },
+  "features": [
+    "Hero, features, plans and FAQ rendered from frontmatter",
+    "Anchor navigation on the one-page home",
+    "FAQ as native details elements",
+    "Three prose subpages: pricing, changelog, privacy",
+    "System light and dark with a toggle"
+  ],
+  "sampleContent": [
+    {"path": "pages/index.md", "purpose": "The front page; its frontmatter holds every section"},
+    {"path": "pages/pricing.md", "purpose": "Plan comparison as a Markdown table"},
+    {"path": "pages/changelog.md, pages/privacy.md", "purpose": "Plain prose pages"}
+  ],
+  "layouts": ["landing", "page"],
+  "notes": [
+    "The front page's Markdown body, if any, appears as a closing section below the FAQ",
+    "Replace static/hero.svg with your own screenshot or illustration"
+  ]
+}
