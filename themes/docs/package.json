@@ -1,0 +1,51 @@
+{
+  "name": "smgen-theme-docs",
+  "version": "0.1.0",
+  "description": "A documentation theme for SMGen: contents tree, article, outline rail, search, version badge and callouts. No plugins.",
+  "keywords": [
+    "smgen",
+    "smgen-theme",
+    "static-site-generator",
+    "theme",
+    "documentation",
+    "docs"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/themes/docs",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "themes/docs"
+  },
+  "smgen": {
+    "theme": "theme.json"
+  },
+  "files": [
+    ".smgen.yaml",
+    "pages",
+    "templates",
+    "static",
+    "theme.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "lint": "find templates -type f -name '*.php' -exec php -l {} +"
+  },
+  "peerDependencies": {
+    "smgen": ">=0.3.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "smgen": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

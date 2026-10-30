@@ -1,5 +1,7 @@
 node_modules/
-docs/
+/docs/
+themes/*/docs/
+examples/*/docs/
 /.docs.smgen-*/
 /design-inspo.png
 .smgen-core/

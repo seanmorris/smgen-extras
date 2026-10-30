@@ -1,0 +1,5 @@
+title: Commands
+menus:
+  docs:
+    weight: 30
+    expanded: true

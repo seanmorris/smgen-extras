@@ -1,0 +1,30 @@
+{
+  "name": "docs",
+  "package": "smgen-theme-docs",
+  "title": "Docs",
+  "description": "A technical manual. Contents tree on the left from the pages directory, the article in the middle, an outline on the right, search in the header, callouts, and a version badge. No plugins.",
+  "demo": {
+    "productName": "Kestrel",
+    "tagline": "Backups you can read"
+  },
+  "features": [
+    "Three columns: contents, article, outline",
+    "Contents from SMGen's tree menu over the pages directory",
+    "Search through smgen-search when it is installed",
+    "Note, tip and warning callouts from fenced divs",
+    "Version badge and edit link in the masthead",
+    "System light and dark with a toggle"
+  ],
+  "sampleContent": [
+    {"path": "pages/index.md", "purpose": "Getting started, the first page"},
+    {"path": "pages/install.md, pages/configuration.md", "purpose": "Install and configuration reference"},
+    {"path": "pages/commands/", "purpose": "One page per command, grouped in the contents"},
+    {"path": "pages/recipes.md, pages/faq.md, pages/changelog.md", "purpose": "Longer-form pages"},
+    {"path": "pages/about.md", "purpose": "About page; says the product is a demo"}
+  ],
+  "layouts": ["doc"],
+  "notes": [
+    "Set DOCS_VERSION and DOCS_REPOSITORY in .smgen.yaml for the masthead badge and edit links",
+    "Search needs the smgen-search package on the build machine; the theme hides the box when it is not"
+  ]
+}
