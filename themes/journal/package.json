@@ -1,0 +1,51 @@
+{
+  "name": "smgen-theme-journal",
+  "version": "0.1.0",
+  "description": "A journal theme for SMGen: dated entries listed from frontmatter, topic pages, an RSS feed, light and dark. No plugins.",
+  "keywords": [
+    "smgen",
+    "smgen-theme",
+    "static-site-generator",
+    "theme",
+    "blog",
+    "journal"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/themes/journal",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "themes/journal"
+  },
+  "smgen": {
+    "theme": "theme.json"
+  },
+  "files": [
+    ".smgen.yaml",
+    "pages",
+    "templates",
+    "static",
+    "theme.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "lint": "find templates -type f -name '*.php' -exec php -l {} +"
+  },
+  "peerDependencies": {
+    "smgen": ">=0.3.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "smgen": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

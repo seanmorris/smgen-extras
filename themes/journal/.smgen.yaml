@@ -1,0 +1,32 @@
+PRODUCT_NAME: Commonplace
+TITLE_PREFIX: Commonplace
+TAGLINE: A working notebook, kept in public
+BASE_URL: ''
+OUTPUT_DIR: ./docs
+
+DEFAULT_THEME: theme-journal
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+SMGEN_ENGINE: php
+SEARCH_ENABLED: 0
+INHERIT_CORE_STATIC: 0
+HIGHLIGHT_STYLE: kate
+CORE_ASSETS:
+  - main.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+DEFER_SCRIPTS:
+  - /main.js
+STYLES:
+  - /scrollbar.css
+  - /journal.css
+RSS_FEEDS:
+  posts:
+    path: /feed.xml
+    title: Commonplace
+    description: New entries in the notebook.
+    link: /
+    language: en
+    limit: 20

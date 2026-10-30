@@ -33,6 +33,7 @@
     "prepack": "npm test"
   },
   "dependencies": {
+    "smgen-theme-journal": "0.1.0",
     "smgen-theme-semantic": "0.1.0"
   },
   "engines": {
