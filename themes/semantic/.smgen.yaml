@@ -12,10 +12,10 @@ SMGEN_ENGINE: php
 SEARCH_ENABLED: 0
 HIGHLIGHT_STYLE: ''
 INHERIT_CORE_STATIC: 0
-CORE_ASSETS: []
+CORE_ASSETS: [scrollbar.css]
 SCRIPTS: []
 DEFER_SCRIPTS: []
-STYLES: [/base.css]
+STYLES: [/scrollbar.css, /base.css]
 MENUS:
   site:
     label: Pages

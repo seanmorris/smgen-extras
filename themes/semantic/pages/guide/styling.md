@@ -8,23 +8,22 @@ menus:
 
 # Adding a stylesheet
 
-`static/base.css` is the whole stylesheet:
+`static/base.css` is the whole stylesheet of the theme's own:
 
 ```css
-:root { color-scheme: light dark; }
-body { margin: 0 auto; max-width: 90rem; padding: 0 1rem; line-height: 1.5; font-family: system-ui, sans-serif; }
+:root { color-scheme: light dark; --scrollbar-thumb: color-mix(in srgb, currentColor 25%, transparent); }
+body { min-height: 100vh; margin: 0; padding: 0 1rem; line-height: 1.5; font-family: system-ui, sans-serif; }
 body > header { padding: 1rem 0; border-bottom: 1px solid; }
-body > footer { padding: 1rem 0; border-top: 1px solid; }
-main { max-width: 72ch; }
+body > footer { position: sticky; top: 100vh; padding: 1rem 0; border-top: 1px solid; }
 img, svg, video { max-width: 100%; height: auto; }
 pre { overflow: auto; }
 table { border-collapse: collapse; }
 td, th { padding: 0.25em 0.6em; border: 1px solid; }
 @media (min-width: 64rem) {
-  body { display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 2rem; }
+  body { display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; column-gap: 2rem; }
   body > header, body > footer { flex: 0 0 100%; }
   body > nav { flex: 0 1 14rem; }
-  main { flex: 1 1 0; min-width: 0; max-width: none; }
+  main { flex: 1 1 0; min-width: 0; }
   body > aside { flex: 0 1 14rem; }
   body > nav, body > aside { position: sticky; top: 0; max-height: 100vh; overflow: auto; }
 }
@@ -33,13 +32,20 @@ td, th { padding: 0.25em 0.6em; border: 1px solid; }
 The first rule is the one that matters. `color-scheme: light dark` tells the
 browser to render its default colours in whichever scheme the visitor
 prefers, so the site is already light and dark without a single colour
-declared. The media query at the end is the layout: above 64rem the body
-becomes a flex row that wraps, the header and footer take the full width,
-the navigation and the outline take a column each, and the article takes
-whatever is left, so there is no dead space between them. The two side
-columns stick while the article scrolls. Below that width the rule does not
-apply and the landmarks stack in source order, which is also what you get
-with no stylesheet at all.
+declared. The body is at least as tall as the window and the footer is
+sticky at `top: 100vh`, which pins it to the bottom of a short page without
+a wrapper element. The media query at the end is the layout: above 64rem
+the body becomes a flex row that wraps, the header and footer take the full
+width, the navigation and the outline take a column each, and the article
+takes whatever is left, so there is no dead space between them. The two
+side columns stick while the article scrolls. Below that width the rule
+does not apply and the landmarks stack in source order, which is also what
+you get with no stylesheet at all.
+
+The only other stylesheet is SMGen core's `scrollbar.css`, listed under
+`CORE_ASSETS` and `STYLES` in `.smgen.yaml`: a thin, quiet scrollbar whose
+gutter is reserved so the page does not shift between pages that scroll
+and pages that do not. `--scrollbar-thumb` on `:root` sets its colour.
 
 ## Start from the landmarks
 

@@ -14,9 +14,12 @@ npm create smgen-site@latest my-site -- --theme semantic
 ## What you get
 
 - `templates/page.php`: one template for every page.
-- `static/base.css`: the three columns on wide screens, colour scheme, and
-  table borders. Delete it and the landmarks stack in
-  reading order with pure browser defaults.
+- `static/base.css`: the three columns on wide screens, a footer that sits
+  at the bottom of short pages, the colour scheme, and table borders.
+  Delete it and the landmarks stack in reading order with pure browser
+  defaults.
+- SMGen core's `scrollbar.css`, a thin quiet scrollbar with a stable gutter,
+  listed in `.smgen.yaml`.
 - `pages/`: a home page, an elements page, two short guides, and an about
   page. Replace them with your own.
 - `.smgen.yaml`: the site menu is SMGen's tree renderer over `pages/`, so
