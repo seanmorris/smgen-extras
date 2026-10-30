@@ -20,6 +20,11 @@ nav[aria-label="Breadcrumb"] li + li::before { content: "/"; margin-right: 0.4em
 img, svg, video { max-width: 100%; height: auto; }
 pre { overflow: auto; }
 table { border-collapse: collapse; }
+code span.kw, code span.cf, code span.bu, code span.im, code span.dt, code span.ot, code span.pp, code span.ex, code span.re { color: light-dark(#00703c, #6fd39a); }
+code span.st, code span.ch, code span.sc, code span.vs, code span.ss, code span.bn, code span.dv, code span.fl, code span.at { color: light-dark(#1a56a8, #8ec2ff); }
+code span.co, code span.do, code span.an, code span.cv, code span.in, code span.wa, code span.op { color: light-dark(#5f6b74, #a3adb5); }
+code span.va, code span.cn, code span.fu { color: light-dark(#7a2e9e, #d9a8ff); }
+code span.al, code span.er { color: light-dark(#b3261e, #ff8a80); }
 td, th { padding: 0.25em 0.6em; border: 1px solid; }
 @media (min-width: 64rem) {
   body { display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; column-gap: 2rem; }
@@ -34,7 +39,10 @@ td, th { padding: 0.25em 0.6em; border: 1px solid; }
 The first rule is the one that matters. `color-scheme: light dark` tells the
 browser to render its default colours in whichever scheme the visitor
 prefers, so the site is already light and dark without a single colour
-declared. The two breadcrumb rules turn SMGen's breadcrumb list into one line with a
+declared. The five `code span` rules recolour Pandoc's syntax highlighting by role,
+keywords, strings and values, comments, names, and errors, and `light-dark()` picks
+the light or dark value to match the browser's scheme, so every token stays
+readable on either background. The two breadcrumb rules turn SMGen's breadcrumb list into one line with a
 slash between the steps, keyed on its `aria-label` rather than a class. The body is at least as tall as the window and the footer is
 sticky at `top: 100vh`, which pins it to the bottom of a short page without
 a wrapper element. The media query at the end is the layout: above 64rem

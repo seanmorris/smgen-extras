@@ -8,7 +8,7 @@
     "tagline": "A site that documents its own markup"
   },
   "features": [
-    "A stylesheet under twenty lines you can delete: three columns on wide screens, a footer at the bottom of short pages, a colour scheme, table borders",
+    "A stylesheet under thirty lines you can delete: three columns on wide screens, a footer at the bottom of short pages, syntax colours that read in light and dark, table borders",
     "Semantic landmarks: header, nav, main, article, aside, footer",
     "Site menu and breadcrumbs from SMGen core",
     "Light and dark through the browser's own colour scheme",

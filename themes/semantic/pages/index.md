@@ -12,7 +12,7 @@ menus:
 
 This site is the SMGen **semantic** theme running with nothing hidden. The
 template writes a header, a navigation landmark, a main article, an outline
-aside and a footer, in that order, and the only stylesheet is under twenty
+aside and a footer, in that order, and the only stylesheet is under thirty
 lines: on a wide screen it places them as the classic three columns, and on
 a narrow one it does nothing at all. Everything else you see is what a
 browser does with correct HTML on its own.

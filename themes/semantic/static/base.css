@@ -8,6 +8,11 @@ nav[aria-label="Breadcrumb"] li + li::before { content: "/"; margin-right: 0.4em
 img, svg, video { max-width: 100%; height: auto; }
 pre { overflow: auto; }
 table { border-collapse: collapse; }
+code span.kw, code span.cf, code span.bu, code span.im, code span.dt, code span.ot, code span.pp, code span.ex, code span.re { color: light-dark(#00703c, #6fd39a); }
+code span.st, code span.ch, code span.sc, code span.vs, code span.ss, code span.bn, code span.dv, code span.fl, code span.at { color: light-dark(#1a56a8, #8ec2ff); }
+code span.co, code span.do, code span.an, code span.cv, code span.in, code span.wa, code span.op { color: light-dark(#5f6b74, #a3adb5); }
+code span.va, code span.cn, code span.fu { color: light-dark(#7a2e9e, #d9a8ff); }
+code span.al, code span.er { color: light-dark(#b3261e, #ff8a80); }
 td, th { padding: 0.25em 0.6em; border: 1px solid; }
 @media (min-width: 64rem) {
   body { display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; column-gap: 2rem; }

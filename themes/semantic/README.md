@@ -3,7 +3,8 @@
 An [SMGen](https://seanmorris.github.io/smgen/) theme with almost no CSS. The
 template writes clean, classless HTML in the classic three-column shape
 (`header`, `nav`, `main > article`, `aside`, `footer`), the stylesheet is
-under twenty lines and most of it is the flex row that places those columns, and
+under thirty lines and most of it is the flex row that places those columns and
+the syntax colours, and
 the sample pages show every Markdown construct so you can see the markup you
 will be styling.
 
