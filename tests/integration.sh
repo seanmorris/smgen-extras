@@ -21,12 +21,12 @@ cp -Rp "${ROOT_DIR}/tests/fixtures/store-site/." "${SITE}/"
 cp -Rp "${SMGEN_ROOT}/templates/." "${SITE}/templates/"
 cp -Rp "${SMGEN_ROOT}/static/." "${SITE}/static/"
 printf '%s\n' '{"private":true}' > "${SITE}/package.json"
-DATA_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-data-pages" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
-STORE_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-store" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
-PHPDOC_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-phpdoc" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
-JSDOC_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-jsdoc" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
-CATEGORIES_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-categories" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
-TIMELINE_TARBALL="$(cd "${ROOT_DIR}/packages/smgen-timeline" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+DATA_TARBALL="$(cd "${ROOT_DIR}/plugins/smgen-data-pages" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+STORE_TARBALL="$(cd "${ROOT_DIR}/plugins/smgen-store" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+PHPDOC_TARBALL="$(cd "${ROOT_DIR}/plugins/smgen-phpdoc" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+JSDOC_TARBALL="$(cd "${ROOT_DIR}/plugins/smgen-jsdoc" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+CATEGORIES_TARBALL="$(cd "${ROOT_DIR}/plugins/smgen-categories" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
+TIMELINE_TARBALL="$(cd "${ROOT_DIR}/plugins/smgen-timeline" && npm pack --silent --ignore-scripts --pack-destination "${TEMP_ROOT}" | tail -n 1)"
 npm install --prefix "${SITE}" --ignore-scripts --no-package-lock --no-save \
 	"${TEMP_ROOT}/${DATA_TARBALL}" \
 	"${TEMP_ROOT}/${STORE_TARBALL}" \

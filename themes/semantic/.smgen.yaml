@@ -1,0 +1,26 @@
+PRODUCT_NAME: Plain
+TITLE_PREFIX: Plain
+TAGLINE: A site that documents its own markup
+BASE_URL: ''
+OUTPUT_DIR: ./docs
+
+DEFAULT_THEME: theme-semantic
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ./templates
+STATIC_DIR: ./static
+SMGEN_ENGINE: php
+SEARCH_ENABLED: 0
+HIGHLIGHT_STYLE: ''
+INHERIT_CORE_STATIC: 0
+CORE_ASSETS: []
+SCRIPTS: []
+DEFER_SCRIPTS: []
+STYLES: [/base.css]
+MENUS:
+  site:
+    label: Pages
+    renderer: tree
+    hierarchy: source
+    showLabel: false
+MENU_REGIONS:
+  header: [site]

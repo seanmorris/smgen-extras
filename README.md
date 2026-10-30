@@ -1,15 +1,15 @@
-# SMGen Plugins
+# SMGen Extras
 
 This workspace contains plugins that extend SMGen builds without adding code to SMGen core:
 
-[Read the plugin guides](https://seanmorris.github.io/smgen-plugins/) or open a package reference below.
+[Read the plugin guides](https://seanmorris.github.io/smgen-extras/) or open a package reference below.
 
-- [`smgen-data-pages`](packages/smgen-data-pages) validates CSV or TSV data and renders Markdown pages from PHP templates.
-- [`smgen-store`](packages/smgen-store) validates public checkout metadata and renders hosted payment links or provider buttons.
-- [`smgen-phpdoc`](packages/smgen-phpdoc) statically analyzes PHP and renders linked API reference pages without loading project code.
-- [`smgen-jsdoc`](packages/smgen-jsdoc) statically analyzes JavaScript and JSDoc and renders linked API reference pages without importing project modules.
-- [`smgen-categories`](packages/smgen-categories) groups pages by a frontmatter field and renders one rollup page per value, including dates by day, month, or year.
-- [`smgen-timeline`](packages/smgen-timeline) renders a dated archive menu with a calendar and day rollup pages built on `smgen-categories`.
+- [`smgen-data-pages`](plugins/smgen-data-pages) validates CSV or TSV data and renders Markdown pages from PHP templates.
+- [`smgen-store`](plugins/smgen-store) validates public checkout metadata and renders hosted payment links or provider buttons.
+- [`smgen-phpdoc`](plugins/smgen-phpdoc) statically analyzes PHP and renders linked API reference pages without loading project code.
+- [`smgen-jsdoc`](plugins/smgen-jsdoc) statically analyzes JavaScript and JSDoc and renders linked API reference pages without importing project modules.
+- [`smgen-categories`](plugins/smgen-categories) groups pages by a frontmatter field and renders one rollup page per value, including dates by day, month, or year.
+- [`smgen-timeline`](plugins/smgen-timeline) renders a dated archive menu with a calendar and day rollup pages built on `smgen-categories`.
 
 The generated site stays static. Product edits can start in a spreadsheet, pass through CI, and publish as ordinary HTML. Payment providers host checkout and remain responsible for the amount charged, payment state, inventory, and fulfillment.
 

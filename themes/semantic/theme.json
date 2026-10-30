@@ -1,0 +1,28 @@
+{
+  "name": "semantic",
+  "package": "smgen-theme-semantic",
+  "title": "Semantic",
+  "description": "Almost no CSS. Clean, classless HTML from a tiny template, with pages that show every Markdown construct so you can see the markup you will be styling.",
+  "demo": {
+    "productName": "Plain",
+    "tagline": "A site that documents its own markup"
+  },
+  "features": [
+    "One eight-line stylesheet you can delete",
+    "Semantic landmarks: header, nav, main, article, aside, footer",
+    "Site menu and breadcrumbs from SMGen core",
+    "Light and dark through the browser's own colour scheme",
+    "No scripts"
+  ],
+  "sampleContent": [
+    {"path": "pages/index.md", "purpose": "Home page"},
+    {"path": "pages/elements.md", "purpose": "Every Markdown construct and the HTML it produces"},
+    {"path": "pages/guide/", "purpose": "Two short guides: writing pages and adding a stylesheet"},
+    {"path": "pages/about.md", "purpose": "About page; says the site is a demo"}
+  ],
+  "layouts": ["page"],
+  "notes": [
+    "static/base.css sets a reading measure and colour-scheme; remove it for pure browser defaults",
+    "The menu is the core tree renderer over the pages directory, so new pages appear automatically"
+  ]
+}

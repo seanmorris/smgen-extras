@@ -17,9 +17,9 @@ jsonld:
   "@type": TechArticle
   headline: JavaScript API References
   description: Generate linked SMGen API pages from JavaScript and JSDoc without running the source.
-  url: https://seanmorris.github.io/smgen-plugins/jsdoc.html
+  url: https://seanmorris.github.io/smgen-extras/jsdoc.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # JavaScript API References
@@ -166,5 +166,5 @@ npx smgen-jsdoc clean
 times. `check` reports drift without writing. `clean` requires the plugin's
 ownership marker before it removes anything.
 
-The [package reference on GitHub](https://github.com/seanmorris/smgen-plugins/tree/main/packages/smgen-jsdoc)
+The [package reference on GitHub](https://github.com/seanmorris/smgen-extras/tree/main/plugins/smgen-jsdoc)
 lists supported JSDoc forms, renderer overrides, and output safeguards.

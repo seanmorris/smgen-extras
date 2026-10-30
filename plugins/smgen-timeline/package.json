@@ -1,0 +1,57 @@
+{
+  "name": "smgen-timeline",
+  "version": "0.1.0",
+  "description": "Add a dated archive menu to an SMGen site: a calendar, year and month groups, and day rollup pages built with smgen-categories.",
+  "keywords": [
+    "smgen",
+    "static-site-generator",
+    "archive",
+    "timeline",
+    "blog"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/plugins/smgen-timeline",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "plugins/smgen-timeline"
+  },
+  "smgen": {
+    "plugin": "smgen.plugin.yaml"
+  },
+  "files": [
+    "bin",
+    "helpers",
+    "src",
+    "static",
+    "templates",
+    "smgen.plugin.yaml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "lint": "php ../../scripts/check-php-docblocks.php . && find bin helpers src templates tests -type f -name '*.php' -exec php -l {} +",
+    "test": "php tests/run.php",
+    "check": "npm run lint && npm test",
+    "prepack": "npm run check"
+  },
+  "dependencies": {
+    "smgen-categories": "0.1.0"
+  },
+  "peerDependencies": {
+    "smgen": ">=0.3.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "smgen": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

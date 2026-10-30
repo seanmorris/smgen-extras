@@ -17,9 +17,9 @@ jsonld:
   "@type": TechArticle
   headline: Timeline
   description: Add a dated archive with a calendar, year and month groups, and a page for every day with several posts.
-  url: https://seanmorris.github.io/smgen-plugins/timeline.html
+  url: https://seanmorris.github.io/smgen-extras/timeline.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # Timeline

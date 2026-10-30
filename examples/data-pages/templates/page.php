@@ -172,7 +172,7 @@ $endfor$
 
 	<footer class="footer">
 		<p><strong><?=escapeHtml(getConf('PRODUCT_NAME'))?></strong> is a fictional place. Distances and conditions are invented. Real trails deserve a real guide.</p>
-		<p class="footer-links"><a href="https://seanmorris.github.io/smgen-plugins/data-pages.html">Built with smgen-data-pages</a><a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/data-pages">View the source</a></p>
+		<p class="footer-links"><a href="https://seanmorris.github.io/smgen-extras/data-pages.html">Built with smgen-data-pages</a><a href="https://github.com/seanmorris/smgen-extras/tree/main/examples/data-pages">View the source</a></p>
 	</footer>
 </body>
 </html>

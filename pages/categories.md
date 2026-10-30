@@ -17,9 +17,9 @@ jsonld:
   "@type": TechArticle
   headline: Category Pages
   description: Generate one page for every value of a frontmatter field, including dates grouped by day, month, or year.
-  url: https://seanmorris.github.io/smgen-plugins/categories.html
+  url: https://seanmorris.github.io/smgen-extras/categories.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # Category Pages

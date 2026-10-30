@@ -1,5 +1,5 @@
 ---
-title: SMGen Plugins
+title: SMGen Extras
 description: Add PHP and JavaScript API references, spreadsheet-driven pages, category rollups, a dated archive, and static checkout controls to an SMGen site.
 layout: home
 TOC: false
@@ -14,17 +14,17 @@ jsonld:
   "@context": https://schema.org
   "@graph":
     - "@type": WebSite
-      "@id": https://seanmorris.github.io/smgen-plugins/#website
-      url: https://seanmorris.github.io/smgen-plugins/
-      name: smgen-plugins
+      "@id": https://seanmorris.github.io/smgen-extras/#website
+      url: https://seanmorris.github.io/smgen-extras/
+      name: smgen-extras
       description: Focused extensions for static SMGen sites.
       inLanguage: en
     - "@type": CollectionPage
-      "@id": https://seanmorris.github.io/smgen-plugins/#page
-      url: https://seanmorris.github.io/smgen-plugins/
-      name: SMGen Plugins
+      "@id": https://seanmorris.github.io/smgen-extras/#page
+      url: https://seanmorris.github.io/smgen-extras/
+      name: SMGen Extras
       isPartOf:
-        "@id": https://seanmorris.github.io/smgen-plugins/#website
+        "@id": https://seanmorris.github.io/smgen-extras/#website
       about:
         "@type": SoftwareApplication
         name: SMGen

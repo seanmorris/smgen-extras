@@ -1,0 +1,5 @@
+title: Guide
+menus:
+  site:
+    weight: 20
+    expanded: true

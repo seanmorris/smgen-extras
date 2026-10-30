@@ -1,0 +1,50 @@
+{
+  "name": "smgen-theme-semantic",
+  "version": "0.1.0",
+  "description": "An SMGen theme with almost no CSS: clean semantic HTML, browser defaults, and pages that document their own markup.",
+  "keywords": [
+    "smgen",
+    "smgen-theme",
+    "static-site-generator",
+    "theme",
+    "classless"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/themes/semantic",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "themes/semantic"
+  },
+  "smgen": {
+    "theme": "theme.json"
+  },
+  "files": [
+    ".smgen.yaml",
+    "pages",
+    "templates",
+    "static",
+    "theme.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "lint": "find templates -type f -name '*.php' -exec php -l {} +"
+  },
+  "peerDependencies": {
+    "smgen": ">=0.3.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "smgen": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

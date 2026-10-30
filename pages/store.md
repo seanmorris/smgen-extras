@@ -17,9 +17,9 @@ jsonld:
   "@type": TechArticle
   headline: Static Store
   description: Add validated hosted checkout controls to static SMGen pages.
-  url: https://seanmorris.github.io/smgen-plugins/store.html
+  url: https://seanmorris.github.io/smgen-extras/store.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # Static Store
@@ -132,5 +132,5 @@ non-HTTPS links, missing public identifiers, and credential-shaped fields or
 values. Never put provider secret keys or access tokens in Markdown, YAML, CSV,
 or Git.
 
-The [package reference on GitHub](https://github.com/seanmorris/smgen-plugins/tree/main/packages/smgen-store)
+The [package reference on GitHub](https://github.com/seanmorris/smgen-extras/tree/main/plugins/smgen-store)
 documents provider fields and content security policy requirements.

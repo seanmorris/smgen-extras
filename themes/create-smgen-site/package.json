@@ -1,0 +1,44 @@
+{
+  "name": "create-smgen-site",
+  "version": "0.1.0",
+  "description": "Scaffold an SMGen site from one of the official base themes.",
+  "keywords": [
+    "smgen",
+    "create",
+    "scaffold",
+    "static-site-generator",
+    "theme"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/themes/create-smgen-site",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "themes/create-smgen-site"
+  },
+  "type": "module",
+  "bin": {
+    "create-smgen-site": "bin/create-smgen-site.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "prepack": "npm test"
+  },
+  "dependencies": {
+    "smgen-theme-semantic": "0.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

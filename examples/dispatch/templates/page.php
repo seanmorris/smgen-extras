@@ -65,7 +65,7 @@ $endfor$
 				<a class="tab tab--<?=escapeHtml($key)?>" href="<?=escapeHtml(resolveAssetUrl('/' . $key . '/'))?>"<?=$libraryKey === $key ? ' aria-current="page"' : ''?>><?=escapeHtml($entry['name'])?><small><?=escapeHtml($entry['language'])?></small></a>
 				<?php endforeach; ?>
 			</nav>
-			<a class="masthead-source" href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/dispatch" target="_blank" rel="noopener noreferrer">Source</a>
+			<a class="masthead-source" href="https://github.com/seanmorris/smgen-extras/tree/main/examples/dispatch" target="_blank" rel="noopener noreferrer">Source</a>
 			<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">
 				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
 				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -169,7 +169,7 @@ $endfor$
 			<?php if($isApi && $library !== null): ?>
 			<footer class="sheet-foot">
 				<a href="<?=escapeHtml(resolveAssetUrl($libraryBase . '/api/index.html'))?>">All <?=escapeHtml($library['name'])?> declarations</a>
-				<a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/dispatch" target="_blank" rel="noopener noreferrer">Edit this page</a>
+				<a href="https://github.com/seanmorris/smgen-extras/tree/main/examples/dispatch" target="_blank" rel="noopener noreferrer">Edit this page</a>
 			</footer>
 			<?php endif; ?>
 		</main>
@@ -178,8 +178,8 @@ $endfor$
 
 	<footer class="colophon">
 		<div class="colophon-inner">
-			<p><strong>Postbox</strong> and <strong>Signalbox</strong> are fictional libraries written to show what <a href="https://seanmorris.github.io/smgen-plugins/phpdoc.html" target="_blank" rel="noopener noreferrer">smgen-phpdoc</a> and <a href="https://seanmorris.github.io/smgen-plugins/jsdoc.html" target="_blank" rel="noopener noreferrer">smgen-jsdoc</a> generate from real source.</p>
-			<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/postbox/api/index.html'))?>">Postbox API</a><a href="<?=escapeHtml(resolveAssetUrl('/signalbox/api/index.html'))?>">Signalbox API</a><a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/dispatch" target="_blank" rel="noopener noreferrer">View the source</a></p>
+			<p><strong>Postbox</strong> and <strong>Signalbox</strong> are fictional libraries written to show what <a href="https://seanmorris.github.io/smgen-extras/phpdoc.html" target="_blank" rel="noopener noreferrer">smgen-phpdoc</a> and <a href="https://seanmorris.github.io/smgen-extras/jsdoc.html" target="_blank" rel="noopener noreferrer">smgen-jsdoc</a> generate from real source.</p>
+			<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/postbox/api/index.html'))?>">Postbox API</a><a href="<?=escapeHtml(resolveAssetUrl('/signalbox/api/index.html'))?>">Signalbox API</a><a href="https://github.com/seanmorris/smgen-extras/tree/main/examples/dispatch" target="_blank" rel="noopener noreferrer">View the source</a></p>
 		</div>
 	</footer>
 </body>

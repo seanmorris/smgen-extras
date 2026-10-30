@@ -217,4 +217,4 @@ final class PhpDocChecker
 }
 
 $paths = array_slice($argv, 1);
-PhpDocChecker::run($paths === [] ? [dirname(__DIR__) . '/packages'] : $paths);
+PhpDocChecker::run($paths === [] ? [dirname(__DIR__) . '/plugins'] : $paths);

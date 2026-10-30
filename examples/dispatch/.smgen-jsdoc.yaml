@@ -17,7 +17,7 @@ llms: false
 assistant: false
 jsonld: true
 source:
-  repository: https://github.com/seanmorris/smgen-plugins
+  repository: https://github.com/seanmorris/smgen-extras
   ref: main
   prefix: examples/dispatch
 validation:

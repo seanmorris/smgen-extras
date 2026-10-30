@@ -47,6 +47,19 @@ if [[ "${COMMAND}" == build || "${COMMAND}" == watch ]]; then
 			BASE_URL="${SITE_BASE_URL%/}/examples/${example}" "${SMGEN_COMMAND}" build
 		)
 	done
+	THEME_OUTPUT="${ROOT_DIR}/static/themes"
+	if [[ -L "${THEME_OUTPUT}" ]]; then
+		echo "Refusing to replace symbolic-link theme output: ${THEME_OUTPUT}" >&2
+		exit 1
+	fi
+	rm -rf -- "${THEME_OUTPUT}"
+	for manifest in "${ROOT_DIR}"/themes/*/theme.json; do
+		theme="$(basename "$(dirname "${manifest}")")"
+		(
+			cd "${ROOT_DIR}/themes/${theme}"
+			OUTPUT_DIR="${THEME_OUTPUT}/${theme}" BASE_URL="${SITE_BASE_URL%/}/themes/${theme}" "${SMGEN_COMMAND}" build
+		)
+	done
 fi
 
 exec "${SMGEN_COMMAND}" "${COMMAND}"

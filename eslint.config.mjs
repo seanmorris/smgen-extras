@@ -10,10 +10,10 @@ const documentedFunctions = [
 
 export default [
   {
-    ignores: ['node_modules/**', 'packages/*/static/vendor/**'],
+    ignores: ['node_modules/**', 'plugins/*/static/vendor/**', 'themes/*/static/vendor/**', 'themes/*/docs/**'],
   },
   {
-    files: ['packages/**/*.{js,mjs}'],
+    files: ['plugins/**/*.{js,mjs}', 'themes/*/static/*.js', 'themes/create-smgen-site/{bin,lib,tests}/**/*.js'],
     plugins: {jsdoc},
     rules: {
       'jsdoc/check-tag-names': 'error',

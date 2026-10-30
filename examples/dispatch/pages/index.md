@@ -52,7 +52,7 @@ subscription.unsubscribe();
 <h2 id="ledger-title">How these pages are made</h2>
 <dl class="ledger-list">
 <div><dt>Guides</dt><dd>Hand-written Markdown, one file per page, kept beside the source.</dd></div>
-<div><dt>References</dt><dd>Generated from the PHP source and the JSDoc on each build by <a href="https://seanmorris.github.io/smgen-plugins/phpdoc.html">smgen-phpdoc</a> and <a href="https://seanmorris.github.io/smgen-plugins/jsdoc.html">smgen-jsdoc</a>. Nothing here is a hand-kept copy.</dd></div>
+<div><dt>References</dt><dd>Generated from the PHP source and the JSDoc on each build by <a href="https://seanmorris.github.io/smgen-extras/phpdoc.html">smgen-phpdoc</a> and <a href="https://seanmorris.github.io/smgen-extras/jsdoc.html">smgen-jsdoc</a>. Nothing here is a hand-kept copy.</dd></div>
 <div><dt>Policy</dt><dd>A public symbol without a summary, a parameter without a description, or a broken <code>@see</code> fails the build before anything is published.</dd></div>
 </dl>
 </section>

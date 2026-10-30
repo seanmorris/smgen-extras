@@ -139,10 +139,10 @@ $endfor$
 				<li><a href="<?=escapeHtml(resolveAssetUrl('/about.html#shipping-and-returns'))?>">Shipping and returns</a></li>
 			</ul>
 			<ul class="footer-links" aria-label="About this example">
-				<li><a href="https://seanmorris.github.io/smgen-plugins/store.html">Built with smgen-store</a></li>
-				<li><a href="https://seanmorris.github.io/smgen-plugins/data-pages.html">smgen-data-pages</a></li>
-				<li><a href="https://seanmorris.github.io/smgen-plugins/categories.html">smgen-categories</a></li>
-				<li><a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/store">View the source</a></li>
+				<li><a href="https://seanmorris.github.io/smgen-extras/store.html">Built with smgen-store</a></li>
+				<li><a href="https://seanmorris.github.io/smgen-extras/data-pages.html">smgen-data-pages</a></li>
+				<li><a href="https://seanmorris.github.io/smgen-extras/categories.html">smgen-categories</a></li>
+				<li><a href="https://github.com/seanmorris/smgen-extras/tree/main/examples/store">View the source</a></li>
 			</ul>
 		</div>
 		<p class="footer-note">A fictional shop. Checkout links point at example.com and charge nothing.</p>

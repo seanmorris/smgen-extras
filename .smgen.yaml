@@ -1,7 +1,7 @@
-PRODUCT_NAME: smgen-plugins
-TAGLINE: Focused extensions for static sites
+PRODUCT_NAME: smgen-extras
+TAGLINE: Plugins and themes for SMGen
 ORGANIZATION: Sean Morris
-TITLE_PREFIX: smgen-plugins
+TITLE_PREFIX: smgen-extras
 DEFAULT_THEME: theme-plugins
 
 BASE_URL: http://localhost:8200
@@ -30,7 +30,7 @@ STYLES:
 SEARCH_ENABLED: 0
 
 LLMS:
-  title: smgen-plugins
+  title: smgen-extras
   summary: Add data-driven pages, static checkout controls, and generated PHP and JavaScript API references to SMGen sites.
   details: |
     Each package participates in the SMGen build and publishes ordinary static

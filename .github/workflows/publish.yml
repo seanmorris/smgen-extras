@@ -71,7 +71,7 @@ jobs:
             smgen-timeline-v*) package="smgen-timeline"; version="${tag#smgen-timeline-v}" ;;
             *) echo "Unsupported release tag: ${tag}" >&2; exit 1 ;;
           esac
-          declared="$(node -p "require('./packages/${package}/package.json').version")"
+          declared="$(node -p "require('./plugins/${package}/package.json').version")"
           if [[ "${declared}" != "${version}" ]]; then
             echo "Tag ${tag} does not match ${package} version ${declared}." >&2
             exit 1
@@ -81,4 +81,4 @@ jobs:
       - name: Publish tagged workspace
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --workspace "packages/${{ steps.package.outputs.name }}" --access public --provenance
+        run: npm publish --workspace "plugins/${{ steps.package.outputs.name }}" --access public --provenance

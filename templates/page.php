@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Renders the smgen-plugins hub: one header navigation, a home layout, and guide pages with an outline.
+ * Renders the smgen-extras hub: one header navigation, a home layout, and guide pages with an outline.
  */
 
 $layout = $frontmatter['layout'] ?? 'guide';
@@ -59,7 +59,7 @@ $endfor$
 				<a href="<?=escapeHtml(resolveAssetUrl($link['path']))?>"<?=$currentSource === $link['source'] ? ' aria-current="page"' : ''?>><?=escapeHtml($link['label'])?></a>
 				<?php endforeach; ?>
 			</nav>
-			<a class="nav-external" href="https://github.com/seanmorris/smgen-plugins" target="_blank" rel="noopener noreferrer">GitHub</a>
+			<a class="nav-external" href="https://github.com/seanmorris/smgen-extras" target="_blank" rel="noopener noreferrer">GitHub</a>
 			<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">
 				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
 				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -92,7 +92,7 @@ $endfor$
 			<p class="outline-title">On this page</p>
 			${toc}
 			<?php if(is_array($guide)): ?>
-			<p class="outline-links"><a href="<?=escapeHtml($guide['example'])?>" target="_blank" rel="noopener noreferrer">Open the example</a><a href="https://github.com/seanmorris/smgen-plugins/tree/main/packages/<?=escapeHtml($guide['package'])?>" target="_blank" rel="noopener noreferrer">Package source</a></p>
+			<p class="outline-links"><a href="<?=escapeHtml($guide['example'])?>" target="_blank" rel="noopener noreferrer">Open the example</a><a href="https://github.com/seanmorris/smgen-extras/tree/main/plugins/<?=escapeHtml($guide['package'])?>" target="_blank" rel="noopener noreferrer">Package source</a></p>
 			<?php endif; ?>
 		</aside>
 		$endif$
@@ -102,7 +102,7 @@ $endfor$
 	<footer class="footer">
 		<div class="shell footer-inner">
 			<p>&copy; <?=date('Y')?> <?=escapeHtml(getConf('ORGANIZATION'))?>. Apache-2.0.</p>
-			<p class="footer-links"><a href="https://seanmorris.github.io/smgen/">SMGen</a><a href="https://github.com/seanmorris/smgen-plugins">Source</a><a href="https://github.com/seanmorris/smgen-plugins/issues">Issues</a><a href="<?=escapeHtml(resolveAssetUrl('/llms.txt'))?>">llms.txt</a></p>
+			<p class="footer-links"><a href="https://seanmorris.github.io/smgen/">SMGen</a><a href="https://github.com/seanmorris/smgen-extras">Source</a><a href="https://github.com/seanmorris/smgen-extras/issues">Issues</a><a href="<?=escapeHtml(resolveAssetUrl('/llms.txt'))?>">llms.txt</a></p>
 		</div>
 	</footer>
 </body>

@@ -1,0 +1,7 @@
+/* Plain: the whole stylesheet. Delete it for pure browser defaults. */
+:root { color-scheme: light dark; }
+body { max-width: 72ch; margin: 0 auto; padding: 1rem; line-height: 1.5; font-family: system-ui, sans-serif; }
+img, svg, video { max-width: 100%; height: auto; }
+pre { overflow: auto; }
+td, th { padding: 0.25em 0.6em; border: 1px solid; }
+table { border-collapse: collapse; }

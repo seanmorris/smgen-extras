@@ -263,7 +263,7 @@ $endfor$
 
 	<footer class="colophon">
 		<p><strong><?=escapeHtml(getConf('PRODUCT_NAME'))?></strong> is printed by hand and published from plain files.</p>
-		<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>" target="_blank" rel="noopener noreferrer">RSS feed</a><a href="<?=escapeHtml(resolveAssetUrl('/about.html'))?>">Colophon</a><a href="https://seanmorris.github.io/smgen/">Built with SMGen</a><a href="https://github.com/seanmorris/smgen-plugins/tree/main/examples/blog">Source</a></p>
+		<p class="colophon-links"><a href="<?=escapeHtml(resolveAssetUrl('/feed.xml'))?>" target="_blank" rel="noopener noreferrer">RSS feed</a><a href="<?=escapeHtml(resolveAssetUrl('/about.html'))?>">Colophon</a><a href="https://seanmorris.github.io/smgen/">Built with SMGen</a><a href="https://github.com/seanmorris/smgen-extras/tree/main/examples/blog">Source</a></p>
 	</footer>
 </body>
 </html>

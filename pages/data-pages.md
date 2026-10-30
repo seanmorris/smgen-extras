@@ -17,9 +17,9 @@ jsonld:
   "@type": TechArticle
   headline: Data Pages
   description: Validate CSV or TSV data and turn each row into an SMGen page.
-  url: https://seanmorris.github.io/smgen-plugins/data-pages.html
+  url: https://seanmorris.github.io/smgen-extras/data-pages.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # Data Pages
@@ -115,6 +115,6 @@ missing required values, duplicate keys, unsafe paths, symlink escapes, and
 template errors. Diagnostics include the dataset and physical row when the
 source provides them.
 
-The [package reference on GitHub](https://github.com/seanmorris/smgen-plugins/tree/main/packages/smgen-data-pages)
+The [package reference on GitHub](https://github.com/seanmorris/smgen-extras/tree/main/plugins/smgen-data-pages)
 covers collection pages, TSV delimiters, template helpers, and standalone
 generation.

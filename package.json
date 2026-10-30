@@ -1,18 +1,18 @@
 {
-  "name": "smgen-plugins-workspace",
+  "name": "smgen-extras-workspace",
   "version": "0.1.0",
   "private": true,
-  "description": "Official data-page, static-store, and API documentation plugins for SMGen.",
+  "description": "Official plugins and base themes for SMGen.",
   "license": "Apache-2.0",
   "author": "Sean Morris",
   "workspaces": [
-    "packages/*"
+    "plugins/*", "themes/*"
   ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "phpdoc:vendor": "composer install --working-dir packages/smgen-phpdoc --no-dev --prefer-dist --no-interaction --optimize-autoloader",
+    "phpdoc:vendor": "composer install --working-dir plugins/smgen-phpdoc --no-dev --prefer-dist --no-interaction --optimize-autoloader",
     "lint": "bash scripts/lint.sh",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "bash tests/run.sh",

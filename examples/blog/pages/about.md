@@ -57,6 +57,6 @@ remember your open archive groups, fetch pages early, and switch calendar
 months in place. Every link works without them. The type is whatever serif
 your device already has, which is faster than anything we could send you.
 
-The example lives in the [smgen-plugins repository](https://github.com/seanmorris/smgen-plugins/tree/main/examples/blog).
+The example lives in the [smgen-extras repository](https://github.com/seanmorris/smgen-extras/tree/main/examples/blog).
 
 [Back to the journal](index.html) · [Subscribe to the feed](feed.xml)

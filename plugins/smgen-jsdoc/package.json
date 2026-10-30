@@ -1,0 +1,61 @@
+{
+  "name": "smgen-jsdoc",
+  "version": "0.1.0",
+  "description": "Generate linked SMGen API reference pages by statically analyzing JavaScript and JSDoc.",
+  "keywords": [
+    "smgen",
+    "jsdoc",
+    "javascript",
+    "documentation",
+    "static-site-generator"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sean Morris",
+  "homepage": "https://github.com/seanmorris/smgen-extras/tree/main/plugins/smgen-jsdoc",
+  "bugs": "https://github.com/seanmorris/smgen-extras/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmorris/smgen-extras.git",
+    "directory": "plugins/smgen-jsdoc"
+  },
+  "type": "module",
+  "bin": {
+    "smgen-jsdoc": "bin/smgen-jsdoc"
+  },
+  "smgen": {
+    "plugin": "smgen.plugin.yaml"
+  },
+  "files": [
+    "bin",
+    "schemas",
+    "src",
+    "smgen.plugin.yaml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "lint": "eslint bin src tests",
+    "typecheck": "tsc -p jsconfig.json",
+    "test": "node --test tests/*.test.js",
+    "check": "npm run lint && npm run typecheck && npm test",
+    "prepack": "npm run check"
+  },
+  "dependencies": {
+    "typescript": "6.0.3",
+    "yaml": "2.9.1"
+  },
+  "peerDependencies": {
+    "smgen": ">=0.3.0 <1"
+  },
+  "peerDependenciesMeta": {
+    "smgen": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

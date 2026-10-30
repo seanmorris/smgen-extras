@@ -15,9 +15,9 @@ jsonld:
   "@type": TechArticle
   headline: SMGen Plugins Development
   description: Test, package, and release the SMGen plugin workspace.
-  url: https://seanmorris.github.io/smgen-plugins/development.html
+  url: https://seanmorris.github.io/smgen-extras/development.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # Development
@@ -74,5 +74,5 @@ runs the complete checks, inspects the npm archive, and publishes only the
 selected workspace. `smgen-timeline` depends on `smgen-categories`, so publish
 the categories package first whenever both change.
 
-The [source repository](https://github.com/seanmorris/smgen-plugins) contains
+The [source repository](https://github.com/seanmorris/smgen-extras) contains
 the package contracts, fixtures, and release workflow.

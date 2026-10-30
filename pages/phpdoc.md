@@ -17,9 +17,9 @@ jsonld:
   "@type": TechArticle
   headline: PHP API References
   description: Generate linked SMGen API pages through static PHP analysis.
-  url: https://seanmorris.github.io/smgen-plugins/phpdoc.html
+  url: https://seanmorris.github.io/smgen-extras/phpdoc.html
   isPartOf:
-    "@id": https://seanmorris.github.io/smgen-plugins/#website
+    "@id": https://seanmorris.github.io/smgen-extras/#website
 ---
 
 # PHP API References
@@ -171,6 +171,6 @@ npx smgen-phpdoc clean
 modification times intact. `check` reports drift without writing. `clean`
 requires the plugin's ownership marker before it removes anything.
 
-The [package reference on GitHub](https://github.com/seanmorris/smgen-plugins/tree/main/packages/smgen-phpdoc)
+The [package reference on GitHub](https://github.com/seanmorris/smgen-extras/tree/main/plugins/smgen-phpdoc)
 lists supported declarations, PHPDoc forms, renderer overrides, and the static
 analysis limits.
