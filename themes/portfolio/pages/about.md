@@ -12,7 +12,7 @@ theme, one of the base themes in the
 [smgen-extras](https://seanmorris.github.io/smgen-extras/themes.html#theme-portfolio)
 collection.
 
-![The bindery's shopfront on the quay, door open to the morning](/images/shopfront.webp)
+![The bindery's shopfront on the quay, door open to the morning.](/images/shopfront.webp)
 
 ## How the work is made
 
@@ -21,15 +21,15 @@ bookcloth or leather pared on a litho stone; paper is chosen with the grain
 running head to tail so books open flat and stay flat. Repairs keep as much
 of the original as the book can carry.
 
-![Paring leather on the litho stone](/images/paring.webp)
+![Paring leather on the litho stone.](/images/paring.webp)
 
 ## How the site works
 
 Each project is one Markdown file under `pages/work/` with a photograph named
 in its frontmatter. The front page and the work page read every project's
-frontmatter at build time and lay out the grid, newest first. A project
-without a photograph yet gets a plain cloth-coloured tile, so it can be
-published before it is shot.
+frontmatter at build time and lay out the grid, newest first. A project without
+a photograph yet is listed without a plate, so it can be published before it
+is shot.
 
 Start a portfolio of your own with:
 

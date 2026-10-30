@@ -11,7 +11,7 @@ STATIC_DIR: ./static
 SMGEN_ENGINE: php
 SEARCH_ENABLED: 0
 INHERIT_CORE_STATIC: 0
-HIGHLIGHT_STYLE: kate
+HIGHLIGHT_STYLE: monochrome
 CORE_ASSETS:
   - main.js
   - scrollbar.css

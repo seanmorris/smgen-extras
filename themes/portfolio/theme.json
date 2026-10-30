@@ -2,23 +2,23 @@
   "name": "portfolio",
   "package": "smgen-theme-portfolio",
   "title": "Portfolio",
-  "description": "A photo-first personal site for someone who makes things. A statement and one large photograph on the front page, a grid of work led by each project's picture, project pages with a full-width image, a facts strip, prose and a gallery, then about and contact. No plugins.",
+  "description": "A maker's catalogue set like a fine-press book: running heads in small capitals, numbered entries, photographs as captioned plates, a specification block on each project, a drop cap and a colophon. Bone paper, black ink, one rubric red. No plugins.",
   "demo": {
     "productName": "Halden Bindery",
     "tagline": "Books bound by hand in a harbour town"
   },
   "features": [
-    "Work grid built from pages/work/*.md frontmatter, newest project shown large",
-    "Responsive photographs with srcset from files you drop in static/images",
-    "Project pages with a full-width image, a facts strip and a gallery",
-    "Next-project link at the foot of every project",
+    "Catalogue built from pages/work/*.md frontmatter, numbered newest first",
+    "Photographs as captioned plates, with srcset from files you drop in static/images",
+    "Project pages: title page, plates, a specification block with leaders, a drop cap",
+    "Running heads, a double rule and a colophon, all set in the reader's serif",
     "About and contact pages",
     "System light and dark with a toggle"
   ],
   "sampleContent": [
     {
       "path": "pages/index.md",
-      "purpose": "The statement, the hero photograph and the work grid"
+      "purpose": "The statement and the first four entries"
     },
     {
       "path": "pages/work/",
@@ -39,7 +39,7 @@
     "page"
   ],
   "notes": [
-    "A project names its photograph with image: and imageAlt:; without one it shows a plain tile in its cloth: colour",
-    "Projects sort by year, newest first, then by weight"
+    "A project names its photograph with image: and imageAlt:; without one it is listed without a plate",
+    "Entries are numbered in the sort order: year, newest first, then weight"
   ]
 }

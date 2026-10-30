@@ -5,7 +5,7 @@ layout: work
 TOC: false
 ---
 
-# Work
+# The catalogue
 
-Every binding leaves the bench with a page here: what it was for, what it
-was made from, and what we learned making it.
+Every binding leaves the bench with an entry here: what it was for, what it
+was made from, and what we learned making it. Newest first.
