@@ -1,35 +1,27 @@
 ---
 title: "Pricing"
-description: "What each Tidewatch plan includes, and the answers to the money questions."
+description: "What each plan includes and how billing works."
 ---
 
 # Pricing
 
-Three plans, one app. Everything below is per year, including VAT, and you can
-change plan or stop at any time.
+The front page carries the comparison table; this page is for the detail
+people look for before they pay: what counts as a project, what happens to
+data when a plan ends, and how to get an invoice.
 
-| | Free | Plus | Crew |
+## What counts
+
+| Plan | Projects | People | History |
 | --- | --- | --- | --- |
-| Price | £0 | £12 a year | £40 a year |
-| People | 1 | 1 | 5 |
-| Harbours | 1 | 4,000 | 4,000 |
-| Marks | 2 | Unlimited | Unlimited, shared |
-| Alerts | — | Yes | Yes, shared |
-| Predictions | This year | Ten years | Ten years |
-| Watch face | Yes | Yes | Yes |
-| Logbook export | — | — | CSV and GPX |
+| Free | One | 1 | 30 days |
+| Pro | Unlimited | 1 | Two years |
+| Team | Unlimited | 5 | Two years |
 
-## Paying
+## When a plan ends
 
-Payment goes through the app store on your device. Tidewatch never sees a
-card number. A plan bought on a phone covers the watch paired with it.
+Everything you created stays on your device and stays readable. Exports keep
+working for thirty days after a paid plan ends.
 
-## Refunds
+## Invoices
 
-Ask within thirty days and the store refunds you; we do not argue. Predictions
-already on the device keep working until the year ends.
-
-## Schools, clubs and rescue
-
-Crew plans are free for sailing schools, rowing clubs and volunteer rescue
-services. Write from an address at the organisation and say how many people.
+Monthly, by email, with your VAT number on them if you give us one.

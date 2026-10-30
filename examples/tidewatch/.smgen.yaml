@@ -1,0 +1,27 @@
+PRODUCT_NAME: Tidewatch
+TITLE_PREFIX: Tidewatch
+TAGLINE: Tide times that fit in a pocket
+ORGANIZATION: Tidewatch
+
+# The example owns only its pages. Template, styles, fonts and scripts come
+# from the landing theme so the demo can never drift from what users get.
+BASE_URL: http://localhost:8200/examples/tidewatch
+OUTPUT_DIR: ../../static/examples/tidewatch
+PAGES_DIR: ./pages
+TEMPLATE_DIR: ../../themes/landing/templates
+STATIC_DIR: ../../themes/landing/static
+DEFAULT_THEME: theme-landing
+SMGEN_ENGINE: php
+SEARCH_ENABLED: 0
+INHERIT_CORE_STATIC: 0
+HIGHLIGHT_STYLE: kate
+CORE_ASSETS:
+  - main.js
+  - scrollbar.css
+SCRIPTS:
+  - /theme.js
+DEFER_SCRIPTS:
+  - /main.js
+STYLES:
+  - /scrollbar.css
+  - /landing.css

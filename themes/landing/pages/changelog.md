@@ -1,28 +1,21 @@
 ---
 title: "Changelog"
-description: "What changed in each Tidewatch release."
+description: "What changed, newest first."
 ---
 
 # Changelog
 
-## 3.2 · March 2026
+## 2.0 · March 2026
 
-- Marks can now count down in minutes as well as hours, for the last stretch.
-- Added 212 harbours in Ireland and the Baltic.
-- The watch face shows the arrow in colour on devices that support it.
+- A redesigned front screen that answers the one question first.
+- Dial view for watches.
+- Exports to CSV and JSON on Pro and Team.
 
-## 3.1 · January 2026
+## 1.4 · November 2025
 
-- Crew plans: shared marks and alerts for up to five people.
-- Export the month's tides to CSV and GPX from the logbook screen.
+- Shared views for teams.
+- Alerts before a threshold, not after.
 
-## 3.0 · October 2025
+## 1.0 · June 2025
 
-- Ten years of predictions on Plus.
-- A new front screen that leads with the next window.
-- Dropped the daily forecast download; everything is computed on the device.
-
-## 2.8 · June 2025
-
-- Alerts fire before a mark, not at it, by the lead time you choose.
-- Fixed a rounding error at stations with a large diurnal inequality.
+- First release.

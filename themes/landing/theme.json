@@ -2,26 +2,41 @@
   "name": "landing",
   "package": "smgen-theme-landing",
   "title": "Landing",
-  "description": "A one-page product site. The hero, feature sections, plan table and FAQ are data in the front page's frontmatter, so the page is edited in YAML, not HTML. Pricing, changelog and privacy pages ride along. No plugins.",
+  "description": "A one-page product site. The hero with a device screen drawn from data, a band of figures, feature rows with readouts, a plan comparison table, questions and a closing call are all YAML in the front page's frontmatter. Neutral starter content; the Tidewatch example shows it finished. No plugins.",
   "demo": {
     "productName": "Tidewatch",
-    "tagline": "Tide times that fit in a pocket"
+    "tagline": "Tide times that fit in a pocket",
+    "path": "examples/tidewatch/",
+    "starterPath": "themes/landing/"
   },
   "features": [
-    "Hero, features, plans and FAQ rendered from frontmatter",
-    "Anchor navigation on the one-page home",
-    "FAQ as native details elements",
+    "Hero, figures, features, plans, questions and closing call rendered from frontmatter",
+    "A phone screen and per-feature readouts drawn from data, no screenshots needed",
+    "Plan comparison table that stacks on phones",
+    "Self-hosted Barlow and Barlow Condensed, preloaded",
     "Three prose subpages: pricing, changelog, privacy",
     "System light and dark with a toggle"
   ],
   "sampleContent": [
-    {"path": "pages/index.md", "purpose": "The front page; its frontmatter holds every section"},
-    {"path": "pages/pricing.md", "purpose": "Plan comparison as a Markdown table"},
-    {"path": "pages/changelog.md, pages/privacy.md", "purpose": "Plain prose pages"}
+    {
+      "path": "pages/index.md",
+      "purpose": "The front page; its frontmatter holds every section, with starter copy that explains each one"
+    },
+    {
+      "path": "pages/pricing.md, pages/changelog.md, pages/privacy.md",
+      "purpose": "Prose pages"
+    },
+    {
+      "path": "examples/tidewatch/ (in the repository)",
+      "purpose": "A finished product site built on this template"
+    }
   ],
-  "layouts": ["landing", "page"],
+  "layouts": [
+    "landing",
+    "page"
+  ],
   "notes": [
-    "The front page's Markdown body, if any, appears as a closing section below the FAQ",
-    "Replace static/hero.svg with your own screenshot or illustration"
+    "The sample content is deliberately neutral; your product goes in pages/index.md and the scaffolder's --name",
+    "Prose pages read pages/index.md for the nav links and the button"
   ]
 }

@@ -1,6 +1,6 @@
-PRODUCT_NAME: Tidewatch
-TITLE_PREFIX: Tidewatch
-TAGLINE: Tide times that fit in a pocket
+PRODUCT_NAME: Your Product
+TITLE_PREFIX: Your Product
+TAGLINE: One line under the name
 BASE_URL: ''
 OUTPUT_DIR: ./docs
 

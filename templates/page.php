@@ -113,7 +113,7 @@ $endfor$
 			$body$
 			<?php if($themes): ?>
 			<h2 id="the-themes">The themes</h2>
-			<?php foreach($themes as $theme): $name = (string) $theme['name']; $demoUrl = resolveAssetUrl('/themes/' . $name . '/'); ?>
+			<?php foreach($themes as $theme): $name = (string) $theme['name']; $demoUrl = resolveAssetUrl('/' . ltrim((string) ($theme['demo']['path'] ?? 'themes/' . $name . '/'), '/')); $starterUrl = !empty($theme['demo']['starterPath']) ? resolveAssetUrl('/' . ltrim((string) $theme['demo']['starterPath'], '/')) : null; ?>
 			<section class="theme" id="theme-<?=escapeHtml($name)?>" aria-labelledby="theme-<?=escapeHtml($name)?>-title">
 				<div class="theme-head"><h3 id="theme-<?=escapeHtml($name)?>-title"><?=escapeHtml((string) $theme['title'])?></h3><span class="package"><?=escapeHtml((string) $theme['package'])?></span></div>
 				<p class="theme-description"><?=escapeHtml((string) $theme['description'])?></p>
@@ -126,7 +126,7 @@ $endfor$
 				<ul class="theme-notes"><?php foreach($theme['notes'] as $note): ?><li><?=escapeHtml((string) $note)?></li><?php endforeach; ?></ul>
 				<?php endif; ?>
 				<pre class="theme-command"><code>npm create smgen-site@latest my-site -- --theme <?=escapeHtml($name)?></code></pre>
-				<p class="theme-links"><a href="<?=escapeHtml($demoUrl)?>" target="_blank" rel="noopener noreferrer">Open the demo: <?=escapeHtml((string) ($theme['demo']['productName'] ?? $theme['title']))?></a><a href="https://github.com/seanmorris/smgen-extras/tree/main/themes/<?=escapeHtml($name)?>" target="_blank" rel="noopener noreferrer">Theme source</a><a href="https://www.npmjs.com/package/<?=escapeHtml((string) $theme['package'])?>" target="_blank" rel="noopener noreferrer">npm</a></p>
+				<p class="theme-links"><a href="<?=escapeHtml($demoUrl)?>" target="_blank" rel="noopener noreferrer">Open the demo: <?=escapeHtml((string) ($theme['demo']['productName'] ?? $theme['title']))?></a><?php if($starterUrl !== null): ?><a href="<?=escapeHtml($starterUrl)?>" target="_blank" rel="noopener noreferrer">The bare starter</a><?php endif; ?><a href="https://github.com/seanmorris/smgen-extras/tree/main/themes/<?=escapeHtml($name)?>" target="_blank" rel="noopener noreferrer">Theme source</a><a href="https://www.npmjs.com/package/<?=escapeHtml((string) $theme['package'])?>" target="_blank" rel="noopener noreferrer">npm</a></p>
 			</section>
 			<?php endforeach; ?>
 			<?php endif; ?>

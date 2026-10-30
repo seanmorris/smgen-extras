@@ -1,30 +1,25 @@
 ---
 title: "Privacy"
-description: "What Tidewatch stores, which is very little."
+description: "What the product stores, what it sends, and what it never does."
 ---
 
 # Privacy
 
-Tidewatch is built to work without knowing who you are.
+Write this page in plain words, in the order a worried person would ask.
 
-## What stays on the device
+## What is stored
 
-Your harbours, marks, alerts and downloaded predictions live on your phone
-and watch. They are backed up by the device's own backup, not by us.
+Your data, on your device. A copy on our servers only if you turn on sync.
 
-## What we receive
+## What is sent
 
-Nothing, unless you choose a Crew plan. Crew plans sync shared marks through
-our server, which stores the marks, the harbour they belong to, and an
-anonymous crew identifier. No names, no email addresses, no location history.
+Crash reports, if you allow them. Nothing else leaves the device without
+you choosing it.
 
-## What we do not do
+## What we never do
 
-We do not run analytics, we do not use advertising identifiers, and the app
-makes no network request on the Free and Plus plans after the year's
-predictions have downloaded.
+Sell data, show advertising, or read what you write.
 
-## Questions
+## Contact
 
-This page describes a fictional product built to demonstrate the SMGen
-landing theme. A real privacy page would give you a contact address here.
+Put an address here that a person answers.

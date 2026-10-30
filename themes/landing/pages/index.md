@@ -1,72 +1,111 @@
 ---
-title: "Tidewatch"
-description: "Tide times, heights and the next safe window for any harbour, offline, on a watch or a phone."
+title: "Home"
+description: "A one-page product site. Every section on this page is data in this file's frontmatter."
 layout: landing
 TOC: false
 hero:
-  kicker: "For people who work the shore"
-  title: "Know the tide before you need it."
-  lede: "Tidewatch shows the next high and low water, the height now, and how long the slip stays dry. It works offline, on a watch face or a phone, for four thousand harbours."
-  primary: {label: "Get Tidewatch", href: "/pricing.html"}
-  secondary: {label: "See what it does", href: "/#features"}
-  note: "Free for one harbour. No account needed."
-  image: "/hero.svg"
-  imageAlt: "A tide chart for one day with both high waters marked"
-featuresTitle: "Built for the shore, not the app store"
+  kicker: "For the people it is for"
+  title: "Say what it does in one line."
+  lede: "Two sentences on who it is for and what changes once they have it. Keep the claim small enough to be true."
+  primary: {label: "Get started", href: "/pricing.html"}
+  secondary: {label: "See how it works", href: "/#features"}
+  note: "Free to try. No account needed."
+  screen:
+    alt: "The product's front screen, showing today's headline figure and what comes next"
+    title: "Your product"
+    subtitle: "Today"
+    value: "42"
+    label: "the figure your users check first"
+    status: "up 3 since yesterday"
+    trend: up
+    series: [12, 18, 15, 22, 27, 25, 31, 36, 33, 39, 42]
+    marks:
+      - {at: 0.4, label: "Launch"}
+      - {at: 1.0, label: "Now"}
+    rows:
+      - {label: "Next", value: "Tomorrow, 09:00"}
+      - {label: "Then", value: "Friday, 14:30"}
+stats:
+  - {value: "12k", label: "people using it"}
+  - {value: "99.9%", label: "uptime last year"}
+  - {value: "0", label: "trackers"}
+  - {value: "4 min", label: "to set up"}
+featuresTitle: "What it does"
 features:
-  - title: "The next window, not a graph"
-    body: "The front screen answers one question: how long until the water reaches the mark you care about. The graph is there when you want it, one swipe away."
-  - title: "Offline by design"
-    body: "Predictions for a whole year load once and stay on the device. No signal at the slipway, no problem at the slipway."
-  - title: "Your marks, your words"
-    body: "Set a mark at the height that matters, the sill, the step, the mooring, and name it. Tidewatch counts down to it in plain language."
-  - title: "On your wrist"
-    body: "A watch face with the time, the height, and the arrow that says rising or falling. Nothing else, because your hands are busy."
+  - title: "Lead with the outcome"
+    body: "Say what the person gets, not what the software has. One idea per section, and a readout beside it that shows the idea instead of an icon."
+    readout: {kind: value, value: "2 h 10 m", label: "saved this week", note: "Measured on the device, not estimated."}
+  - title: "Show the state, not a screenshot"
+    body: "A list readout takes labels and values from this file, so the page can show the product's real shape before there is a product to photograph."
+    readout:
+      kind: list
+      items:
+        - {label: "Inbox", value: "0"}
+        - {label: "Waiting on you", value: "3"}
+        - {label: "Done today", value: "17"}
+  - title: "Works where they are"
+    body: "Three short lines beat a paragraph when the feature is a promise. Say what is stored, what is sent, and what is not."
+    readout: {kind: text, lines: ["Stored on the device", "Syncs when it can", "Sends nothing you did not choose"]}
+  - title: "Fits on a wrist"
+    body: "A dial readout holds one number, a unit and a direction. Use it for the figure that matters when hands are busy."
+    readout: {kind: dial, value: "42", unit: "", label: "rising", trend: up}
 plansTitle: "Plans"
 plans:
   - name: "Free"
     price: "£0"
-    summary: "One harbour, this year."
-    includes: ["One harbour", "Phone and watch", "A year of predictions"]
+    summary: "For one person, getting started."
     href: "/pricing.html"
     action: "Download"
-  - name: "Plus"
-    price: "£12"
-    period: "a year"
-    summary: "Every harbour, with marks and alerts."
-    includes: ["Four thousand harbours", "Unlimited marks", "Alerts before a mark", "Ten years of predictions"]
+  - name: "Pro"
+    price: "£9"
+    period: "a month"
+    summary: "Everything, for one person."
     href: "/pricing.html"
-    action: "Start Plus"
+    action: "Start Pro"
     featured: true
-  - name: "Crew"
-    price: "£40"
-    period: "a year, five people"
-    summary: "Shared marks for a boat, a club or a yard."
-    includes: ["Everything in Plus", "Shared marks and alerts", "Export to the logbook"]
+  - name: "Team"
+    price: "£29"
+    period: "a month, five people"
+    summary: "Shared with the people you work with."
     href: "/pricing.html"
-    action: "Set up a crew"
-plansNote: "Prices include VAT. Change plans or stop any time; predictions you downloaded stay on the device."
+    action: "Set up a team"
+planRows:
+  - {label: "Projects", values: ["One", "Unlimited", "Unlimited"]}
+  - {label: "People", values: ["1", "1", "5"]}
+  - {label: "History", values: ["30 days", "Two years", "Two years"]}
+  - {label: "Alerts", values: [false, true, true]}
+  - {label: "Export", values: [false, true, true]}
+  - {label: "Shared views", values: [false, false, true]}
+plansNote: "Prices include tax. Change or cancel any time; what you downloaded stays yours."
 faqTitle: "Questions"
 faq:
-  - q: "Where do the predictions come from?"
-    a: "From the published harmonic constants for each station, computed on the device. Tidewatch does not fetch a daily forecast and does not need to."
-  - q: "How accurate is it?"
-    a: "As accurate as the station constants, usually within ten minutes and a few centimetres. Weather can move real water a long way from any prediction, so treat a mark as a plan, not a promise."
-  - q: "Does it work without a phone?"
-    a: "On most watches, yes, once the year's predictions have synced. The watch keeps its own copy."
-  - q: "Can I add a harbour that is missing?"
-    a: "Send the constants or a reference to a published table and it goes into the next release for everyone."
+  - q: "Is there a free plan?"
+    a: "Yes. The free plan is the whole product for one person and one project, with no time limit. Upgrade when you need history, alerts or a second person."
+  - q: "Does it work offline?"
+    a: "Everything is stored on the device and syncs when there is a connection. Nothing you do waits for the network."
+  - q: "Can I export my data?"
+    a: "On Pro and Team, to CSV and JSON, at any time. Your data is yours; the export exists so that stays true."
+  - q: "Who is behind it?"
+    a: "Say who you are in two sentences, and where to write. People buy from people."
+closing:
+  title: "Ready when you are."
+  lede: "Repeat the promise, shorter. Then the one button."
+  note: "Free to try. No account needed."
+footerLinks:
+  - {label: "Pricing", href: "/pricing.html"}
+  - {label: "Changelog", href: "/changelog.html"}
+  - {label: "Privacy", href: "/privacy.html"}
 jsonld:
   "@context": https://schema.org
-  "@type": SoftwareApplication
-  name: Tidewatch
-  applicationCategory: UtilitiesApplication
-  operatingSystem: iOS, Android, watchOS
+  "@type": WebSite
+  name: Your product
 ---
 
-## A note on what this site is
+## About this starter
 
-Tidewatch is a fictional product. This page demonstrates the SMGen **landing**
-theme, one of the base themes in the [smgen-extras](https://seanmorris.github.io/smgen-extras/themes.html#landing)
-collection. Every section above it comes from the YAML at the top of
-`pages/index.md`; this paragraph is the page's Markdown body.
+Everything above this line is data in the frontmatter of `pages/index.md`:
+the hero and its screen, the figures, the features and their readouts, the
+plans and the comparison rows, the questions and the closing call. This
+paragraph is the page's Markdown body. For a finished site built on the
+same template, see the Tidewatch example in
+[smgen-extras](https://seanmorris.github.io/smgen-extras/examples/tidewatch/).
