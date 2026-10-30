@@ -1,10 +1,12 @@
 <?php
 
 /**
- * Renders a page as plain semantic HTML: header with the site menu, main with
- * the article and breadcrumbs, an aside for the outline, and a footer. The
- * template adds no class names of its own; the only classes on the page come
- * from SMGen's menu and breadcrumb helpers.
+ * Renders a page as plain semantic HTML in the classic three-column shape:
+ * header across the top, nav on the left, main with the article and
+ * breadcrumbs in the middle, an aside with the outline on the right, and a
+ * footer across the bottom. The stylesheet places them on a grid; without it
+ * they stack in reading order. The template adds no class names of its own;
+ * the only classes on the page come from SMGen's menu and breadcrumb helpers.
  */
 
 $leftBarShow = $frontmatter['leftBarShow'] ?? true;
@@ -42,24 +44,24 @@ $endfor$
 <body>
 	<header>
 		<p><a href="<?=escapeHtml(resolveAssetUrl('/'))?>"><strong><?=escapeHtml(getConf('PRODUCT_NAME'))?></strong></a><?php if(getConf('TAGLINE')): ?> <small><?=escapeHtml(getConf('TAGLINE'))?></small><?php endif; ?></p>
-		<?php if($leftBarShow && menuRegionExists('header')): ?>
-		<nav aria-label="Site">
-			<?php renderMenuRegion('header'); ?>
-		</nav>
-		<?php endif; ?>
 	</header>
+	<?php if($leftBarShow && menuRegionExists('header')): ?>
+	<nav aria-label="Site">
+		<?php renderMenuRegion('header'); ?>
+	</nav>
+	<?php endif; ?>
 	<main id="content">
 		<article>
 			<?php renderBreadcrumbs(['menu' => 'site']); ?>
 			$body$
 		</article>
-		$if(toc)$
-		<aside aria-label="On this page">
-			<h2>On this page</h2>
-			${toc}
-		</aside>
-		$endif$
 	</main>
+	$if(toc)$
+	<aside aria-label="On this page">
+		<h2>On this page</h2>
+		${toc}
+	</aside>
+	$endif$
 	<footer>
 		<p><small><?=escapeHtml(getConf('PRODUCT_NAME'))?> is built with <a href="https://seanmorris.github.io/smgen/">SMGen</a> and the <a href="https://seanmorris.github.io/smgen-extras/themes.html#semantic">semantic theme</a>.</small></p>
 	</footer>

@@ -1,7 +1,19 @@
-/* Plain: the whole stylesheet. Delete it for pure browser defaults. */
+/* Plain: the whole stylesheet. Delete it and the page still reads, top to bottom. */
 :root { color-scheme: light dark; }
-body { max-width: 72ch; margin: 0 auto; padding: 1rem; line-height: 1.5; font-family: system-ui, sans-serif; }
+body { margin: 0 auto; max-width: 90rem; padding: 0 1rem; line-height: 1.5; font-family: system-ui, sans-serif; }
+body > header { padding: 1rem 0; border-bottom: 1px solid; }
+body > footer { padding: 1rem 0; border-top: 1px solid; }
+main { max-width: 72ch; }
 img, svg, video { max-width: 100%; height: auto; }
 pre { overflow: auto; }
-td, th { padding: 0.25em 0.6em; border: 1px solid; }
 table { border-collapse: collapse; }
+td, th { padding: 0.25em 0.6em; border: 1px solid; }
+@media (min-width: 64rem) {
+  body { display: grid; grid-template-columns: 14rem minmax(0, 1fr) 14rem; grid-template-areas: "header header header" "nav main aside" "footer footer footer"; column-gap: 2rem; }
+  body > header { grid-area: header; }
+  body > nav { grid-area: nav; }
+  main { grid-area: main; justify-self: center; width: 100%; }
+  body > aside { grid-area: aside; }
+  body > footer { grid-area: footer; }
+  body > nav, body > aside { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto; }
+}

@@ -14,7 +14,7 @@ npm create smgen-site@latest my-site -- --theme journal
 - [`smgen-theme-journal`](themes/journal): dated entries listed from frontmatter, topic pages and an RSS feed.
 - [`smgen-theme-portfolio`](themes/portfolio): a statement, a grid of work with drawn covers, and project pages.
 - [`smgen-theme-landing`](themes/landing): a one-page product site edited in YAML, with pricing, changelog and privacy pages.
-- [`smgen-theme-semantic`](themes/semantic): classless HTML and an eight-line stylesheet, for building a design from nothing.
+- [`smgen-theme-semantic`](themes/semantic): classless HTML in a three-column grid and a twenty-line stylesheet, for building a design from nothing.
 - [`create-smgen-site`](themes/create-smgen-site): the scaffolder behind the command above.
 
 ## Plugins
